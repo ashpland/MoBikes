@@ -23,4 +23,4 @@ extension Environment {
     static let live = Environment()
 }
 
-public let Current = Environment.mock
+public let Current = Environment.live

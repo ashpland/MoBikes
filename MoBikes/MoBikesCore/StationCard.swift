@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import MoBikesCore
 
-struct StationCard: View {
+public struct StationCard: View {
     let station: Station
     
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text(station.name)
@@ -19,6 +18,11 @@ struct StationCard: View {
             }
             Text("\(station.location.distance(from: Current.location()).asUnitString()) away")
         }
+        .padding()
+    }
+    
+    public init(station: Station) {
+        self.station = station
     }
 }
 
