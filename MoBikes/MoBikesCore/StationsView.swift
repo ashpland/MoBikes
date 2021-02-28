@@ -47,6 +47,8 @@ public struct StationsView: View {
                 if case .success(let stations) = result {
                     let operativeStations = stations
                         .filter { $0.operative }
+                        .sorted()
+                        
                     
                     if let last = stations.last {
                         print (last.name)

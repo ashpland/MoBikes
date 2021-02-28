@@ -18,6 +18,7 @@ public class Station: NSObject, Codable, MKAnnotation {
     lazy public var name = { String(rawName.dropFirst(5)) }()
     lazy public var coordinate = { convertRawCoordinates(rawCoordinates, CoordinateOrder.latFirst) }()
     lazy public var location = { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) }()
+    public var distance: CLLocationDistance { location.distance(from: Current.location()) }
     
     lazy public var title: String? = { name }()
     
@@ -47,6 +48,12 @@ public class Station: NSObject, Codable, MKAnnotation {
         self.availableBikes = availableBikes
         self.totalSlots = totalSlots
         self.operative = operative
+    }
+}
+
+extension Station: Comparable {
+    public static func < (lhs: Station, rhs: Station) -> Bool {
+        lhs.distance < rhs.distance
     }
 }
 

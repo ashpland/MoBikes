@@ -10,11 +10,6 @@ import SwiftUI
 public struct StationCard: View {
     let station: Station
     
-    let distanceTo: (Station) -> String = { $0
-            .location
-            .distance(from: Current.location())
-            .asUnitString() }
-    
     public var body: some View {
         VStack(alignment: .leading) {
             Text(station.name)
@@ -22,7 +17,7 @@ public struct StationCard: View {
                 .fontWeight(.light)
             HStack(alignment: .top) {
                 Image(systemName: "location.fill")
-                Text("\(distanceTo(station)) away")
+                Text("\(station.distance.asUnitString()) away")
                 Spacer()
                 Text(station.subtitle!)
             }
