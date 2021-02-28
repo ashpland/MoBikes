@@ -29,7 +29,7 @@ getStations { result in
             print(last.name)
         }
         DispatchQueue.main.async {
-            mapView.addAnnotations(stations)
+            mapView.addAnnotations(stations.filter { $0.operative })
         }
     case .failure(let error):
         print(error.localizedDescription)

@@ -15,22 +15,20 @@ struct SimpleError: LocalizedError {
     }
 }
 
+let apiURL = URL(string: "https://vancouver-ca.smoove.pro/api-public/stations")!
+
 public func getStations(_ completionHandler: @escaping (Result<[Station], Error>) -> Void) {
-    if let url = URL(string: "https://vancouver-ca.smoove.pro/api-public/stations") {
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode(Station.Group.self, from: data) {
-                    completionHandler(.success(decodedResponse.stations))
-                    return
-                } else {
-                completionHandler(.failure(SimpleError("Decoding response failed")))
-                }
+    let request = URLRequest(url: apiURL)
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        if let data = data {
+            if let decodedResponse = try? JSONDecoder().decode(Station.Group.self, from: data) {
+                completionHandler(.success(decodedResponse.stations))
+                return
             } else {
-            completionHandler(.failure(SimpleError("No data returned")))
+                completionHandler(.failure(SimpleError("Decoding response failed")))
             }
-        }.resume()
-    } else {
-        completionHandler(.failure(SimpleError("Bad URL")))
-    }
+        } else {
+            completionHandler(.failure(SimpleError("No data returned")))
+        }
+    }.resume()
 }
