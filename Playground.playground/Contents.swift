@@ -19,72 +19,13 @@ import Combine
 //mapView.showsUserLocation = true
 //
 
-//// Add the created mapView to our Playground Live View
-//PlaygroundPage.current.liveView = mapView
-//
-//Current.stations { result in
-//    if case .success(let stations) = result {
-//        DispatchQueue.main.async {
-//            let annotations = stations
-//                .filter { $0.operative }
-//                .map { station -> Station in
-//                    station.title = "\(station.location.distance(from: Current.location()).asUnitString())"
-//                    return station
-//                }
-//
-//
-//            mapView.addAnnotations(annotations)
-//        }
-//    }
-//}
 
-//let liveView = StationCard(station: Station.examples[0])
-//DispatchQueue.main.async {
-//    PlaygroundPage.current.setLiveView(liveView)
-//}
+testImage
+testImage2
 
-struct StationsView: View {
-    @ObservedObject var stationGetter = StationGetter()
-    
-    var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(stationGetter.stations, id: \.self, content: StationCard.init)
-            }
-        }
-    }
-
-    func updateStations() {
-        Current.stations { result in
-            if case .success(let stations) = result {
-                let operativeStations = stations
-                    .filter { $0.operative }
-
-                if let last = stations.last {
-                    print (last.name)
-                }
-                
-                DispatchQueue.main.async {
-                    self.stationGetter.stations.append(contentsOf: operativeStations)
-                }
-            }
-        }
-    }
-    
-    final class StationGetter: ObservableObject {
-        let objectWillChange = PassthroughSubject<Void, Never>()
-        var stations: [Station] = [] {
-            willSet {
-                objectWillChange.send()
-            }
-        }
-    }
-    
-}
+Image("bikeIcon")
 
 
-
-let liveView = StationsView()
-liveView.updateStations()
+let liveView = StationsView().frame(width: 272, height: 340, alignment: .center)
 
 PlaygroundPage.current.setLiveView(liveView)

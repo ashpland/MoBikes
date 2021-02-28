@@ -10,13 +10,31 @@ import SwiftUI
 public struct StationCard: View {
     let station: Station
     
+    let distanceTo: (Station) -> String = { $0
+            .location
+            .distance(from: Current.location())
+            .asUnitString() }
+    
     public var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text(station.name)
+            Text(station.name)
+                .font(.title2)
+                .fontWeight(.light)
+            HStack(alignment: .top) {
+                Image(systemName: "location")
+                Text("\(distanceTo(station)) away")
+                Spacer()
                 Text(station.subtitle!)
             }
-            Text("\(station.location.distance(from: Current.location()).asUnitString()) away")
+            HStack {
+
+                Text("hello")
+                Image("bikeIcon")
+                    .resizable()
+                    .scaledToFit()
+
+            }
+
         }
         .padding()
     }
@@ -29,14 +47,11 @@ public struct StationCard: View {
 struct StationCard_Previews: PreviewProvider {
     static var previews: some View {
         StationCard(station: Station.examples[0])
-            .previewLayout(PreviewLayout.sizeThatFits)
-            .padding()
+            .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
         StationCard(station: Station.examples[1])
-            .previewLayout(PreviewLayout.sizeThatFits)
-            .padding()
+            .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
         StationCard(station: Station.examples[2])
-            .previewLayout(PreviewLayout.sizeThatFits)
-            .padding()
-
+            .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
+        
     }
 }

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
+
+public let testImage = UIImage(named: "bikeIcon")
+public let testImage2 = Image("bikeIcon")
