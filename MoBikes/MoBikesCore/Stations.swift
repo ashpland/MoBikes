@@ -17,10 +17,12 @@ public class Station: NSObject, Codable, MKAnnotation {
     
     lazy public var name = { String(rawName.dropFirst(5)) }()
     lazy public var coordinate = { convertRawCoordinates(rawCoordinates, CoordinateOrder.latFirst) }()
-        
+    
     public var title: String? { name }
     
     public var subtitle: String? { "\(availableBikes) / \(totalSlots)" }
+    
+    public var distanceTo: CLLocationDistance { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude).distance(from: Current.location()) }
     
     enum CodingKeys: String, CodingKey {
         case rawName = "name"
@@ -50,8 +52,18 @@ public class Station: NSObject, Codable, MKAnnotation {
 }
 
 extension Station {
-    static public let example: Station = Station(rawName: "0001 10th & Cambie",
-                                          rawCoordinates: "49.262487, -123.114397",
-                                          freeSlots: 1, availableBikes: 31, totalSlots: 32,
-                                          operative: true)
+    static public let examples: [Station] = [
+        Station(rawName: "0001 10th & Cambie",
+                rawCoordinates: "49.262487, -123.114397",
+                freeSlots: 1, availableBikes: 31, totalSlots: 32,
+                operative: true),
+        Station(rawName: "0007 12th & Yukon (City Hall)",
+                rawCoordinates: "49.260599,-123.113504",
+                freeSlots: 11, availableBikes: 5, totalSlots: 16,
+                operative: true),
+        Station(rawName: "0170 8th & Yukon",
+                rawCoordinates: "49.263962, -123.112621",
+                freeSlots: 10, availableBikes: 4, totalSlots: 14,
+                operative: true)
+    ]
 }

@@ -17,14 +17,20 @@ struct StationCard: View {
                 Text(station.name)
                 Text(station.subtitle!)
             }
-            Text("\(station.coordinate.latitude), \(station.coordinate.longitude)")
+            Text("\(station.distanceTo.pretty()) away")
         }
     }
 }
 
 struct StationCard_Previews: PreviewProvider {
     static var previews: some View {
-        StationCard(station: Station.example)
+        StationCard(station: Station.examples[0])
+            .previewLayout(PreviewLayout.sizeThatFits)
+            .padding()
+        StationCard(station: Station.examples[1])
+            .previewLayout(PreviewLayout.sizeThatFits)
+            .padding()
+        StationCard(station: Station.examples[2])
             .previewLayout(PreviewLayout.sizeThatFits)
             .padding()
 
