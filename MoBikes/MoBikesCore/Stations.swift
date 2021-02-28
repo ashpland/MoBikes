@@ -19,7 +19,7 @@ public class Station: NSObject, Codable, MKAnnotation {
     lazy public var coordinate = { convertRawCoordinates(rawCoordinates, CoordinateOrder.latFirst) }()
     lazy public var location = { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) }()
     
-    public var title: String? { name }
+    lazy public var title: String? = { name }()
     
     public var subtitle: String? { "\(availableBikes) / \(totalSlots)" }
         
