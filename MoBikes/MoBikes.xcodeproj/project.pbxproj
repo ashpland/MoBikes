@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		495B402925EC3F070073AEBD /* StationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B402825EC3F070073AEBD /* StationsView.swift */; };
 		49C1C8E725EB450D0066B2FB /* MoBikesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C8E625EB450D0066B2FB /* MoBikesApp.swift */; };
-		49C1C8E925EB450D0066B2FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C8E825EB450D0066B2FB /* ContentView.swift */; };
 		49C1C8EB25EB450F0066B2FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C1C8EA25EB450F0066B2FB /* Assets.xcassets */; };
 		49C1C8EE25EB450F0066B2FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C1C8ED25EB450F0066B2FB /* Preview Assets.xcassets */; };
 		49C1C8FF25EB45500066B2FB /* MoBikesCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C1C8FD25EB45500066B2FB /* MoBikesCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,7 +51,6 @@
 		495B402825EC3F070073AEBD /* StationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsView.swift; sourceTree = "<group>"; };
 		49C1C8E325EB450D0066B2FB /* MoBikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoBikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C1C8E625EB450D0066B2FB /* MoBikesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoBikesApp.swift; sourceTree = "<group>"; };
-		49C1C8E825EB450D0066B2FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49C1C8EA25EB450F0066B2FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49C1C8ED25EB450F0066B2FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49C1C8EF25EB450F0066B2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 			children = (
 				49C1C91D25EB48D60066B2FB /* MoBikes.entitlements */,
 				49C1C8E625EB450D0066B2FB /* MoBikesApp.swift */,
-				49C1C8E825EB450D0066B2FB /* ContentView.swift */,
 				49C1C8EA25EB450F0066B2FB /* Assets.xcassets */,
 				49C1C8EF25EB450F0066B2FB /* Info.plist */,
 				49C1C8EC25EB450F0066B2FB /* Preview Content */,
@@ -257,7 +254,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C1C8E925EB450D0066B2FB /* ContentView.swift in Sources */,
 				49C1C8E725EB450D0066B2FB /* MoBikesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

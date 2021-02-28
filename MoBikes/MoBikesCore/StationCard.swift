@@ -21,19 +21,13 @@ public struct StationCard: View {
                 .font(.title2)
                 .fontWeight(.light)
             HStack(alignment: .top) {
-                Image(systemName: "location")
+                Image(systemName: "location.fill")
                 Text("\(distanceTo(station)) away")
                 Spacer()
                 Text(station.subtitle!)
             }
-            HStack {
-
-                Text("hello")
-                Image("bikeIcon")
-                    .resizable()
-                    .scaledToFit()
-
-            }
+            .padding(EdgeInsets(top: 4, leading: 0, bottom: 0, trailing: 0))
+            
 
         }
         .padding()
