@@ -17,7 +17,7 @@ struct StationCard: View {
                 Text(station.name)
                 Text(station.subtitle!)
             }
-            Text("\(station.distanceTo.pretty()) away")
+            Text("\(station.location.distance(from: Current.location()).asUnitString()) away")
         }
     }
 }

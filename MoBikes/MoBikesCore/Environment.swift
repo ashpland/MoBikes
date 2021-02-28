@@ -13,5 +13,8 @@ public struct Environment {
     public var stations: (@escaping (Result<[Station], Error>) -> Void) -> Void
 }
 
-public let Current = Environment(location: { CLLocation(latitude: 49.26307047497602, longitude: -123.11455871130153) },
+let close = CLLocation(latitude: 49.26307047497602, longitude: -123.11455871130153)
+let far   = CLLocation(latitude: 49.29235477443431, longitude: -123.13665159634905)
+
+public let Current = Environment(location: { far },
                           stations: { $0(.success(Station.examples)) })

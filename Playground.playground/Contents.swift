@@ -2,17 +2,13 @@ import MapKit
 import PlaygroundSupport
 import MoBikesCore
 
-func testPretty(input: Double) -> String {
-//    String(format: "%.2f", myDouble)
-    if (input < 1000) {
-        return String(format: "%.0f", input) + " m"
-    } else {
-        return String(format: "%.2f", input / 1000) + " km"
-    }
-}
-
-testPretty(input: 343.234290835)
-
+let rawDistance = 1234.432438
+let distanceInMeters = Measurement(value: round(rawDistance), unit: UnitLength.meters)
+let formatter = MeasurementFormatter()
+formatter.locale = Locale(identifier: "en_CA")
+formatter.unitOptions = .naturalScale
+formatter.numberFormatter.maximumFractionDigits = 2
+formatter.string(from: distanceInMeters)
 
 let center = CLLocationCoordinate2DMake(49.262487, -123.114397)
 

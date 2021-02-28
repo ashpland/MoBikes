@@ -22,10 +22,12 @@ func convertRawCoordinates(_ raw: String, _ order: (lat: Int, lng: Int)) -> CLLo
 }
 
 extension CLLocationDistance {
-    public func pretty() -> String {
-        if (self < 1000) {
-            return String(format: "%.0f", self) + " m"
-        } else {
-            return String(format: "%.2f", self / 1000) + " km"
-        }    }
+    public func asUnitString() -> String {
+        let distanceInMeters = Measurement(value: self.rounded(), unit: UnitLength.meters)
+        let formatter = MeasurementFormatter()
+        formatter.locale = Locale(identifier: "en_CA")
+        formatter.unitOptions = .naturalScale
+        formatter.numberFormatter.maximumFractionDigits = 1
+        return formatter.string(from: distanceInMeters)
+    }
 }

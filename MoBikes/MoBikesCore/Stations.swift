@@ -17,13 +17,12 @@ public class Station: NSObject, Codable, MKAnnotation {
     
     lazy public var name = { String(rawName.dropFirst(5)) }()
     lazy public var coordinate = { convertRawCoordinates(rawCoordinates, CoordinateOrder.latFirst) }()
+    lazy public var location = { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) }()
     
     public var title: String? { name }
     
     public var subtitle: String? { "\(availableBikes) / \(totalSlots)" }
-    
-    public var distanceTo: CLLocationDistance { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude).distance(from: Current.location()) }
-    
+        
     enum CodingKeys: String, CodingKey {
         case rawName = "name"
         case rawCoordinates = "coordinates"
