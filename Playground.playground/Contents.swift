@@ -25,7 +25,13 @@ testImage2
 
 Image("bikeIcon")
 
+Current.smooveAPI.getStations = { $0(.failure(SimpleError("yo"))) }
 
 let liveView = StationsView().frame(width: 272, height: 340, alignment: .center)
 
 PlaygroundPage.current.setLiveView(liveView)
+
+Current.smooveAPI.getStations { result in
+    guard case let .failure(error) = result else { return }
+    error.localizedDescription
+}

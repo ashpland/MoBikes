@@ -43,7 +43,7 @@ public struct StationsView: View {
         }
         
         func updateStations() {
-            Current.stations { result in
+            Current.smooveAPI.getStations { result in
                 if case .success(let stations) = result {
                     let operativeStations = stations
                         .filter { $0.operative }
