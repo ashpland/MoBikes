@@ -19,13 +19,13 @@ import Combine
 //mapView.showsUserLocation = true
 //
 
-
-testImage
-testImage2
-
-Image("bikeIcon")
-
-Current.smooveAPI.getStations = { $0(.failure(SimpleError("yo"))) }
+//
+//testImage
+//testImage2
+//
+//Image("bikeIcon")
+//
+//Current.smooveAPI.getStations = { $0(.failure(SimpleError("yo"))) }
 
 let liveView = StationsView().frame(width: 272, height: 340, alignment: .center)
 

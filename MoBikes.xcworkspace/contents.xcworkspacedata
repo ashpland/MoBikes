@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MoBikes/../MoBikesCore">
+   </FileRef>
+   <FileRef
       location = "group:MoBikes/MoBikes.xcodeproj">
    </FileRef>
    <FileRef

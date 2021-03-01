@@ -6,8 +6,15 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import MapKit
 
-public let testImage = UIImage(named: "bikeIcon")
 public let testImage2 = Image("bikeIcon")
+
+#if os(iOS)
+
+struct FailStruct {
+    let renderer: MKOverlayRenderer
+}
+
+#endif

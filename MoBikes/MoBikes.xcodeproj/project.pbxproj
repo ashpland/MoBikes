@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,45 +11,18 @@
 		494DAFCF25EC5EFA0049C3F4 /* Watch Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494DAFCE25EC5EFA0049C3F4 /* Watch Assets.xcassets */; };
 		494DAFE125EC60B70049C3F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494DAFE025EC60B70049C3F4 /* MapKit.framework */; };
 		494DAFE325EC60D10049C3F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494DAFE225EC60D10049C3F4 /* MapKit.framework */; };
-		495B402925EC3F070073AEBD /* StationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B402825EC3F070073AEBD /* StationsView.swift */; };
 		49C1C8E725EB450D0066B2FB /* MoBikesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C8E625EB450D0066B2FB /* MoBikesApp.swift */; };
-		49C1C8FF25EB45500066B2FB /* MoBikesCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C1C8FD25EB45500066B2FB /* MoBikesCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49C1C90225EB45500066B2FB /* MoBikesCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1C8FB25EB45500066B2FB /* MoBikesCore.framework */; };
-		49C1C90325EB45500066B2FB /* MoBikesCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1C8FB25EB45500066B2FB /* MoBikesCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		49C1C90A25EB45620066B2FB /* Scratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C90925EB45620066B2FB /* Scratch.swift */; };
-		49C1C90E25EB46630066B2FB /* Stations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C90D25EB46630066B2FB /* Stations.swift */; };
-		49C1C91125EB466E0066B2FB /* Spatial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C91025EB466E0066B2FB /* Spatial.swift */; };
-		49C1C91425EB46750066B2FB /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C91325EB46750066B2FB /* Networking.swift */; };
-		49D0ED5625EC23F100B7D3E0 /* StationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C91625EB487D0066B2FB /* StationCard.swift */; };
-		49EDCE7325EC500A00AC0942 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EDCE7225EC500A00AC0942 /* Media.xcassets */; };
 		49EDCE7D25EC577400AC0942 /* MoBikes-Watch WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 49EDCE7C25EC577400AC0942 /* MoBikes-Watch WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		49EDCE8925EC577600AC0942 /* MoBikes-Watch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49EDCE8825EC577600AC0942 /* MoBikes-Watch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		49EDCE9025EC577600AC0942 /* MoBikesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EDCE8F25EC577600AC0942 /* MoBikesApp.swift */; };
 		49EDCE9225EC577600AC0942 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EDCE9125EC577600AC0942 /* ComplicationController.swift */; };
 		49EDCE9425EC577700AC0942 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EDCE9325EC577700AC0942 /* Assets.xcassets */; };
 		49EDCE9725EC577700AC0942 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EDCE9625EC577700AC0942 /* Preview Assets.xcassets */; };
-		49EDCEBD25EC593C00AC0942 /* MoBikes_WatchCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EDCEBB25EC593C00AC0942 /* MoBikes_WatchCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49EDCECE25EC594D00AC0942 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C92225EB4C8E0066B2FB /* Environment.swift */; };
-		49EDCED325EC595300AC0942 /* StationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C91625EB487D0066B2FB /* StationCard.swift */; };
-		49EDCED825EC595800AC0942 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C91325EB46750066B2FB /* Networking.swift */; };
-		49EDCED925EC595800AC0942 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C92225EB4C8E0066B2FB /* Environment.swift */; };
-		49EDCEDA25EC595800AC0942 /* Stations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C90D25EB46630066B2FB /* Stations.swift */; };
-		49EDCEDB25EC595800AC0942 /* Scratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C90925EB45620066B2FB /* Scratch.swift */; };
-		49EDCEDC25EC595800AC0942 /* Spatial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1C91025EB466E0066B2FB /* Spatial.swift */; };
-		49EDCEDD25EC595800AC0942 /* StationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B402825EC3F070073AEBD /* StationsView.swift */; };
-		49EDCEE225EC596000AC0942 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EDCE7225EC500A00AC0942 /* Media.xcassets */; };
-		49EDCEEC25EC597700AC0942 /* MoBikes_WatchCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EDCEB925EC593C00AC0942 /* MoBikes_WatchCore.framework */; };
-		49EDCEED25EC597700AC0942 /* MoBikes_WatchCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49EDCEB925EC593C00AC0942 /* MoBikes_WatchCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		49EF452425ECD6440032E449 /* MoBikesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 49EF452325ECD6440032E449 /* MoBikesCore */; };
+		49EF452625ECD64B0032E449 /* MoBikesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 49EF452525ECD64B0032E449 /* MoBikesCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		49C1C90025EB45500066B2FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49C1C8DB25EB450D0066B2FB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 49C1C8FA25EB45500066B2FB;
-			remoteInfo = MoBikesCore;
-		};
 		49EDCE7E25EC577400AC0942 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49C1C8DB25EB450D0066B2FB /* Project object */;
@@ -64,27 +37,9 @@
 			remoteGlobalIDString = 49EDCE8725EC577600AC0942;
 			remoteInfo = "MoBikes-Watch WatchKit Extension";
 		};
-		49EDCEEE25EC597700AC0942 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49C1C8DB25EB450D0066B2FB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 49EDCEB825EC593C00AC0942;
-			remoteInfo = "MoBikes-WatchCore";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		49C1C90725EB45500066B2FB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				49C1C90325EB45500066B2FB /* MoBikesCore.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		49EDCE9C25EC577700AC0942 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,17 +62,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49EDCEF025EC597700AC0942 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				49EDCEED25EC597700AC0942 /* MoBikes_WatchCore.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -125,22 +69,12 @@
 		494DAFCE25EC5EFA0049C3F4 /* Watch Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Watch Assets.xcassets"; sourceTree = "<group>"; };
 		494DAFE025EC60B70049C3F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		494DAFE225EC60D10049C3F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
-		495B402825EC3F070073AEBD /* StationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsView.swift; sourceTree = "<group>"; };
 		49C1C8E325EB450D0066B2FB /* MoBikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoBikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C1C8E625EB450D0066B2FB /* MoBikesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoBikesApp.swift; sourceTree = "<group>"; };
 		49C1C8ED25EB450F0066B2FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49C1C8EF25EB450F0066B2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49C1C8FB25EB45500066B2FB /* MoBikesCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoBikesCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		49C1C8FD25EB45500066B2FB /* MoBikesCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoBikesCore.h; sourceTree = "<group>"; };
-		49C1C8FE25EB45500066B2FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		49C1C90925EB45620066B2FB /* Scratch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scratch.swift; sourceTree = "<group>"; };
-		49C1C90D25EB46630066B2FB /* Stations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stations.swift; sourceTree = "<group>"; };
-		49C1C91025EB466E0066B2FB /* Spatial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spatial.swift; sourceTree = "<group>"; };
-		49C1C91325EB46750066B2FB /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		49C1C91625EB487D0066B2FB /* StationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCard.swift; sourceTree = "<group>"; };
 		49C1C91D25EB48D60066B2FB /* MoBikes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoBikes.entitlements; sourceTree = "<group>"; };
-		49C1C92225EB4C8E0066B2FB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		49EDCE7225EC500A00AC0942 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		49EDCE7925EC577300AC0942 /* MoBikes-Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MoBikes-Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EDCE7C25EC577400AC0942 /* MoBikes-Watch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MoBikes-Watch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EDCE8325EC577600AC0942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,8 +85,6 @@
 		49EDCE9625EC577700AC0942 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49EDCE9825EC577700AC0942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49EDCEB925EC593C00AC0942 /* MoBikes_WatchCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoBikes_WatchCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		49EDCEBB25EC593C00AC0942 /* MoBikes_WatchCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoBikes_WatchCore.h; sourceTree = "<group>"; };
-		49EDCEBC25EC593C00AC0942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49EF452425ECD6440032E449 /* MoBikesCore in Frameworks */,
 				494DAFE125EC60B70049C3F4 /* MapKit.framework in Frameworks */,
-				49C1C90225EB45500066B2FB /* MoBikesCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,8 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49EF452625ECD64B0032E449 /* MoBikesCore in Frameworks */,
 				494DAFE325EC60D10049C3F4 /* MapKit.framework in Frameworks */,
-				49EDCEEC25EC597700AC0942 /* MoBikes_WatchCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,33 +123,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		494DAFEF25EC7CA60049C3F4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				49C1C91625EB487D0066B2FB /* StationCard.swift */,
-				495B402825EC3F070073AEBD /* StationsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		494DAFF025EC7CB40049C3F4 /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				49C1C92225EB4C8E0066B2FB /* Environment.swift */,
-				49C1C90925EB45620066B2FB /* Scratch.swift */,
-				49C1C90D25EB46630066B2FB /* Stations.swift */,
-				49C1C91025EB466E0066B2FB /* Spatial.swift */,
-				49C1C91325EB46750066B2FB /* Networking.swift */,
-			);
-			path = Misc;
-			sourceTree = "<group>";
-		};
 		49C1C8DA25EB450D0066B2FB = {
 			isa = PBXGroup;
 			children = (
-				49C1C8FC25EB45500066B2FB /* MoBikesCore */,
 				49C1C8E525EB450D0066B2FB /* MoBikes */,
-				49EDCEBA25EC593C00AC0942 /* MoBikes-WatchCore */,
 				49EDCE8025EC577400AC0942 /* MoBikes-Watch WatchKit App */,
 				49EDCE8C25EC577600AC0942 /* MoBikes-Watch WatchKit Extension */,
 				49C1C8E425EB450D0066B2FB /* Products */,
@@ -258,18 +167,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		49C1C8FC25EB45500066B2FB /* MoBikesCore */ = {
-			isa = PBXGroup;
-			children = (
-				494DAFF025EC7CB40049C3F4 /* Misc */,
-				494DAFEF25EC7CA60049C3F4 /* Views */,
-				49C1C8FD25EB45500066B2FB /* MoBikesCore.h */,
-				49C1C8FE25EB45500066B2FB /* Info.plist */,
-				49EDCE7225EC500A00AC0942 /* Media.xcassets */,
-			);
-			path = MoBikesCore;
-			sourceTree = "<group>";
-		};
 		49EDCE8025EC577400AC0942 /* MoBikes-Watch WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,15 +205,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		49EDCEBA25EC593C00AC0942 /* MoBikes-WatchCore */ = {
-			isa = PBXGroup;
-			children = (
-				49EDCEBB25EC593C00AC0942 /* MoBikes_WatchCore.h */,
-				49EDCEBC25EC593C00AC0942 /* Info.plist */,
-			);
-			path = "MoBikes-WatchCore";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -324,7 +212,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C1C8FF25EB45500066B2FB /* MoBikesCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +219,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49EDCEBD25EC593C00AC0942 /* MoBikes_WatchCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,14 +232,15 @@
 				49C1C8DF25EB450D0066B2FB /* Sources */,
 				49C1C8E025EB450D0066B2FB /* Frameworks */,
 				49C1C8E125EB450D0066B2FB /* Resources */,
-				49C1C90725EB45500066B2FB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				49C1C90125EB45500066B2FB /* PBXTargetDependency */,
 			);
 			name = MoBikes;
+			packageProductDependencies = (
+				49EF452325ECD6440032E449 /* MoBikesCore */,
+			);
 			productName = MoBikes;
 			productReference = 49C1C8E325EB450D0066B2FB /* MoBikes.app */;
 			productType = "com.apple.product-type.application";
@@ -417,14 +304,15 @@
 				49EDCE8425EC577600AC0942 /* Sources */,
 				49EDCE8525EC577600AC0942 /* Frameworks */,
 				49EDCE8625EC577600AC0942 /* Resources */,
-				49EDCEF025EC597700AC0942 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				49EDCEEF25EC597700AC0942 /* PBXTargetDependency */,
 			);
 			name = "MoBikes-Watch WatchKit Extension";
+			packageProductDependencies = (
+				49EF452525ECD64B0032E449 /* MoBikesCore */,
+			);
 			productName = "MoBikes-Watch WatchKit Extension";
 			productReference = 49EDCE8825EC577600AC0942 /* MoBikes-Watch WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -513,7 +401,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49EDCE7325EC500A00AC0942 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,7 +432,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49EDCEE225EC596000AC0942 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,13 +450,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C1C90E25EB46630066B2FB /* Stations.swift in Sources */,
-				49C1C90A25EB45620066B2FB /* Scratch.swift in Sources */,
-				49C1C91125EB466E0066B2FB /* Spatial.swift in Sources */,
-				49EDCECE25EC594D00AC0942 /* Environment.swift in Sources */,
-				495B402925EC3F070073AEBD /* StationsView.swift in Sources */,
-				49C1C91425EB46750066B2FB /* Networking.swift in Sources */,
-				49D0ED5625EC23F100B7D3E0 /* StationCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,24 +466,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49EDCEDB25EC595800AC0942 /* Scratch.swift in Sources */,
-				49EDCED325EC595300AC0942 /* StationCard.swift in Sources */,
-				49EDCEDC25EC595800AC0942 /* Spatial.swift in Sources */,
-				49EDCEDD25EC595800AC0942 /* StationsView.swift in Sources */,
-				49EDCED925EC595800AC0942 /* Environment.swift in Sources */,
-				49EDCEDA25EC595800AC0942 /* Stations.swift in Sources */,
-				49EDCED825EC595800AC0942 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		49C1C90125EB45500066B2FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 49C1C8FA25EB45500066B2FB /* MoBikesCore */;
-			targetProxy = 49C1C90025EB45500066B2FB /* PBXContainerItemProxy */;
-		};
 		49EDCE7F25EC577400AC0942 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 49EDCE7B25EC577400AC0942 /* MoBikes-Watch WatchKit App */;
@@ -614,11 +481,6 @@
 			isa = PBXTargetDependency;
 			target = 49EDCE8725EC577600AC0942 /* MoBikes-Watch WatchKit Extension */;
 			targetProxy = 49EDCE8A25EC577600AC0942 /* PBXContainerItemProxy */;
-		};
-		49EDCEEF25EC597700AC0942 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 49EDCEB825EC593C00AC0942 /* MoBikes-WatchCore */;
-			targetProxy = 49EDCEEE25EC597700AC0942 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -742,7 +604,6 @@
 		49C1C8F325EB450F0066B2FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MoBikes/MoBikes.entitlements;
@@ -758,16 +619,15 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		49C1C8F425EB450F0066B2FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MoBikes/MoBikes.entitlements;
@@ -783,9 +643,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1089,6 +949,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		49EF452325ECD6440032E449 /* MoBikesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MoBikesCore;
+		};
+		49EF452525ECD64B0032E449 /* MoBikesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MoBikesCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 49C1C8DB25EB450D0066B2FB /* Project object */;
 }

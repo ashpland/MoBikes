@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MoBikes_WatchCore
+import MoBikesCore
 
 @main
 struct MoBikesApp: App {
