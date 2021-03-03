@@ -1,10 +1,3 @@
-//
-//  Spatial.swift
-//  MoBikesCore
-//
-//  Created by Andrew on 2021-02-27.
-//
-
 import MapKit
 
 enum CoordinateOrder {

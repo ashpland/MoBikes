@@ -1,10 +1,3 @@
-//
-//  Stations.swift
-//  MoBikesCore
-//
-//  Created by Andrew on 2021-02-27.
-//
-
 import MapKit
 
 public class Station: NSObject, Codable, MKAnnotation {
@@ -18,7 +11,6 @@ public class Station: NSObject, Codable, MKAnnotation {
     lazy public var name = { String(rawName.dropFirst(5)) }()
     lazy public var coordinate = { convertRawCoordinates(rawCoordinates, CoordinateOrder.latFirst) }()
     lazy public var location = { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) }()
-    public var distance: CLLocationDistance { location.distance(from: Current.location()) }
 
     lazy public var title: String? = { name }()
 
@@ -53,12 +45,6 @@ public class Station: NSObject, Codable, MKAnnotation {
     
 }
 
-extension Station: Comparable {
-    public static func < (lhs: Station, rhs: Station) -> Bool {
-        lhs.distance < rhs.distance
-    }
-}
-
 extension Station {
     public override func isEqual(_ object: Any?) -> Bool {
             if let object = object as? Station {
@@ -87,6 +73,3 @@ extension Station {
         Station(bikes:  5, docks: 11, "49.260599, -123.113504", "12th & Yukon (City Hall)"),
         Station(bikes:  4, docks: 10, "49.263962, -123.112621", "8th & Yukon")]
 }
-
-//NW 49.32168873738296, -123.23743181980063
-//SE 49.181413489156846, -122.99433494248083

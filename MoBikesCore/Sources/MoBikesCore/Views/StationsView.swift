@@ -1,12 +1,5 @@
-//
-//  StationsView.swift
-//  MoBikesCore
-//
-//  Created by Andrew on 2021-02-28.
-//
-
-import SwiftUI
 import Combine
+import SwiftUI
 
 public struct StationsView: View {
     @ObservedObject var vm: StationsViewModel
@@ -54,7 +47,7 @@ struct StationsView_Previews: PreviewProvider {
     
     static var previews: some View {
         StationsView(vm: .init(stationsClient: .live))
-            .previewDevice("Apple Watch Series 6 - 40mm")
+//            .previewDevice("Apple Watch Series 6 - 40mm")
 //            .previewLayout(PreviewLayout.fixed(width: 300, height: 600))
         
     }

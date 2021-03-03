@@ -1,11 +1,18 @@
-import Foundation
 import Combine
+import Foundation
+
+import CoreLocation
+
+
+struct LocationClient {
+}
 
 final class StationsViewModel: ObservableObject {
     
     @Published var stations: [Station] = []
     
     let stationsClient: StationsClient
+//    let locationClient: LocationClient
     
     private var stationRequestCancelable: AnyCancellable?
     
@@ -14,7 +21,15 @@ final class StationsViewModel: ObservableObject {
         self.stationRequestCancelable = stationsClient.results
             // handle errors properly
             .replaceError(with: [])
-            .map { $0.filter { $0.operative } }
+            .map { stations in
+                stations
+                    .filter { $0.operative }
+                    .sorted(by: { (lhs, rhs) in
+                        let near = CLLocation(latitude: 49.26307047497602, longitude: -123.11455871130153)
+                        return lhs.location.distance(from: near) < rhs.location.distance(from: near)
+                        
+                    })
+            }
             .assign(to: \.stations, on: self)
     }
 }

@@ -1,10 +1,3 @@
-//
-//  StationCard.swift
-//  MoBikes
-//
-//  Created by Andrew on 2021-02-27.
-//
-
 import SwiftUI
 
 public struct StationCard: View {
@@ -17,7 +10,7 @@ public struct StationCard: View {
                 .fontWeight(.light)
             HStack(alignment: .top) {
                 Image(systemName: "location.fill")
-                Text("\(station.distance.asUnitString()) away")
+                // Text("\(station.distance.asUnitString()) away")
                 Spacer()
                 Text(station.subtitle!)
             }
