@@ -20,6 +20,8 @@
 		49EDCE9725EC577700AC0942 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EDCE9625EC577700AC0942 /* Preview Assets.xcassets */; };
 		49EF452425ECD6440032E449 /* MoBikesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 49EF452325ECD6440032E449 /* MoBikesCore */; };
 		49EF452625ECD64B0032E449 /* MoBikesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 49EF452525ECD64B0032E449 /* MoBikesCore */; };
+		49F863C825F010B1008F7550 /* LocationClient in Frameworks */ = {isa = PBXBuildFile; productRef = 49F863C725F010B1008F7550 /* LocationClient */; };
+		49F863CA25F010BA008F7550 /* LocationClient in Frameworks */ = {isa = PBXBuildFile; productRef = 49F863C925F010BA008F7550 /* LocationClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F863C825F010B1008F7550 /* LocationClient in Frameworks */,
 				49EF452425ECD6440032E449 /* MoBikesCore in Frameworks */,
 				494DAFE125EC60B70049C3F4 /* MapKit.framework in Frameworks */,
 			);
@@ -99,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F863CA25F010BA008F7550 /* LocationClient in Frameworks */,
 				49EF452625ECD64B0032E449 /* MoBikesCore in Frameworks */,
 				494DAFE325EC60D10049C3F4 /* MapKit.framework in Frameworks */,
 			);
@@ -205,6 +209,7 @@
 			name = MoBikes;
 			packageProductDependencies = (
 				49EF452325ECD6440032E449 /* MoBikesCore */,
+				49F863C725F010B1008F7550 /* LocationClient */,
 			);
 			productName = MoBikes;
 			productReference = 49C1C8E325EB450D0066B2FB /* MoBikes.app */;
@@ -259,6 +264,7 @@
 			name = "MoBikes-Watch WatchKit Extension";
 			packageProductDependencies = (
 				49EF452525ECD64B0032E449 /* MoBikesCore */,
+				49F863C925F010BA008F7550 /* LocationClient */,
 			);
 			productName = "MoBikes-Watch WatchKit Extension";
 			productReference = 49EDCE8825EC577600AC0942 /* MoBikes-Watch WatchKit Extension.appex */;
@@ -713,6 +719,14 @@
 		49EF452525ECD64B0032E449 /* MoBikesCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoBikesCore;
+		};
+		49F863C725F010B1008F7550 /* LocationClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationClient;
+		};
+		49F863C925F010BA008F7550 /* LocationClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

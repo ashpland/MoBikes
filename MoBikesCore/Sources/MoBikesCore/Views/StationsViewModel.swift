@@ -1,11 +1,7 @@
 import Combine
-import Foundation
-
 import CoreLocation
-
-
-struct LocationClient {
-}
+import Foundation
+import LocationClient
 
 final class StationsViewModel: ObservableObject {
     
