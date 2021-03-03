@@ -8,12 +8,13 @@ final class StationsViewModel: ObservableObject {
     @Published var stations: [Station] = []
     
     let stationsClient: StationsClient
-//    let locationClient: LocationClient
+    let locationClient: LocationClient
     
     private var stationRequestCancelable: AnyCancellable?
     
-    init(stationsClient: StationsClient = .live) {
+    init(stationsClient: StationsClient = .live, locationClient: LocationClient = .live) {
         self.stationsClient = stationsClient
+        self.locationClient = locationClient
         self.stationRequestCancelable = stationsClient.results
             // handle errors properly
             .replaceError(with: [])
