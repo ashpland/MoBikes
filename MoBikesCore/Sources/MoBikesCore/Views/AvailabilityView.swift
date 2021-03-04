@@ -8,42 +8,65 @@ struct AvailabilityView: View {
         CGFloat(available) / CGFloat(total)
     }
     
+    private let borderConstant: CGFloat = 2
+    
+    static let aspectRatio: CGFloat = 0.7
+    
     var body: some View {
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .center)) {
             GeometryReader { geometry in
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                     Rectangle().fill(Color.white)
-                        .cornerRadius((geometry.size.width * 0.03) * 2)
-                    Rectangle()
-                        .fill(Color.accentColor)
-                        .frame(maxWidth: geometry.size.width - ((geometry.size.width * 0.03) * 2),
-                               maxHeight: (geometry.size.height - ((geometry.size.width * 0.03) * 2)) * percentage,
-                               alignment: .bottom)
-                        .cornerRadius((geometry.size.width * 0.03) * 2)
-                        .padding(.bottom, (geometry.size.width * 0.03))
+                        .cornerRadius(borderConstant * 2)
+
+                    FillAndIcon(fillColor: .white, iconColor: .accentColor,
+                                height: (geometry.size.height - (borderConstant * 2)))
+                        .cornerRadius(borderConstant * 2)
+                        .padding(borderConstant)
+                    
+                    FillAndIcon(fillColor: .accentColor, iconColor: .white,
+                                height: (geometry.size.height - (borderConstant * 2)))
+                        .cornerRadius(borderConstant * 2)
+                        .padding(borderConstant)
+                        .frame(height: geometry.size.height * percentage, alignment: .bottom)
+                        .clipped()
+
+                    
                 }
-            }
-//            Image(systemName: "car.fill")
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .foregroundColor(.white)
-//                .frame(maxWidth: 150)
         }
-        .padding()
+        .aspectRatio(AvailabilityView.aspectRatio, contentMode: .fit)
         
+    }
+}
+
+struct FillAndIcon: View {
+    let fillColor: Color
+    let iconColor: Color
+    let height: CGFloat
+    
+    var body: some View {
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .center)) {
+            Rectangle()
+                .fill(fillColor)
+            Image(systemName: "car.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(iconColor)
+                .frame(maxWidth: 15)
+        }
+        .frame(height: height)
     }
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AvailabilityView(available: 7, total: 10)
-            .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
+            .previewLayout(PreviewLayout.fixed(width: 100, height: 200))
             .background(Color.accentColor)
             .accentColor(.purple)
 
         
-        AvailabilityView(available: 5, total: 10)
-            .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
+        AvailabilityView(available: 1, total: 10)
+            .previewLayout(PreviewLayout.fixed(width: 100, height: 200))
             .preferredColorScheme(.dark)
             .background(Color.accentColor)
 

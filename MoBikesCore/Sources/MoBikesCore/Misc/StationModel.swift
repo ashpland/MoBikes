@@ -3,12 +3,14 @@ import MapKit
 public class Station: NSObject, Codable, MKAnnotation {
     let rawName: String
     let rawCoordinates: String
-    let freeSlots: Int
+    let freeDocks: Int
     let availableBikes: Int
     let totalSlots: Int
     public let operative: Bool
 
-    lazy public var name = { String(rawName.dropFirst(5)) }()
+    lazy public var name = { String(rawName.dropFirst(5))
+        .replacingOccurrences(of: "Stanley Park - ", with: "")
+    }()
     lazy public var coordinate = { convertRawCoordinates(rawCoordinates, CoordinateOrder.latFirst) }()
     lazy public var location = { CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) }()
 
@@ -19,7 +21,7 @@ public class Station: NSObject, Codable, MKAnnotation {
     enum CodingKeys: String, CodingKey {
         case rawName = "name"
         case rawCoordinates = "coordinates"
-        case freeSlots = "free_slots"
+        case freeDocks = "free_slots"
         case availableBikes = "avl_bikes"
         case totalSlots = "total_slots"
         case operative
@@ -33,12 +35,12 @@ public class Station: NSObject, Codable, MKAnnotation {
         }
     }
 
-    private init(rawName: String, rawCoordinates: String, freeSlots: Int, availableBikes: Int, operative: Bool = true) {
+    private init(rawName: String, rawCoordinates: String, freeDocks: Int, availableBikes: Int, operative: Bool = true) {
         self.rawName = rawName
         self.rawCoordinates = rawCoordinates
-        self.freeSlots = freeSlots
+        self.freeDocks = freeDocks
         self.availableBikes = availableBikes
-        self.totalSlots = freeSlots + availableBikes
+        self.totalSlots = freeDocks + availableBikes
         self.operative = operative
     }
 
@@ -50,7 +52,7 @@ extension Station {
                 return
                     self.rawName == object.rawName &&
                     self.rawCoordinates == object.rawCoordinates &&
-                    self.freeSlots == object.freeSlots &&
+                    self.freeDocks == object.freeDocks &&
                     self.availableBikes == object.availableBikes &&
                     self.totalSlots == object.totalSlots &&
                     self.operative == object.operative
@@ -60,15 +62,19 @@ extension Station {
 }
 
 extension Station {
-    public convenience init(bikes availableBikes: Int, docks freeSlots: Int, _ rawCoordinates: String, _ name: String, _ operative: Bool = true) {
+    public convenience init(bikes availableBikes: Int, docks freeDocks: Int, _ rawCoordinates: String, _ name: String, _ operative: Bool = true) {
         self.init(rawName: "0000 " + name,
                   rawCoordinates: rawCoordinates,
-                  freeSlots: freeSlots,
+                  freeDocks: freeDocks,
                   availableBikes: availableBikes,
                   operative: operative)}
 
     static public let examples: [Station] = [
         Station(bikes: 31, docks: 1, "49.262487, -123.114397", "10th & Cambie"),
         Station(bikes: 5, docks: 11, "49.260599, -123.113504", "12th & Yukon (City Hall)"),
-        Station(bikes: 4, docks: 10, "49.263962, -123.112621", "8th & Yukon")]
+        Station(bikes: 4, docks: 10, "49.263962, -123.112621", "8th & Yukon"),
+        Station(bikes: 5, docks: 11, "49.260599, -123.113504", "Information Booth"),
+        Station(bikes: 5, docks: 11, "49.260599, -123.113504", "Coal Harbour Community Centre"),
+
+    ]
 }

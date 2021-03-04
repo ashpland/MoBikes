@@ -28,6 +28,7 @@ public struct StationsView: View {
                 }
             }
         }
+        .accentColor(.purple)
     }
 
     public init(viewModel: StationsViewModel = StationsViewModel()) {
@@ -50,7 +51,7 @@ struct StationsView_Previews: PreviewProvider {
 
     static let nearLocationClient: LocationClient = {
         let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
-        var nearFar = true
+        var nearFar = false
 
         return .init(authorizationStatus: { .authorizedAlways },
                      requestWhenInUseAuthorization: { },
@@ -61,7 +62,7 @@ struct StationsView_Previews: PreviewProvider {
     }()
 
     static var previews: some View {
-        StationsView(viewModel: .init(stationsClient: stationsClient, locationClient: nearLocationClient))
+        StationsView(viewModel: .init(stationsClient: .live, locationClient: nearLocationClient))
             .preferredColorScheme(.dark)
 
 //            .previewDevice("Apple Watch Series 6 - 40mm")

@@ -50,7 +50,6 @@ public final class StationsViewModel: ObservableObject {
             .assign(to: \.stations, on: self)
 
         self.locationDelegateCancellable = self.locationClient.delegate
-            .handleEvents(receiveOutput: { print("output", $0) })
           .sink { event in
             switch event {
             case let .didChangeAuthorization(status):
