@@ -18,7 +18,8 @@ extension StationsClient {
         return Self.init(
             updateStations: { requestStations.send(()) },
             results: requestStations
-                .throttle(for: 6, scheduler: DispatchQueue.main, latest: true)
+                // TODO: Figure out appropriate api throttle
+                .throttle(for: 6, scheduler: RunLoop.main, latest: true)
                 .flatMap { URLSession.shared.dataTaskPublisher(for: apiURL) }
                 .map { data, _ in data }
                 .decode(type: Station.Group.self, decoder: JSONDecoder())

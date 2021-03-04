@@ -3,17 +3,17 @@ import SwiftUI
 import LocationClient
 
 public struct StationsView: View {
-    @ObservedObject var vm: StationsViewModel
+    @ObservedObject var viewModel: StationsViewModel
     
     public var body: some View {
         NavigationView {
             ZStack {
-                if vm.stations.isEmpty {
+                if viewModel.stations.isEmpty {
                     ProgressView()
                 } else {
                     ScrollView {
                         VStack {
-                            ForEach(vm.stations, id: \.self) { station in
+                            ForEach(viewModel.stations, id: \.self) { station in
                                 StationCard(station: station)
                                 Divider()
                             }}}}
@@ -21,13 +21,17 @@ public struct StationsView: View {
             .navigationTitle("Mo'Bikes")
             .toolbar {
                 Button(action: {
-                    vm.locationClient.requestLocation()
+                    viewModel.locationClient.requestLocation()
                 }) {
                     Image(systemName: "arrow.clockwise")
                 }
                 
             }
         }
+    }
+    
+    public init(viewModel: StationsViewModel = StationsViewModel()) {
+        self.viewModel = viewModel
     }
     
     
@@ -59,7 +63,7 @@ struct StationsView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        StationsView(vm: .init(stationsClient: .live, locationClient: nearLocationClient))
+        StationsView(viewModel: .init(stationsClient: .live, locationClient: nearLocationClient))
 //            .previewDevice("Apple Watch Series 6 - 40mm")
 //            .previewLayout(PreviewLayout.fixed(width: 300, height: 600))
         

@@ -19,7 +19,6 @@ public final class StationsViewModel: ObservableObject {
         
         let stationResults: AnyPublisher<[Station], Never> = stationsClient.results
             .handleEvents(receiveOutput: { print("stationResults", $0) })
-
             // handle errors properly
             .replaceError(with: [])
             .eraseToAnyPublisher()
@@ -81,12 +80,20 @@ public final class StationsViewModel: ObservableObject {
               break
             }
           }
-
-        if self.locationClient.authorizationStatus() == .authorizedWhenInUse ||
-            self.locationClient.authorizationStatus() == .authorizedAlways
         
-        {
-          self.locationClient.requestLocation()
+        switch self.locationClient.authorizationStatus() {
+        case .notDetermined:
+            self.locationClient.requestWhenInUseAuthorization()
+        case .restricted:
+            // TODO: show an alert
+            break
+        case .denied:
+            // TODO: show an alert
+            break
+        case .authorizedAlways, .authorizedWhenInUse:
+            self.locationClient.requestLocation()
+        @unknown default:
+            break
         }
     }
 }
