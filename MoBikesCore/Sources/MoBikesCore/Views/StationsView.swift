@@ -20,6 +20,9 @@ public struct StationsView: View {
                     }) {
                         Image(systemName: "arrow.clockwise")
                     }
+//                    .foregroundColor(.white)
+                    
+                    
                     Button(action: {
                         viewModel.locationClient.requestLocation()
                     }) {
@@ -28,7 +31,7 @@ public struct StationsView: View {
                 }
             }
         }
-        .accentColor(.purple)
+        .accentColor(Color("MoPurple", bundle: Bundle.module))
     }
 
     public init(viewModel: StationsViewModel = StationsViewModel()) {

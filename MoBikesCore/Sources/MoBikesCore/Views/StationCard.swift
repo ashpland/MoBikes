@@ -5,27 +5,27 @@ import SwiftUI
 public struct StationCard: View {
     let station: Station
     let location: CLLocation
+    private let distanceString: String
     
     public var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .center, spacing: 0) {
             Text(station.name)
                 .font(Font.system(size: 27, weight: .semibold, design: .rounded))
-            HStack(spacing: 3) {
-                
-                Text("\(station.location.distance(from: location).asUnitString())")
-                    .fontWeight(.semibold)
-                    .font(Font.system(size: 16, weight: .semibold, design: .rounded))
-                
+                .multilineTextAlignment(.center)
+            HStack {
                 Spacer()
-                AvailabilityView(available: station.availableBikes, total: station.totalSlots)
-                    .frame(maxWidth: 50)
-                    .accentColor(.purple)
+                IconWithNumber(name: "bikeIcon", number: station.availableBikes)
+                Spacer()
+                IconWithNumber(name: "dockIcon", number: station.freeDocks)
+                Spacer()
             }
+            Text("\(distanceString) away")
+                .fontWeight(.semibold)
+                .font(Font.system(size: 16, weight: .semibold, design: .rounded))
+
         }
-        //            .frame(maxHeight: geometry.size.width * 2)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        
         .foregroundColor(.white)
         .padding()
         .background(RoundedRectangle(cornerRadius: 15)
@@ -36,6 +36,25 @@ public struct StationCard: View {
     public init(station: Station, location: CLLocation) {
         self.station = station
         self.location = location
+        self.distanceString = station.location.distance(from: location).asUnitString()
+    }
+}
+
+struct IconWithNumber: View {
+    let name: String
+    let number: Int
+    
+    public var body: some View {
+
+        HStack {
+            Text(String(number))
+                .font(Font.system(size: 27, weight: .regular, design: .rounded))
+            Image(name, bundle: Bundle.module)
+                .resizable()
+                .frame(width: 27, height: 27)
+                .aspectRatio(contentMode: .fit)
+
+        }
     }
 }
 
@@ -44,18 +63,18 @@ struct StationCard_Previews: PreviewProvider {
         StationCard(station: Station.examples[2],
                     location: Location.cityHall)
             .previewDevice("Apple Watch Series 6 - 40mm")
-//            .accentColor(.purple)
+            .accentColor(.purple)
 
         
-        StationCard(station: Station(bikes: 23, docks: 3, "8th & Yukon"),
+        StationCard(station: Station(bikes: 23, docks: 3, "Information Booth"),
                     location: Location.cityHall)
             .previewDevice("Apple Watch Series 6 - 40mm")
-//            .accentColor(.gray)
+            .accentColor(.purple)
         
         StationCard(station: Station.examples[4],
                     location: Location.cityHall)
             .previewDevice("Apple Watch Series 6 - 40mm")
-//            .accentColor(.purple)
+            .accentColor(.purple)
 
 
         
