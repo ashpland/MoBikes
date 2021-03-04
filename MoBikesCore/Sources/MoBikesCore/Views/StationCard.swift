@@ -5,7 +5,7 @@ import SwiftUI
 public struct StationCard: View {
     let station: Station
     let location: CLLocation
-        
+
     public var body: some View {
         VStack(alignment: .leading) {
             Text(station.name)
@@ -21,7 +21,7 @@ public struct StationCard: View {
         }
         .padding()
     }
-    
+
     public init(station: Station, location: CLLocation) {
         self.station = station
         self.location = location
@@ -39,6 +39,6 @@ struct StationCard_Previews: PreviewProvider {
         StationCard(station: Station.examples[2],
                     location: Location.cityHall)
             .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
-        
+
     }
 }

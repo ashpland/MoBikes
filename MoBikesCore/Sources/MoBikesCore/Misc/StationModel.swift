@@ -24,15 +24,15 @@ public class Station: NSObject, Codable, MKAnnotation {
         case totalSlots = "total_slots"
         case operative
     }
-    
+
     public struct Group: Decodable {
         public let stations: [Station]
-    
+
         enum CodingKeys: String, CodingKey {
             case stations = "result"
         }
     }
-    
+
     private init(rawName: String, rawCoordinates: String, freeSlots: Int, availableBikes: Int, operative: Bool = true) {
         self.rawName = rawName
         self.rawCoordinates = rawCoordinates
@@ -41,8 +41,7 @@ public class Station: NSObject, Codable, MKAnnotation {
         self.totalSlots = freeSlots + availableBikes
         self.operative = operative
     }
-    
-    
+
 }
 
 extension Station {
@@ -67,9 +66,9 @@ extension Station {
                   freeSlots: freeSlots,
                   availableBikes: availableBikes,
                   operative: operative)}
-        
+
     static public let examples: [Station] = [
-        Station(bikes: 31, docks:  1, "49.262487, -123.114397", "10th & Cambie"),
-        Station(bikes:  5, docks: 11, "49.260599, -123.113504", "12th & Yukon (City Hall)"),
-        Station(bikes:  4, docks: 10, "49.263962, -123.112621", "8th & Yukon")]
+        Station(bikes: 31, docks: 1, "49.262487, -123.114397", "10th & Cambie"),
+        Station(bikes: 5, docks: 11, "49.260599, -123.113504", "12th & Yukon (City Hall)"),
+        Station(bikes: 4, docks: 10, "49.263962, -123.112621", "8th & Yukon")]
 }

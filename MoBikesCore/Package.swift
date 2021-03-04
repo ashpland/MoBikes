@@ -10,7 +10,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "MoBikesCore",
-            targets: ["MoBikesCore"]),
+            targets: ["MoBikesCore"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -25,6 +25,6 @@ let package = Package(
             dependencies: ["LocationClient"]),
         .testTarget(
             name: "MoBikesCoreTests",
-            dependencies: ["MoBikesCore"]),
+            dependencies: ["MoBikesCore"])
     ]
 )

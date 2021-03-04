@@ -4,7 +4,7 @@ import Foundation
 public struct StationsClient {
     public var updateStations: () -> Void
     public var results: AnyPublisher<[Station], Error>
-    
+
     public init(updateStations: @escaping () -> Void, results: AnyPublisher<[Station], Error>) {
         self.updateStations = updateStations
         self.results = results

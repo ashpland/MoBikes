@@ -57,8 +57,6 @@ var cancellables = Set<AnyCancellable>()
 
 //PlaygroundPage.current.setLiveView(mapView)
 
-
-
     let stationsClient: StationsClient = {
         let submitStations = CurrentValueSubject<[Station], Never>([])
         var flip = true
@@ -70,10 +68,10 @@ var cancellables = Set<AnyCancellable>()
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher())
     }()
-    
+
    let nearLocationClient: LocationClient = {
         let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
-        
+
         return .init(authorizationStatus: { .authorizedAlways },
                      requestWhenInUseAuthorization: { },
                      requestLocation: { locationDelegateSubject.send(.didUpdateLocations([LocationClient.sampleNear])) },
@@ -82,10 +80,8 @@ var cancellables = Set<AnyCancellable>()
                         .eraseToAnyPublisher())
     }()
 
-
 let vm: StationsViewModel = .init(stationsClient: .mock,
                                   locationClient: nearLocationClient)
-
 
 vm.$stations
     .sink(receiveValue: { print("the stations", $0) })

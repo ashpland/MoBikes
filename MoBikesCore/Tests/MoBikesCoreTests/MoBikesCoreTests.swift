@@ -10,6 +10,6 @@ final class MoBikesCoreTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

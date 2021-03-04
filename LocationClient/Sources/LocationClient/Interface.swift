@@ -6,7 +6,7 @@ public struct LocationClient {
     public var requestWhenInUseAuthorization: () -> Void
     public var requestLocation: () -> Void
     public var delegate: AnyPublisher<DelegateEvent, Never>
-    
+
     public init(
         authorizationStatus: @escaping () -> CLAuthorizationStatus,
         requestWhenInUseAuthorization: @escaping () -> Void,
@@ -18,7 +18,7 @@ public struct LocationClient {
         self.requestLocation = requestLocation
         self.delegate = delegate
     }
-    
+
     public enum DelegateEvent {
         case didChangeAuthorization(CLAuthorizationStatus)
         case didUpdateLocations([CLLocation])

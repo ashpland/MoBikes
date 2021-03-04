@@ -4,7 +4,7 @@ import CoreLocation
 extension LocationClient {
     public static var authorizedWhenInUse: Self {
         let subject = PassthroughSubject<DelegateEvent, Never>()
-        
+
         return Self(
             authorizationStatus: { .authorizedWhenInUse },
             requestWhenInUseAuthorization: { },
@@ -14,11 +14,11 @@ extension LocationClient {
             delegate: subject.eraseToAnyPublisher()
         )
     }
-    
+
     public static var notDetermined: Self {
         var status = CLAuthorizationStatus.notDetermined
         let subject = PassthroughSubject<DelegateEvent, Never>()
-        
+
         return Self(
             authorizationStatus: { status },
             requestWhenInUseAuthorization: {

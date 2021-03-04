@@ -4,21 +4,21 @@ import Foundation
 import LocationClient
 
 public final class StationsViewModel: ObservableObject {
-    
+
     @Published public var stations: [Station] = []
     @Published public var location: CLLocation = Location.cityHall
-    
+
     public let stationsClient: StationsClient
     public let locationClient: LocationClient
-    
+
     private var stationRequestCancelable: AnyCancellable?
     private var locationDelegateCancellable: AnyCancellable?
     private var currentLocationCancellable: AnyCancellable?
-    
+
     public init(stationsClient: StationsClient = .live, locationClient: LocationClient = .live) {
         self.stationsClient = stationsClient
         self.locationClient = locationClient
-        
+
         let stationResults: AnyPublisher<[Station], Never> = stationsClient.results
             // handle errors properly
             .replaceError(with: [])
@@ -35,7 +35,7 @@ public final class StationsViewModel: ObservableObject {
             }
             .removeDuplicates()
             .assign(to: \.location, on: self)
-        
+
         self.stationRequestCancelable = Publishers.CombineLatest(stationResults, self.$location)
             .map { (stations, currentLocation) -> [Station] in
                 stations
@@ -46,7 +46,7 @@ public final class StationsViewModel: ObservableObject {
                     })
             }
             .assign(to: \.stations, on: self)
-        
+
         self.locationDelegateCancellable = self.locationClient.delegate
             .handleEvents(receiveOutput: { print("output", $0) })
           .sink { event in
@@ -74,7 +74,7 @@ public final class StationsViewModel: ObservableObject {
               break
             }
           }
-        
+
         switch self.locationClient.authorizationStatus() {
         case .notDetermined:
             self.locationClient.requestWhenInUseAuthorization()
