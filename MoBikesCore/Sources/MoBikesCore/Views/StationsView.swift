@@ -16,7 +16,11 @@ public struct StationsView: View {
                             ForEach(viewModel.stations, id: \.self) { station in
                                 StationCard(station: station, location: viewModel.location)
                                 Divider()
-                            }}}}}
+                            }
+                        }
+                    }
+                }
+            }
             .navigationTitle("Mo'Bikes")
             .toolbar {
                 HStack {
@@ -29,7 +33,11 @@ public struct StationsView: View {
                         viewModel.locationClient.requestLocation()
                     }) {
                         Image(systemName: "location")
-                    }}}}}
+                    }
+                }
+            }
+        }
+    }
 
     public init(viewModel: StationsViewModel = StationsViewModel()) {
         self.viewModel = viewModel

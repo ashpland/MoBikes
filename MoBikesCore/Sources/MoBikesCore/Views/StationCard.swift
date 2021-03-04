@@ -36,9 +36,6 @@ struct StationCard_Previews: PreviewProvider {
         StationCard(station: Station.examples[1],
                     location: Location.lostLagoon)
             .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
-        StationCard(station: Station.examples[2],
-                    location: Location.cityHall)
-            .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
 
     }
 }
