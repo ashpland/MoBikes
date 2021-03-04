@@ -4,21 +4,12 @@ import LocationClient
 
 public struct StationsView: View {
     @ObservedObject var viewModel: StationsViewModel
-
+    
     public var body: some View {
         NavigationView {
-            ZStack {
-                if viewModel.stations.isEmpty {
-                    ProgressView()
-                } else {
-                    ScrollView {
-                        VStack {
-                            ForEach(viewModel.stations, id: \.self) { station in
-                                StationCard(station: station, location: viewModel.location)
-                                Divider()
-                            }
-                        }
-                    }
+            ScrollView {
+                ForEach(viewModel.stations, id: \.self) { station in
+                    StationCard(station: station, location: viewModel.location)
                 }
             }
             .navigationTitle("Mo'Bikes")
@@ -71,6 +62,8 @@ struct StationsView_Previews: PreviewProvider {
 
     static var previews: some View {
         StationsView(viewModel: .init(stationsClient: stationsClient, locationClient: nearLocationClient))
+            .preferredColorScheme(.dark)
+
 //            .previewDevice("Apple Watch Series 6 - 40mm")
 //            .previewLayout(PreviewLayout.fixed(width: 300, height: 600))
 

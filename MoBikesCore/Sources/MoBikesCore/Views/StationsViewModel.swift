@@ -24,6 +24,8 @@ public final class StationsViewModel: ObservableObject {
             .replaceError(with: [])
             .eraseToAnyPublisher()
 
+        self.stationsClient.updateStations()
+        
         self.currentLocationCancellable = locationClient.delegate
             .compactMap { delegateEvent -> CLLocation? in
                 if case .didUpdateLocations(let locations) = delegateEvent,

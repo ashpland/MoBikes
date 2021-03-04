@@ -7,19 +7,23 @@ public struct StationCard: View {
     let location: CLLocation
 
     public var body: some View {
+            
         VStack(alignment: .leading) {
             Text(station.name)
                 .font(.title2)
-                .fontWeight(.light)
-            HStack(alignment: .top) {
-                Image(systemName: "location.fill")
-                Text("\(station.location.distance(from: location).asUnitString()) away")
-                Spacer()
-                Text(station.subtitle!)
-            }
-            .padding(EdgeInsets(top: 4, leading: 0, bottom: 0, trailing: 0))
+                .fontWeight(.semibold)
+                
+            Text("\(station.location.distance(from: location).asUnitString()) away")
+                .fontWeight(.semibold)
+            
         }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+
+        .foregroundColor(.white)
         .padding()
+        .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.purple))
+        .padding([.leading, .trailing])        
     }
 
     public init(station: Station, location: CLLocation) {
@@ -36,6 +40,7 @@ struct StationCard_Previews: PreviewProvider {
         StationCard(station: Station.examples[1],
                     location: Location.lostLagoon)
             .previewLayout(PreviewLayout.fixed(width: 272, height: 340))
+            .preferredColorScheme(.dark)
 
     }
 }
