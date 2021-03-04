@@ -62,7 +62,7 @@ extension Station {
 }
 
 extension Station {
-    public convenience init(bikes availableBikes: Int, docks freeDocks: Int, _ rawCoordinates: String, _ name: String, _ operative: Bool = true) {
+    public convenience init(bikes availableBikes: Int, docks freeDocks: Int, _ name: String, _ rawCoordinates: String = "49.263962, -123.112621", _ operative: Bool = true) {
         self.init(rawName: "0000 " + name,
                   rawCoordinates: rawCoordinates,
                   freeDocks: freeDocks,
@@ -70,11 +70,11 @@ extension Station {
                   operative: operative)}
 
     static public let examples: [Station] = [
-        Station(bikes: 31, docks: 1, "49.262487, -123.114397", "10th & Cambie"),
-        Station(bikes: 5, docks: 11, "49.260599, -123.113504", "12th & Yukon (City Hall)"),
-        Station(bikes: 4, docks: 10, "49.263962, -123.112621", "8th & Yukon"),
-        Station(bikes: 5, docks: 11, "49.260599, -123.113504", "Information Booth"),
-        Station(bikes: 5, docks: 11, "49.260599, -123.113504", "Coal Harbour Community Centre"),
+        Station(bikes: 31, docks: 1, "10th & Cambie", "49.262487, -123.114397"),
+        Station(bikes: 5, docks: 11, "12th & Yukon (City Hall)", "49.260599, -123.113504"),
+        Station(bikes: 4, docks: 10, "8th & Yukon", "49.263962, -123.112621"),
+        Station(bikes: 5, docks: 11, "Information Booth", "49.260599, -123.113504"),
+        Station(bikes: 5, docks: 11, "Coal Harbour Community Centre", "49.260599, -123.113504"),
 
     ]
 }

@@ -13,13 +13,14 @@ public struct StationCard: View {
                 .font(Font.system(size: 27, weight: .semibold, design: .rounded))
             HStack(spacing: 3) {
                 
-                Text("\(station.location.distance(from: location).asUnitString()) away")
+                Text("\(station.location.distance(from: location).asUnitString())")
                     .fontWeight(.semibold)
                     .font(Font.system(size: 16, weight: .semibold, design: .rounded))
                 
                 Spacer()
                 AvailabilityView(available: station.availableBikes, total: station.totalSlots)
-                    .frame(maxWidth: 30)
+                    .frame(maxWidth: 50)
+                    .accentColor(.purple)
             }
         }
         //            .frame(maxHeight: geometry.size.width * 2)
@@ -43,18 +44,18 @@ struct StationCard_Previews: PreviewProvider {
         StationCard(station: Station.examples[2],
                     location: Location.cityHall)
             .previewDevice("Apple Watch Series 6 - 40mm")
-            .accentColor(.purple)
+//            .accentColor(.purple)
 
         
-        StationCard(station: Station.examples[3],
+        StationCard(station: Station(bikes: 23, docks: 3, "8th & Yukon"),
                     location: Location.cityHall)
             .previewDevice("Apple Watch Series 6 - 40mm")
-            .accentColor(.purple)
+//            .accentColor(.gray)
         
         StationCard(station: Station.examples[4],
                     location: Location.cityHall)
             .previewDevice("Apple Watch Series 6 - 40mm")
-            .accentColor(.purple)
+//            .accentColor(.purple)
 
 
         

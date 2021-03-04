@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct AvailabilityView: View {
     let available: Int
@@ -10,7 +11,7 @@ struct AvailabilityView: View {
     
     private let borderConstant: CGFloat = 2
     
-    static let aspectRatio: CGFloat = 0.7
+    static let aspectRatio: CGFloat = 1
     
     var body: some View {
             GeometryReader { geometry in
@@ -32,6 +33,8 @@ struct AvailabilityView: View {
 
                     
                 }
+                .cornerRadius(borderConstant * 2)
+
         }
         .aspectRatio(AvailabilityView.aspectRatio, contentMode: .fit)
         
@@ -47,11 +50,11 @@ struct FillAndIcon: View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .center)) {
             Rectangle()
                 .fill(fillColor)
-            Image(systemName: "car.fill")
+            Image("bikeIcon-small", bundle: Bundle.module)
+                .renderingMode(.template)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(iconColor)
-                .frame(maxWidth: 15)
         }
         .frame(height: height)
     }
