@@ -32,10 +32,3 @@ extension LocationClient {
         )
     }
 }
-
-extension LocationClient {
-    public static let sampleNear = CLLocation(latitude: 49.26307047497602,
-                                              longitude: -123.11455871130153)
-    public static let sampleFar  = CLLocation(latitude: 49.29235477443431,
-                                              longitude: -123.13665159634905)
-}

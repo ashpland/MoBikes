@@ -6,26 +6,25 @@ import LocationClient
 public final class StationsViewModel: ObservableObject {
     
     @Published public var stations: [Station] = []
+    @Published public var location: CLLocation = Location.cityHall
     
     public let stationsClient: StationsClient
     public let locationClient: LocationClient
     
     private var stationRequestCancelable: AnyCancellable?
     private var locationDelegateCancellable: AnyCancellable?
+    private var currentLocationCancellable: AnyCancellable?
     
     public init(stationsClient: StationsClient = .live, locationClient: LocationClient = .live) {
         self.stationsClient = stationsClient
         self.locationClient = locationClient
         
         let stationResults: AnyPublisher<[Station], Never> = stationsClient.results
-            .handleEvents(receiveOutput: { print("stationResults", $0) })
             // handle errors properly
             .replaceError(with: [])
             .eraseToAnyPublisher()
 
-        let currentLocation: AnyPublisher<CLLocation, Never> = locationClient.delegate
-            .handleEvents(receiveOutput: { print("currentLocation", $0) })
-
+        self.currentLocationCancellable = locationClient.delegate
             .compactMap { delegateEvent -> CLLocation? in
                 if case .didUpdateLocations(let locations) = delegateEvent,
                    let location = locations.first {
@@ -35,12 +34,9 @@ public final class StationsViewModel: ObservableObject {
                 }
             }
             .removeDuplicates()
-            .eraseToAnyPublisher()
+            .assign(to: \.location, on: self)
         
-        
-        self.stationRequestCancelable = Publishers.CombineLatest(stationResults, currentLocation)
-            .handleEvents(receiveOutput: { print("combined", $0) })
-
+        self.stationRequestCancelable = Publishers.CombineLatest(stationResults, self.$location)
             .map { (stations, currentLocation) -> [Station] in
                 stations
                     .filter { $0.operative }
@@ -59,14 +55,12 @@ public final class StationsViewModel: ObservableObject {
               switch status {
               case .notDetermined:
                 break
-
               case .restricted:
                 // TODO: show an alert
                 break
               case .denied:
                 // TODO: show an alert
                 break
-
               case .authorizedAlways, .authorizedWhenInUse:
                 self.locationClient.requestLocation()
 

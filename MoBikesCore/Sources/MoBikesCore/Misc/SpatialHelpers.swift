@@ -25,4 +25,9 @@ extension CLLocationDistance {
     }
 }
 
-
+public enum Location {
+    public static let cityHall   = CLLocation(latitude: 49.260919069539746,
+                                              longitude: -123.11397548064534)
+    public static let lostLagoon = CLLocation(latitude: 49.29438528642601,
+                                              longitude: -123.13785887586177)
+}

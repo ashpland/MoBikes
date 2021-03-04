@@ -14,7 +14,7 @@ public struct StationsView: View {
                     ScrollView {
                         VStack {
                             ForEach(viewModel.stations, id: \.self) { station in
-                                StationCard(station: station)
+                                StationCard(station: station, location: viewModel.location)
                                 Divider()
                             }}}}
             }
@@ -56,7 +56,7 @@ struct StationsView_Previews: PreviewProvider {
         
         return .init(authorizationStatus: { .authorizedAlways },
                      requestWhenInUseAuthorization: { },
-                     requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? LocationClient.sampleNear : LocationClient.sampleFar]))
+                     requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Location.cityHall : Location.lostLagoon]))
                         nearFar.toggle()
                      },
                      delegate: locationDelegateSubject.eraseToAnyPublisher())
