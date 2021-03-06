@@ -20,12 +20,22 @@ extension MapMarker {
 struct StationsMapView: View {
     @State var region: MKCoordinateRegion
     let stations: [Station]
+    
+    let newView: some View = AvailabilityView(available: .init(bikes: 4, docks: 6))
+        .frame(height: 30)
+        .accentColor(Color.Mo.primary)
 
     var body: some View {
         Map(coordinateRegion: $region,
+            interactionModes: [.pan],
             showsUserLocation: true,
-            annotationItems: stations,
-            annotationContent: MapMarker.init)
+            annotationItems: stations) { station in
+            return MapAnnotation(coordinate: station.coordinate) {
+                AvailabilityView(available: station.available)
+                    .frame(height: 30)
+                    .accentColor(Color.Mo.primary)
+            }
+        }
     }
 
 }

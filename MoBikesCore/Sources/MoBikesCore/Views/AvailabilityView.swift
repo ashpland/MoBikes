@@ -1,38 +1,42 @@
 import SwiftUI
 import UIKit
 
+let shape = Circle()
+
 struct AvailabilityView: View {
-    let available: Int
-    let total: Int
+    let available: Station.Available
 
     private var percentage: CGFloat {
-        CGFloat(available) / CGFloat(total)
+        CGFloat(available.bikes) / CGFloat(available.bikes + available.docks)
     }
 
     private let borderConstant: CGFloat = 2
 
     static let aspectRatio: CGFloat = 1
-
+    
+    private var color: Color {
+        let markerColor = Color.Mo.marker
+        return available.bikes > Style.low ? markerColor.normal : markerColor.low
+    }
+    
     var body: some View {
             GeometryReader { geometry in
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-                    Rectangle().fill(Color.white)
-                        .cornerRadius(borderConstant * 2)
-
-                    FillAndIcon(fillColor: .white, iconColor: .accentColor,
-                                height: (geometry.size.height - (borderConstant * 2)))
-                        .cornerRadius(borderConstant * 2)
-                        .padding(borderConstant)
-
-                    FillAndIcon(fillColor: .accentColor, iconColor: .white,
-                                height: (geometry.size.height - (borderConstant * 2)))
-                        .cornerRadius(borderConstant * 2)
-                        .padding(borderConstant)
+                    shape.fill(Color.clear)
+                    shape.stroke(color, style: .init(lineWidth: 0.5))
+                        
+                    FillAndIcon(fillColor: .clear,
+                                iconColor: color,
+                                height: (geometry.size.height))
+                    
+                    FillAndIcon(fillColor: color,
+                                iconColor: .white,
+                                height: (geometry.size.height))
                         .frame(height: geometry.size.height * percentage, alignment: .bottom)
                         .clipped()
 
                 }
-                .cornerRadius(borderConstant * 2)
+                .padding([.horizontal], 1)
 
         }
         .aspectRatio(AvailabilityView.aspectRatio, contentMode: .fit)
@@ -47,8 +51,7 @@ struct FillAndIcon: View {
 
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .center)) {
-            Rectangle()
-                .fill(fillColor)
+            shape.fill(fillColor)
             Image("bikeIcon-small", bundle: Bundle.module)
                 .renderingMode(.template)
                 .resizable()
@@ -61,12 +64,12 @@ struct FillAndIcon: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        AvailabilityView(available: 7, total: 10)
+        AvailabilityView(available: .init(bikes: 7, docks: 10))
             .previewLayout(PreviewLayout.fixed(width: 100, height: 200))
             .background(Color.accentColor)
-            .accentColor(.purple)
+            .accentColor(Color.Mo.primary)
 
-        AvailabilityView(available: 1, total: 10)
+        AvailabilityView(available: .init(bikes: 1, docks: 10))
             .previewLayout(PreviewLayout.fixed(width: 100, height: 200))
             .preferredColorScheme(.dark)
             .background(Color.accentColor)

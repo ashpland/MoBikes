@@ -18,6 +18,8 @@ enum Style {
         static let marker = (normal: Color.primary,
                              low: Color.lightPrimary)
     }
+    
+    static let low = 2
 }
 
 extension Color {
