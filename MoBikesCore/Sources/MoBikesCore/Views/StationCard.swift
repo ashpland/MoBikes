@@ -29,7 +29,7 @@ public struct StationCard: View {
         .foregroundColor(.white)
         .padding()
         .background(RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.accentColor))
+                        .fill(Color.Mo.primary))
 
     }
 
@@ -66,23 +66,19 @@ struct StationCard_Previews: PreviewProvider {
         StationCard(station: Station.examples[2],
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
-            .accentColor(.purple)
 
         StationCard(station: .init(23, of: 26, "Information Booth"),
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
-            .accentColor(.purple)
 
         StationCard(station: Station.examples[4],
                     location: nil)
             .previewDevice("Apple Watch Series 6 - 40mm")
-            .accentColor(.purple)
 
 //        StationCard(station: Station.examples[1],
 //                    location: Location.lostLagoon)
 //            .previewLayout(PreviewLayout.fixed(width: 400, height: 600))
 //            .preferredColorScheme(.dark)
-//            .accentColor(.purple)
 
     }
 }

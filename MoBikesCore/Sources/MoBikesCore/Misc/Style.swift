@@ -1,10 +1,17 @@
 import SwiftUI
 import UIKit
+import CoreLocation
 
 extension UIColor {
     var asColor: Color {
         Color(self)
     }
+}
+
+enum Constants {
+    static let lowBikes = 2
+    static let maxLongitudeDeltaForDetailedMarkers: CLLocationDegrees = 0.015
+
 }
 
 enum Style {
@@ -19,7 +26,6 @@ enum Style {
                              low: Color.lightPrimary)
     }
     
-    static let low = 2
 }
 
 extension Color {
