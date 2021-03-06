@@ -57,8 +57,8 @@ var cancellables = Set<AnyCancellable>()
 
 //PlaygroundPage.current.setLiveView(mapView)
 
-let pub: AnyPublisher<LocationClient.DelegateEvent, Never> = Just(LocationClient.DelegateEvent.didUpdateLocations([]))
-    .eraseToAnyPublisher()
+//let pub: AnyPublisher<LocationClient.DelegateEvent, Never> = Just(LocationClient.DelegateEvent.didUpdateLocations([]))
+//    .eraseToAnyPublisher()
 
 //pub.filter
 
@@ -120,41 +120,57 @@ let nearLocationClient: LocationClient = {
 
 //PlaygroundPage.current.setLiveView(liveView)
 
-let locationClient: LocationClient = .live
+//let liveStationsClient: StationsClient = .live
+//
+//liveStationsClient.results
+//    .sink(receiveCompletion: { print("recieveCompletion", $0)},
+//          receiveValue: { _ in print("recieveValue", Date()) })
+//    .store(in: &cancellables)
+//
+//liveStationsClient.updateStations()
+//
+//Timer
+//    .publish(every: 1, on: .main, in: .common)
+//    .autoconnect()
+//    .sink(receiveValue: { _ in liveStationsClient.updateStations() })
+//    .store(in: &cancellables)
 
-locationClient.delegate.sink(receiveValue: { event in
-    switch event {
-    case .didChangeAuthorization(let status):
-        print("didChangeAuthorization")
-        switch status {
-        case .notDetermined:
-            print("notDetermined")
-        case .restricted:
-            print("restricted")
-        case .denied:
-            print("denied")
-        case .authorizedAlways:
-            print("authorizedAlways")
-        case .authorizedWhenInUse:
-            print("authorizedWhenInuse")
-        @unknown default:
-            print("unknown")
-        }
-    case .didUpdateLocations(_):
-        print("did update location")
-    case .didFailWithError(_):
-        print("did fail with error")
-    }
-})
-.store(in: &cancellables)
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+dateFormatter.date(from: "2021-03-06 21:26:14 +0000")
+let newResultTimes: [Date] = [
+    "2021-03-06 21:26:14 +0000",
+    "2021-03-06 21:26:56 +0000",
+    "2021-03-06 21:27:02 +0000",
+    "2021-03-06 21:27:08 +0000",
+    "2021-03-06 21:27:14 +0000",
+    "2021-03-06 21:27:20 +0000",
+    "2021-03-06 21:27:26 +0000",
+    "2021-03-06 21:27:44 +0000",
+    "2021-03-06 21:28:08 +0000",
+    "2021-03-06 21:28:14 +0000",
+    "2021-03-06 21:28:20 +0000",
+    "2021-03-06 21:28:26 +0000",
+    "2021-03-06 21:28:44 +0000",
+    "2021-03-06 21:28:56 +0000",
+    "2021-03-06 21:29:26 +0000",
+    "2021-03-06 21:29:50 +0000",
+    "2021-03-06 21:29:56 +0000",
+    "2021-03-06 21:30:08 +0000",
+    "2021-03-06 21:30:32 +0000",
+    "2021-03-06 21:30:56 +0000",
+    "2021-03-06 21:31:08 +0000",
+    "2021-03-06 21:31:20 +0000",
+    "2021-03-06 21:31:26 +0000",
+    "2021-03-06 21:31:32 +0000",
+    "2021-03-06 21:31:38 +0000",
+    "2021-03-06 21:32:02 +0000"]
+    .compactMap { dateFormatter.date(from: $0) }
 
-let viewModel: StationsViewModel = .init(locationClient: locationClient)
 
-extension Publisher {
-    func sinkPrint() -> AnyCancellable {
-        self.sink(receiveCompletion: { Swift.print("recieveCompletion", $0) },
-                  receiveValue: { Swift.print("recieveValue", $0) })
-    }
+let pairs = zip(newResultTimes, newResultTimes.dropFirst())
+let diffs = pairs.map { (lhs, rhs) -> TimeInterval in
+    lhs.distance(to: rhs)
 }
 
-viewModel.$stations.map { $0.count }.sinkPrint().store(in: &cancellables)
+Set(diffs).sorted()

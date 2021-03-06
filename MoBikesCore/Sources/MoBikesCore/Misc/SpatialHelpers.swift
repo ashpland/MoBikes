@@ -53,7 +53,7 @@ extension CLLocationCoordinate2D {
         self.location.distance(from: location)
     }
 
-    public func region(spanning delta: CLLocationDegrees = 0.005) -> MKCoordinateRegion {
+    public func region(spanning delta: CLLocationDegrees = Constants.startingLongitudeDeltaForMap) -> MKCoordinateRegion {
         MKCoordinateRegion(center: self,
                            span: .init(latitudeDelta: delta, longitudeDelta: delta))
     }

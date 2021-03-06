@@ -16,6 +16,7 @@ public final class StationsViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     public init(stations: [Station] = [],
+                stationsRefreshRate: TimeInterval = Constants.stationsRefreshRate,
                 stationsClient: StationsClient = .live,
                 locationClient: LocationClient = .live) {
 
@@ -30,6 +31,12 @@ public final class StationsViewModel: ObservableObject {
             .eraseToAnyPublisher()
 
         self.stationsClient.updateStations()
+        
+        Timer
+            .publish(every: stationsRefreshRate, on: .main, in: .common)
+            .autoconnect()
+            .sink(receiveValue: { _ in self.stationsClient.updateStations() })
+            .store(in: &cancellables)
 
         locationClient.delegate
             .compactMap { delegateEvent -> CLLocation? in
@@ -68,7 +75,7 @@ public final class StationsViewModel: ObservableObject {
             .sink(receiveValue: { event in
                 switch event {
                 case let .didChangeAuthorization(status):
-                    self.handle(status)
+                    self.handleAthorizationStatusChange(status)
                 case .didUpdateLocations(_):
                     break
                 case .didFailWithError:
@@ -80,7 +87,7 @@ public final class StationsViewModel: ObservableObject {
 
     }
 
-    func handle(_ status: CLAuthorizationStatus) {
+    func handleAthorizationStatusChange(_ status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
             self.locationClient.requestWhenInUseAuthorization()

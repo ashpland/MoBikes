@@ -8,10 +8,11 @@ extension UIColor {
     }
 }
 
-enum Constants {
-    static let lowBikes = 2
-    static let maxLongitudeDeltaForDetailedMarkers: CLLocationDegrees = 0.015
-
+public enum Constants {
+    public static let lowBikes = 2
+    public static let maxLongitudeDeltaForDetailedMarkers: CLLocationDegrees = 0.015
+    public static let startingLongitudeDeltaForMap: CLLocationDegrees = 0.005
+    public static let stationsRefreshRate: TimeInterval = 6
 }
 
 enum Style {
@@ -25,7 +26,6 @@ enum Style {
         static let marker = (normal: Color.primary,
                              low: Color.lightPrimary)
     }
-    
 }
 
 extension Color {
