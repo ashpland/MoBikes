@@ -62,8 +62,6 @@ let pub: AnyPublisher<LocationClient.DelegateEvent, Never> = Just(LocationClient
 
 //pub.filter
 
-
-
 //extension Publisher {
 //
 //    public func filter(_ isIncluded: @escaping (Self.Output) -> Bool) -> Publishers.Filter<Self>
@@ -109,7 +107,7 @@ let stationsClient: StationsClient = {
 let nearLocationClient: LocationClient = {
     let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
     var nearFar = false
-    
+
     return .init(authorizationStatus: { .authorizedAlways },
                  requestWhenInUseAuthorization: { },
                  requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Location.cityHall : Location.lostLagoon]))

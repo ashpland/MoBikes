@@ -4,7 +4,7 @@ import LocationClient
 
 public struct StationsView: View {
     @ObservedObject var viewModel: StationsViewModel
-    
+
     public var body: some View {
         NavigationView {
             ScrollView {

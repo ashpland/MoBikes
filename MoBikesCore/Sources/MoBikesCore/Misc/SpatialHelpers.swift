@@ -36,7 +36,7 @@ extension CLLocationCoordinate2D: Equatable, Hashable {
         lhs.latitude == rhs.latitude &&
             lhs.longitude == rhs.longitude
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(latitude)
         hasher.combine(longitude)
@@ -48,13 +48,19 @@ extension CLLocationCoordinate2D {
     public var location: CLLocation {
         return CLLocation(self)
     }
-    
+
     public func distance(from location: CLLocation) -> CLLocationDistance {
         self.location.distance(from: location)
+    }
+
+    public func region(spanning delta: CLLocationDegrees = 0.006) -> MKCoordinateRegion {
+        MKCoordinateRegion(center: self,
+                           span: .init(latitudeDelta: delta, longitudeDelta: delta))
     }
 }
 
 public enum Coordinates {
+
     public static let cityHall   = CLLocationCoordinate2D(latitude: 49.260919069539746,
                                               longitude: -123.11397548064534)
     public static let lostLagoon = CLLocationCoordinate2D(latitude: 49.29438528642601,

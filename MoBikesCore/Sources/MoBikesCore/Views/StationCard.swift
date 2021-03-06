@@ -6,9 +6,9 @@ public struct StationCard: View {
     let station: Station
     let location: CLLocation
     private let distanceString: String
-    
+
     public var body: some View {
-        
+
         VStack(alignment: .center, spacing: 0) {
             Text(station.name)
                 .font(Font.system(size: 27, weight: .semibold, design: .rounded))
@@ -30,20 +30,20 @@ public struct StationCard: View {
         .padding()
         .background(RoundedRectangle(cornerRadius: 15)
                         .fill(Color.accentColor))
-        
+
     }
-    
+
     public init(station: Station, location: CLLocation) {
         self.station = station
         self.location = location
-        self.distanceString = station.coordinates.distance(from: location).asUnitString()
+        self.distanceString = station.coordinate.distance(from: location).asUnitString()
     }
 }
 
 struct IconWithNumber: View {
     let name: String
     let number: Int
-    
+
     public var body: some View {
 
         HStack {
@@ -69,20 +69,17 @@ struct StationCard_Previews: PreviewProvider {
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
-        
+
         StationCard(station: Station.examples[4],
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
 
-
-        
 //        StationCard(station: Station.examples[1],
 //                    location: Location.lostLagoon)
 //            .previewLayout(PreviewLayout.fixed(width: 400, height: 600))
 //            .preferredColorScheme(.dark)
 //            .accentColor(.purple)
-        
-        
+
     }
 }

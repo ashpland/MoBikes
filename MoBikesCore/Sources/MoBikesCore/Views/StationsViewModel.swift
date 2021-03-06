@@ -2,11 +2,14 @@ import Combine
 import CoreLocation
 import Foundation
 import LocationClient
+import MapKit
+import SwiftUI
 
 public final class StationsViewModel: ObservableObject {
 
-    @Published public var stations: [Station] = []
-    @Published public var location: CLLocation = Coordinates.cityHall.location
+    @Published public var stations: [Station]
+    @Published public var location: CLLocation
+    @State public var region: MKCoordinateRegion
 
     public let stationsClient: StationsClient
     public let locationClient: LocationClient
@@ -15,7 +18,15 @@ public final class StationsViewModel: ObservableObject {
     private var locationDelegateCancellable: AnyCancellable?
     private var currentLocationCancellable: AnyCancellable?
 
-    public init(stationsClient: StationsClient = .live, locationClient: LocationClient = .live) {
+    public init(stations: [Station] = [],
+                location: CLLocation = Coordinates.cityHall.location,
+                region: MKCoordinateRegion = Coordinates.cityHall.region(),
+                stationsClient: StationsClient = .live,
+                locationClient: LocationClient = .live) {
+
+        self.stations = stations
+        self.location = location
+        self.region = region
         self.stationsClient = stationsClient
         self.locationClient = locationClient
 
@@ -25,7 +36,7 @@ public final class StationsViewModel: ObservableObject {
             .eraseToAnyPublisher()
 
         self.stationsClient.updateStations()
-        
+
         self.currentLocationCancellable = locationClient.delegate
             .compactMap { delegateEvent -> CLLocation? in
                 guard case .didUpdateLocations(let locations) = delegateEvent else { return nil }
@@ -38,8 +49,8 @@ public final class StationsViewModel: ObservableObject {
             .map { (stations, currentLocation) -> [Station] in
                 stations
                     .sorted(by: { (lhs, rhs) in
-                        return lhs.coordinates.distance(from: currentLocation) <
-                            rhs.coordinates.distance(from: currentLocation)
+                        return lhs.coordinate.distance(from: currentLocation) <
+                            rhs.coordinate.distance(from: currentLocation)
                     })
             }
             .assign(to: \.stations, on: self)
@@ -59,8 +70,8 @@ public final class StationsViewModel: ObservableObject {
             break
         }
     }
-    
-    private func handleDelegateEvent(_ event: LocationClient.DelegateEvent) -> Void {
+
+    private func handleDelegateEvent(_ event: LocationClient.DelegateEvent) {
         switch event {
         case let .didChangeAuthorization(status):
           switch status {
