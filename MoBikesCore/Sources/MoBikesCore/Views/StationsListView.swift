@@ -21,11 +21,8 @@ public struct StationsListView: View {
         .navigationTitle("Mo'Bikes")
         .toolbar {
             HStack {
-
-                Button(action: {
-                    viewModel.stationsClient.updateStations()
-                }) {
-                    Image(systemName: "arrow.clockwise")
+                NavigationLink(destination: Text("More")) {
+                    Image(systemName: "ellipsis.circle")
                 }
                 NavigationLink(destination: StationsMapView(region: {
                     if let location = viewModel.location {
@@ -38,6 +35,7 @@ public struct StationsListView: View {
                     Image(systemName: "location")
                 }
             }
+            
         }
         .accentColor(Color.Mo.primary)
     }
