@@ -66,13 +66,7 @@ extension Station {
         .init( 5, of: 11, "12th & Yukon (City Hall)",
                .init(latitude: 49.260599, longitude: -123.113504)),
 
-        .init( 4, of: 10, "8th & Yukon",
-               .init(latitude: 49.263962, longitude: -123.112621)),
-
-        .init(11, of: 16, "Information Booth",
-              .init(latitude: 49.260599, longitude: -123.113504)),
-
-        .init( 2, of: 12, "Coal Harbour Community Centre",
-               .init(latitude: 49.260599, longitude: -123.113504))
+        .init( 1, of: 10, "8th & Yukon",
+               .init(latitude: 49.263962, longitude: -123.112621))
     ]
 }

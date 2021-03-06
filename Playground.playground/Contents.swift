@@ -92,17 +92,17 @@ let pub: AnyPublisher<LocationClient.DelegateEvent, Never> = Just(LocationClient
 //        return status
 //    }
 
-let stationsClient: StationsClient = {
-    let submitStations = CurrentValueSubject<[Station], Never>([])
-    var flip = true
-    return .init(updateStations: {
-        submitStations.send(flip ? Station.examples : [])
-        flip.toggle()
-    },
-    results: submitStations
-        .setFailureType(to: Error.self)
-        .eraseToAnyPublisher())
-}()
+//let stationsClient: StationsClient = {
+//    let submitStations = CurrentValueSubject<[Station], Never>([])
+//    var flip = true
+//    return .init(updateStations: {
+//        submitStations.send(flip ? Station.examples : [])
+//        flip.toggle()
+//    },
+//    results: submitStations
+//        .setFailureType(to: Error.self)
+//        .eraseToAnyPublisher())
+//}()
 
 let nearLocationClient: LocationClient = {
     let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
@@ -110,12 +110,51 @@ let nearLocationClient: LocationClient = {
 
     return .init(authorizationStatus: { .authorizedAlways },
                  requestWhenInUseAuthorization: { },
-                 requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Location.cityHall : Location.lostLagoon]))
+                 requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Coordinates.cityHall.location : Coordinates.lostLagoon.location]))
                     nearFar.toggle()
                  },
                  delegate: locationDelegateSubject.eraseToAnyPublisher())
 }()
 
-let liveView = StationsView(viewModel: .init(stationsClient: .live, locationClient: nearLocationClient))
+//let liveView = StationsListView(viewModel: .init(stationsClient: .live, locationClient: nearLocationClient))
 
-PlaygroundPage.current.setLiveView(liveView)
+//PlaygroundPage.current.setLiveView(liveView)
+
+let locationClient: LocationClient = .live
+
+locationClient.delegate.sink(receiveValue: { event in
+    switch event {
+    case .didChangeAuthorization(let status):
+        print("didChangeAuthorization")
+        switch status {
+        case .notDetermined:
+            print("notDetermined")
+        case .restricted:
+            print("restricted")
+        case .denied:
+            print("denied")
+        case .authorizedAlways:
+            print("authorizedAlways")
+        case .authorizedWhenInUse:
+            print("authorizedWhenInuse")
+        @unknown default:
+            print("unknown")
+        }
+    case .didUpdateLocations(_):
+        print("did update location")
+    case .didFailWithError(_):
+        print("did fail with error")
+    }
+})
+.store(in: &cancellables)
+
+let viewModel: StationsViewModel = .init(locationClient: locationClient)
+
+extension Publisher {
+    func sinkPrint() -> AnyCancellable {
+        self.sink(receiveCompletion: { Swift.print("recieveCompletion", $0) },
+                  receiveValue: { Swift.print("recieveValue", $0) })
+    }
+}
+
+viewModel.$stations.map { $0.count }.sinkPrint().store(in: &cancellables)

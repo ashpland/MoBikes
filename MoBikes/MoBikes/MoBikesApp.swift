@@ -12,7 +12,7 @@ import MoBikesCore
 struct MoBikesApp: App {
     var body: some Scene {
         WindowGroup {
-            StationsView()
+            StationsListView()
         }
     }
 }

@@ -8,87 +8,94 @@ import SwiftUI
 public final class StationsViewModel: ObservableObject {
 
     @Published public var stations: [Station]
-    @Published public var location: CLLocation
-    @State public var region: MKCoordinateRegion
+    @Published public var location: CLLocation?
 
     public let stationsClient: StationsClient
     public let locationClient: LocationClient
 
-    private var stationRequestCancelable: AnyCancellable?
-    private var locationDelegateCancellable: AnyCancellable?
-    private var currentLocationCancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
 
     public init(stations: [Station] = [],
-                location: CLLocation = Coordinates.cityHall.location,
-                region: MKCoordinateRegion = Coordinates.cityHall.region(),
                 stationsClient: StationsClient = .live,
                 locationClient: LocationClient = .live) {
 
         self.stations = stations
-        self.location = location
-        self.region = region
         self.stationsClient = stationsClient
         self.locationClient = locationClient
 
         let stationResults: AnyPublisher<[Station], Never> = stationsClient.results
-            // handle errors properly
+            //TODO: handle errors properly
+            .handleEvents(receiveOutput: { print("stationResults", $0.count) })
             .replaceError(with: [])
             .eraseToAnyPublisher()
 
         self.stationsClient.updateStations()
 
-        self.currentLocationCancellable = locationClient.delegate
+        locationClient.delegate
             .compactMap { delegateEvent -> CLLocation? in
+                print("delegateEvent", delegateEvent)
+                switch delegateEvent {
+                case .didChangeAuthorization(let status):
+                    print("didChangeAuthorization", status.description)
+                case .didUpdateLocations(_):
+                    print("did update location")
+                case .didFailWithError(_):
+                    print("did fail with error")
+                }
+
                 guard case .didUpdateLocations(let locations) = delegateEvent else { return nil }
                 return locations.first
             }
             .removeDuplicates()
             .assign(to: \.location, on: self)
+            .store(in: &cancellables)
 
-        self.stationRequestCancelable = Publishers.CombineLatest(stationResults, self.$location)
+        Publishers.CombineLatest(stationResults, self.$location)
             .map { (stations, currentLocation) -> [Station] in
-                stations
+                print("stations and location", stations.count, currentLocation as Any)
+                guard let currentLocation = currentLocation else { return stations }
+
+                return stations
                     .sorted(by: { (lhs, rhs) in
                         return lhs.coordinate.distance(from: currentLocation) <
                             rhs.coordinate.distance(from: currentLocation)
                     })
             }
             .assign(to: \.stations, on: self)
+            .store(in: &cancellables)
 
-        self.locationDelegateCancellable = self.locationClient.delegate
-          .sink(receiveValue: handleDelegateEvent)
+        locationClient.delegate
+            .sink(receiveValue: { event in
+                switch event {
+                case let .didChangeAuthorization(status):
+                    self.handle(status)
+                case .didUpdateLocations(_):
+                    break
+                case .didFailWithError:
+                    //TODO: handle error
+                    break
+                }
+            })
+            .store(in: &cancellables)
 
-        switch self.locationClient.authorizationStatus() {
+    }
+
+    func handle(_ status: CLAuthorizationStatus) {
+        switch status {
         case .notDetermined:
             self.locationClient.requestWhenInUseAuthorization()
         case .restricted, .denied:
             // TODO: show an alert
+            self.location = nil
             break
-        case .authorizedAlways, .authorizedWhenInUse:
+        case .authorizedWhenInUse:
             self.locationClient.requestLocation()
+        case .authorizedAlways:
+            print("This shouldn't happen because we never request .authorizedAlways")
+            self.location = nil
         @unknown default:
             break
         }
-    }
 
-    private func handleDelegateEvent(_ event: LocationClient.DelegateEvent) {
-        switch event {
-        case let .didChangeAuthorization(status):
-          switch status {
-          case .notDetermined:
-            self.locationClient.requestWhenInUseAuthorization()
-          case .restricted, .denied:
-            // TODO: show an alert
-            break
-          case .authorizedAlways, .authorizedWhenInUse:
-            self.locationClient.requestLocation()
-          @unknown default:
-            break
-          }
-        case .didUpdateLocations(_):
-            break
-        case .didFailWithError:
-          break
-        }
     }
 }

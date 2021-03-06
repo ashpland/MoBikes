@@ -4,8 +4,7 @@ import SwiftUI
 
 public struct StationCard: View {
     let station: Station
-    let location: CLLocation
-    private let distanceString: String
+    private let distanceString: String?
 
     public var body: some View {
 
@@ -20,10 +19,11 @@ public struct StationCard: View {
                 IconWithNumber(name: "dockIcon", number: station.available.docks)
                 Spacer()
             }
-            Text("\(distanceString) away")
-                .fontWeight(.semibold)
-                .font(Font.system(size: 16, weight: .semibold, design: .rounded))
-
+            distanceString.map {
+                Text("\($0) away")
+                    .fontWeight(.semibold)
+                    .font(Font.system(size: 16, weight: .semibold, design: .rounded))
+                }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .foregroundColor(.white)
@@ -33,10 +33,13 @@ public struct StationCard: View {
 
     }
 
-    public init(station: Station, location: CLLocation) {
+    public init(station: Station, location: CLLocation?) {
         self.station = station
-        self.location = location
-        self.distanceString = station.coordinate.distance(from: location).asUnitString()
+        if let location = location {
+            self.distanceString = station.coordinate.distance(from: location).asUnitString()
+        } else {
+            self.distanceString = nil
+        }
     }
 }
 
@@ -71,7 +74,7 @@ struct StationCard_Previews: PreviewProvider {
             .accentColor(.purple)
 
         StationCard(station: Station.examples[4],
-                    location: Coordinates.cityHall.location)
+                    location: nil)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
 

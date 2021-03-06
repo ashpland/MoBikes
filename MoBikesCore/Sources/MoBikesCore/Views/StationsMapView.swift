@@ -11,26 +11,28 @@ import Combine
 
 extension MapMarker {
     init(_ station: Station) {
-        self.init(coordinate: station.coordinate)
+        let color = Style.Color.marker
+        let tint = station.available.bikes > 2 ? color.normal : color.low
+        self.init(coordinate: station.coordinate, tint: tint)
     }
 }
 
 struct StationsMapView: View {
-    @ObservedObject var viewModel: StationsViewModel
+    @State var region: MKCoordinateRegion
+    let stations: [Station]
 
     var body: some View {
-        NavigationView {
-            Map(coordinateRegion: viewModel.$region,
+        Map(coordinateRegion: $region,
             showsUserLocation: true,
-            annotationItems: viewModel.stations,
+            annotationItems: stations,
             annotationContent: MapMarker.init)
-        }
-        .navigationTitle("Mo'Bikes")
     }
+
 }
 
 struct StationsMapView_Previews: PreviewProvider {
     static var previews: some View {
-        StationsMapView(viewModel: .init())
+        StationsMapView(region: Coordinates.cityHall.region(),
+                        stations: Station.examples)
     }
 }

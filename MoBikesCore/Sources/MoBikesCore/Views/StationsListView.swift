@@ -2,33 +2,44 @@ import Combine
 import SwiftUI
 import LocationClient
 
-public struct StationsView: View {
+public struct StationsListView: View {
     @ObservedObject var viewModel: StationsViewModel
 
     public var body: some View {
-        NavigationView {
-            ScrollView {
+        ScrollView {
+            if viewModel.stations.isEmpty {
+                ProgressView()
+            } else {
                 ForEach(viewModel.stations, id: \.self) { station in
-                    StationCard(station: station, location: viewModel.location)
-                }
-            }
-            .navigationTitle("Mo'Bikes")
-            .toolbar {
-                HStack {
-                    Button(action: {
-                        viewModel.stationsClient.updateStations()
-                    }) {
-                        Image(systemName: "arrow.clockwise")
+                    NavigationLink(destination: StationsMapView(region: station.coordinate.region(), stations: viewModel.stations)) {
+                        StationCard(station: station, location: viewModel.location)
                     }
-                    Button(action: {
-                        viewModel.locationClient.requestLocation()
-                    }) {
-                        Image(systemName: "location")
-                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
         }
-        .accentColor(Color("MoPurple", bundle: Bundle.module))
+        .navigationTitle("Mo'Bikes")
+        .toolbar {
+            HStack {
+
+                Button(action: {
+                    viewModel.stationsClient.updateStations()
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                }
+                NavigationLink(destination: StationsMapView(region: {
+                    if let location = viewModel.location {
+                        return location.coordinate.region()
+                    } else {
+                        return Coordinates.cityHall.region()
+                    }
+                }(),
+                stations: viewModel.stations)) {
+                    Image(systemName: "location")
+                }
+            }
+        }
+        .accentColor(Color.Mo.primary)
     }
 
     public init(viewModel: StationsViewModel = StationsViewModel()) {
@@ -62,11 +73,11 @@ struct StationsView_Previews: PreviewProvider {
     }()
 
     static var previews: some View {
-        StationsView(viewModel: .init(stationsClient: .mock, locationClient: nearLocationClient))
+        StationsListView(viewModel: .init(locationClient: .live))
             .preferredColorScheme(.dark)
 
-//            .previewDevice("Apple Watch Series 6 - 40mm")
-//            .previewLayout(PreviewLayout.fixed(width: 300, height: 600))
+        //            .previewDevice("Apple Watch Series 6 - 40mm")
+        //            .previewLayout(PreviewLayout.fixed(width: 300, height: 600))
 
     }
 }
