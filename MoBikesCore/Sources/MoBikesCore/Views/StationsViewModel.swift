@@ -37,10 +37,9 @@ public final class StationsViewModel: ObservableObject {
         self.stationRequestCancelable = Publishers.CombineLatest(stationResults, self.$location)
             .map { (stations, currentLocation) -> [Station] in
                 stations
-                    .filter { $0.operative }
                     .sorted(by: { (lhs, rhs) in
-                        return lhs.location.distance(from: currentLocation) <
-                            rhs.location.distance(from: currentLocation)
+                        return lhs.coordinates.distance(from: currentLocation) <
+                            rhs.coordinates.distance(from: currentLocation)
                     })
             }
             .assign(to: \.stations, on: self)

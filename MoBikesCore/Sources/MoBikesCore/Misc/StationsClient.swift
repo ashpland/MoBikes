@@ -22,8 +22,8 @@ extension StationsClient {
                 .throttle(for: 6, scheduler: RunLoop.main, latest: true)
                 .flatMap { URLSession.shared.dataTaskPublisher(for: apiURL) }
                 .map { data, _ in data }
-                .decode(type: Station.Group.self, decoder: JSONDecoder())
-                .map(\.stations)
+                .decode(type: DecodableStation.Group.self, decoder: JSONDecoder())
+                .map(DecodableStation.convertToStations)
                 .removeDuplicates()
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()

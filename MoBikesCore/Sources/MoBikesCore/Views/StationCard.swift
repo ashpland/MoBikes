@@ -15,9 +15,9 @@ public struct StationCard: View {
                 .multilineTextAlignment(.center)
             HStack {
                 Spacer()
-                IconWithNumber(name: "bikeIcon", number: station.availableBikes)
+                IconWithNumber(name: "bikeIcon", number: station.available.bikes)
                 Spacer()
-                IconWithNumber(name: "dockIcon", number: station.freeDocks)
+                IconWithNumber(name: "dockIcon", number: station.available.docks)
                 Spacer()
             }
             Text("\(distanceString) away")
@@ -36,7 +36,7 @@ public struct StationCard: View {
     public init(station: Station, location: CLLocation) {
         self.station = station
         self.location = location
-        self.distanceString = station.location.distance(from: location).asUnitString()
+        self.distanceString = station.coordinates.distance(from: location).asUnitString()
     }
 }
 
@@ -65,8 +65,7 @@ struct StationCard_Previews: PreviewProvider {
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
 
-        
-        StationCard(station: Station(bikes: 23, docks: 3, "Information Booth"),
+        StationCard(station: .init(23, of: 26, "Information Booth"),
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)

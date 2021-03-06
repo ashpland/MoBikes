@@ -20,9 +20,6 @@ public struct StationsView: View {
                     }) {
                         Image(systemName: "arrow.clockwise")
                     }
-//                    .foregroundColor(.white)
-                    
-                    
                     Button(action: {
                         viewModel.locationClient.requestLocation()
                     }) {
