@@ -58,14 +58,14 @@ struct StationsView_Previews: PreviewProvider {
 
         return .init(authorizationStatus: { .authorizedAlways },
                      requestWhenInUseAuthorization: { },
-                     requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Location.cityHall : Location.lostLagoon]))
+                     requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Coordinates.cityHall.location : Coordinates.lostLagoon.location]))
                         nearFar.toggle()
                      },
                      delegate: locationDelegateSubject.eraseToAnyPublisher())
     }()
 
     static var previews: some View {
-        StationsView(viewModel: .init(stationsClient: .live, locationClient: nearLocationClient))
+        StationsView(viewModel: .init(stationsClient: .mock, locationClient: nearLocationClient))
             .preferredColorScheme(.dark)
 
 //            .previewDevice("Apple Watch Series 6 - 40mm")

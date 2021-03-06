@@ -57,32 +57,67 @@ var cancellables = Set<AnyCancellable>()
 
 //PlaygroundPage.current.setLiveView(mapView)
 
-    let stationsClient: StationsClient = {
-        let submitStations = CurrentValueSubject<[Station], Never>([])
-        var flip = true
-        return .init(updateStations: {
-            submitStations.send(flip ? Station.examples : [])
-            flip.toggle()
-        },
-        results: submitStations
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher())
-    }()
+let pub: AnyPublisher<LocationClient.DelegateEvent, Never> = Just(LocationClient.DelegateEvent.didUpdateLocations([]))
+    .eraseToAnyPublisher()
 
-   let nearLocationClient: LocationClient = {
-        let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
+//pub.filter
 
-        return .init(authorizationStatus: { .authorizedAlways },
-                     requestWhenInUseAuthorization: { },
-                     requestLocation: { locationDelegateSubject.send(.didUpdateLocations([LocationClient.sampleNear])) },
-                     delegate: locationDelegateSubject
-                        .handleEvents(receiveOutput: { print("output", $0) })
-                        .eraseToAnyPublisher())
-    }()
 
-let vm: StationsViewModel = .init(stationsClient: .mock,
-                                  locationClient: nearLocationClient)
 
-vm.$stations
-    .sink(receiveValue: { print("the stations", $0) })
-    .store(in: &cancellables)
+//extension Publisher {
+//
+//    public func filter(_ isIncluded: @escaping (Self.Output) -> Bool) -> Publishers.Filter<Self>
+//
+//}
+
+//    .compactMap { delegateEvent -> CLLocation? in
+//        if case .didUpdateLocations(let locations) = delegateEvent,
+//           let location = locations.first {
+//            return location
+//        } else {
+//            return nil
+//        }
+//    }
+//    .removeDuplicates()
+
+//let event = LocationClient.DelegateEvent.didUpdateLocations([])
+//
+////let test: [CLLocation]? = case let .didUpdateLocations(locations) = delegateEvent
+//
+//if case .didUpdateLocations(let locations) = event {
+//    print(locations)
+//}
+//
+//let temp = pub
+//    .compactMap { event -> CLAuthorizationStatus? in
+//        guard case .didChangeAuthorization(let status) = event else { return nil }
+//        return status
+//    }
+
+let stationsClient: StationsClient = {
+    let submitStations = CurrentValueSubject<[Station], Never>([])
+    var flip = true
+    return .init(updateStations: {
+        submitStations.send(flip ? Station.examples : [])
+        flip.toggle()
+    },
+    results: submitStations
+        .setFailureType(to: Error.self)
+        .eraseToAnyPublisher())
+}()
+
+let nearLocationClient: LocationClient = {
+    let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
+    var nearFar = false
+    
+    return .init(authorizationStatus: { .authorizedAlways },
+                 requestWhenInUseAuthorization: { },
+                 requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Location.cityHall : Location.lostLagoon]))
+                    nearFar.toggle()
+                 },
+                 delegate: locationDelegateSubject.eraseToAnyPublisher())
+}()
+
+let liveView = StationsView(viewModel: .init(stationsClient: .live, locationClient: nearLocationClient))
+
+PlaygroundPage.current.setLiveView(liveView)

@@ -25,9 +25,35 @@ extension CLLocationDistance {
     }
 }
 
-public enum Location {
-    public static let cityHall   = CLLocation(latitude: 49.260919069539746,
+extension CLLocation {
+    convenience init(_ coordinates: CLLocationCoordinate2D) {
+        self.init(latitude: coordinates.latitude, longitude: coordinates.longitude)
+    }
+}
+
+extension CLLocationCoordinate2D {
+    public var location: CLLocation {
+        return CLLocation(self)
+    }
+    
+    public func distance(from location: CLLocation) -> CLLocationDistance {
+        self.location.distance(from: location)
+    }
+}
+
+public enum Coordinates {
+    public static let cityHall   = CLLocationCoordinate2D(latitude: 49.260919069539746,
                                               longitude: -123.11397548064534)
-    public static let lostLagoon = CLLocation(latitude: 49.29438528642601,
+    public static let lostLagoon = CLLocationCoordinate2D(latitude: 49.29438528642601,
                                               longitude: -123.13785887586177)
+
+    public static func randomVancouver() -> CLLocationCoordinate2D {
+        let latMax =   49.321689
+        let latMin =   49.181413
+        let lngMax = -122.994335
+        let lngMin = -123.237431
+
+        return CLLocationCoordinate2DMake(Double.random(in: latMin...latMax),
+                                          Double.random(in: lngMin...lngMax))
+    }
 }

@@ -61,18 +61,18 @@ struct IconWithNumber: View {
 struct StationCard_Previews: PreviewProvider {
     static var previews: some View {
         StationCard(station: Station.examples[2],
-                    location: Location.cityHall)
+                    location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
 
         
         StationCard(station: Station(bikes: 23, docks: 3, "Information Booth"),
-                    location: Location.cityHall)
+                    location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
         
         StationCard(station: Station.examples[4],
-                    location: Location.cityHall)
+                    location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
             .accentColor(.purple)
 
