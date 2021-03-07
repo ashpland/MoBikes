@@ -74,7 +74,7 @@ struct StationsView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-        StationsListView(viewModel: .init(locationClient: .live))
+        StationsListView(viewModel: .init(locationClient: nearLocationClient))
             .preferredColorScheme(.dark)
         
         //            .previewDevice("Apple Watch Series 6 - 40mm")

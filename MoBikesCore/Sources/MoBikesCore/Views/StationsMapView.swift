@@ -32,6 +32,8 @@ struct StationsMapView: View {
                                     Constants.maxLongitudeDeltaForDetailedMarkers)
             }
         }
+        .ignoresSafeArea()
+        .padding(EdgeInsets(top: 0, leading: 0, bottom: -55, trailing: 0))
     }
 
 }

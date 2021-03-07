@@ -11,7 +11,7 @@ extension UIColor {
 public enum Constants {
     public static let lowBikes = 2
     public static let maxLongitudeDeltaForDetailedMarkers: CLLocationDegrees = 0.015
-    public static let startingLongitudeDeltaForMap: CLLocationDegrees = 0.005
+    public static let startingLongitudeDeltaForMap: CLLocationDegrees = 0.007
     public static let stationsRefreshRate: TimeInterval = 6
     public static let mobiPhoneNumber: URL = URL(string: "tel://7786551800")!
 }

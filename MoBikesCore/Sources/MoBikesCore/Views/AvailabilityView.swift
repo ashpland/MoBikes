@@ -34,9 +34,9 @@ struct AvailabilityView: View {
             GeometryReader { geometry in
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                     shape.fill(Color.clear)
-                    shape.stroke(color, style: .init(lineWidth: 0.5))
+                    shape.stroke(color, style: .init(lineWidth: 2))
                     
-                    FillAndIcon(fillColor: .clear,
+                    FillAndIcon(fillColor: .white,
                                 iconColor: color,
                                 height: (geometry.size.height))
                     
