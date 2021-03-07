@@ -4,24 +4,26 @@ import LocationClient
 
 public struct StationsListView: View {
     @ObservedObject var viewModel: StationsViewModel
-
+    
     public var body: some View {
         ScrollView {
             if viewModel.stations.isEmpty {
                 ProgressView()
             } else {
-                ForEach(viewModel.stations, id: \.self) { station in
-                    NavigationLink(destination: StationsMapView(region: station.coordinate.region(), stations: viewModel.stations)) {
-                        StationCard(station: station, location: viewModel.location)
+                LazyVStack {
+                    ForEach(viewModel.stations, id: \.self) { station in
+                        NavigationLink(destination: StationsMapView(region: station.coordinate.region(), stations: viewModel.stations)) {
+                            StationCardView(station: station, location: viewModel.location)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
         }
         .navigationTitle("Mo'Bikes")
         .toolbar {
             HStack {
-                NavigationLink(destination: Text("More")) {
+                NavigationLink(destination: MoreView()) {
                     Image(systemName: "ellipsis.circle")
                 }
                 NavigationLink(destination: StationsMapView(region: {
@@ -39,7 +41,7 @@ public struct StationsListView: View {
         }
         .accentColor(Color.Mo.primary)
     }
-
+    
     public init(viewModel: StationsViewModel = StationsViewModel()) {
         self.viewModel = viewModel
     }
@@ -57,11 +59,11 @@ struct StationsView_Previews: PreviewProvider {
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher())
     }()
-
+    
     static let nearLocationClient: LocationClient = {
         let locationDelegateSubject = PassthroughSubject<LocationClient.DelegateEvent, Never>()
         var nearFar = false
-
+        
         return .init(authorizationStatus: { .authorizedAlways },
                      requestWhenInUseAuthorization: { },
                      requestLocation: { locationDelegateSubject.send(.didUpdateLocations([nearFar ? Coordinates.cityHall.location : Coordinates.lostLagoon.location]))
@@ -69,13 +71,15 @@ struct StationsView_Previews: PreviewProvider {
                      },
                      delegate: locationDelegateSubject.eraseToAnyPublisher())
     }()
-
+    
     static var previews: some View {
+        NavigationView {
         StationsListView(viewModel: .init(locationClient: .live))
             .preferredColorScheme(.dark)
-
+        
         //            .previewDevice("Apple Watch Series 6 - 40mm")
         //            .previewLayout(PreviewLayout.fixed(width: 300, height: 600))
-
+        }
+        
     }
 }

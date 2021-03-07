@@ -2,7 +2,7 @@ import Combine
 import CoreLocation
 import SwiftUI
 
-public struct StationCard: View {
+public struct StationCardView: View {
     let station: Station
     private let distanceString: String?
 
@@ -61,17 +61,17 @@ struct IconWithNumber: View {
     }
 }
 
-struct StationCard_Previews: PreviewProvider {
+struct StationCardView_Previews: PreviewProvider {
     static var previews: some View {
-        StationCard(station: Station.examples[2],
+        StationCardView(station: Station.examples[2],
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
 
-        StationCard(station: .init(23, of: 26, "Information Booth"),
+        StationCardView(station: .init(23, of: 26, "Information Booth"),
                     location: Coordinates.cityHall.location)
             .previewDevice("Apple Watch Series 6 - 40mm")
 
-        StationCard(station: Station.examples[4],
+        StationCardView(station: Station.examples[4],
                     location: nil)
             .previewDevice("Apple Watch Series 6 - 40mm")
 

@@ -2,8 +2,6 @@ import Combine
 import CoreLocation
 import Foundation
 import LocationClient
-import MapKit
-import SwiftUI
 
 public final class StationsViewModel: ObservableObject {
 
