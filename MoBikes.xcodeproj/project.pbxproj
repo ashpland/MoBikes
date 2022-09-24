@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4909804428DE950100E2DF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909804328DE950100E2DF9E /* Assets.xcassets */; };
 		4909804A28DE950100E2DF9E /* watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4909804928DE950100E2DF9E /* watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4909804F28DE950100E2DF9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909804E28DE950100E2DF9E /* ContentView.swift */; };
 		4909805328DE950100E2DF9E /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909805228DE950100E2DF9E /* ComplicationController.swift */; };
 		4909805528DE950200E2DF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909805428DE950200E2DF9E /* Assets.xcassets */; };
 		4909805828DE950200E2DF9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909805728DE950200E2DF9E /* Preview Assets.xcassets */; };
@@ -103,7 +102,6 @@
 		4909804128DE950000E2DF9E /* watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4909804328DE950100E2DF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4909804928DE950100E2DF9E /* watchOS WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "watchOS WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4909804E28DE950100E2DF9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4909805228DE950100E2DF9E /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		4909805428DE950200E2DF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4909805728DE950200E2DF9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 			children = (
 				49B6466F28DECBF40048AAB0 /* watchMain.swift */,
 				49B6467228DECC820048AAB0 /* watchState.swift */,
-				4909804E28DE950100E2DF9E /* ContentView.swift */,
 				4909805228DE950100E2DF9E /* ComplicationController.swift */,
 				4909805428DE950200E2DF9E /* Assets.xcassets */,
 				4909805928DE950200E2DF9E /* Info.plist */,
@@ -438,7 +435,6 @@
 			files = (
 				49C2BB5C28DE986D009738AB /* Spatial.swift in Sources */,
 				49C2BB5A28DE986D009738AB /* MBError.swift in Sources */,
-				4909804F28DE950100E2DF9E /* ContentView.swift in Sources */,
 				49B6467328DECC820048AAB0 /* watchState.swift in Sources */,
 				49B6466E28DEBFC80048AAB0 /* HelperViews.swift in Sources */,
 				49C2BB5728DE986A009738AB /* Network.swift in Sources */,
