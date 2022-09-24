@@ -28,7 +28,18 @@ struct MainView: View {
             List {
                 ForEach(sm.db.stations, content: StationCard.init)
             }
+            .accentColor(.purple)
         }
+    }
+}
+
+struct Main_Previews: PreviewProvider {
+    static let previewState = { watchState() |>
+        assoc(\.stations, Station.examples) }()
+    
+    static var previews: some View {
+        MainView()
+            .environmentObject(StateManager(previewState))
     }
 }
 
@@ -42,15 +53,40 @@ struct StationCard: View {
             Text("\(station.available.bikes) / \(station.available.total)")
         }
         .padding(.vertical)
+        .listRowBackground(StationCardBackground(available: station.available))
+        
+
     }
 }
 
-struct Main_Previews: PreviewProvider {
-    static let previewState = { watchState() |>
-        assoc(\.stations, Station.examples) }()
+struct StationCardBackground: View {
+    let available: Station.Available
     
-    static var previews: some View {
-        MainView()
-            .environmentObject(StateManager(previewState))
+    var body: some View {
+        ZStack {
+            Color.white.opacity(0.15)
+            AvailabilityBar(available: available)
+                .opacity(0.4)
+        }
+        .cornerRadius(12)
+    }
+}
+
+extension Station.Available {
+    var percent: CGFloat {
+        return Double(self.bikes) / Double(self.total)
+    }
+}
+
+struct AvailabilityBar: View {
+    let available: Station.Available
+    
+    var body: some View {
+        GeometryReader { geom in
+            ZStack(alignment: .leading) {
+                Color.accentColor.frame(width: geom.size.width * available.percent)
+                
+            }
+        }
     }
 }
