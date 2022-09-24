@@ -2,11 +2,10 @@ import Foundation
 
 struct World {
     var stationApi = StationApi()
-    var tests = TestSettings()
 }
 
 extension World {
-    static let mock = World(stationApi: .mock, tests: .mock)
+    static let mock = World(stationApi: .mock)
 }
 
 struct StationApi {
@@ -30,13 +29,4 @@ extension StationApi {
     static func random(_ count: Int = 250) -> StationApi {
         StationApi { Array(1...count).map { _ in Station.random() }}
     }
-}
-
-struct TestSettings {
-    var enableTests = false
-    var showFullScreen = false
-}
-
-extension TestSettings {
-    static let mock = TestSettings(enableTests: true, showFullScreen: false)
 }

@@ -12,7 +12,7 @@ struct MoBikesApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(StateManager.shared)
+                .environmentObject(StateManager(iosState()))
         }
     }
 }

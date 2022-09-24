@@ -30,19 +30,23 @@ extension Bikeway {
 }
 
 extension Bikeway {
-    static let jsonUrl = #fileLiteral(resourceName: "bikeways.geojson")
-    
-    static let loadFromUrl: (URL) throws -> [Bikeway] = 
-    getDataFromContentsOfUrl
-    >>> MKGeoJSONDecoder().decode
-    >>> compactMap(makeSegment)
-    >>> groupBy(\.category)
-    >>> map(^\.value >>> Bikeway.init)
+    static func loadFromFile() throws -> [Bikeway] {
+        guard let url = Bundle.main.url(forResource: "bikeways", withExtension: "json") else {
+            throw MBError.resourceNotFound("bikeways")
+        }
+        
+        return try url |>
+        getDataFromContentsOfUrl
+        >>> MKGeoJSONDecoder().decode
+        >>> compactMap(makeSegment)
+        >>> groupBy(\.category)
+        >>> map(^\.value >>> Bikeway.init)
+    }
 }
 
 fileprivate let makeSegment = 
 asType(MKGeoJSONFeature.self)
->>> twin
+>>> { ($0, $0) }
 >>> first(getPolyline)
 >>> second(getCategory)
 >>> zip

@@ -45,7 +45,7 @@ struct Whimsy: View {
 }
 
 struct Controls: View {
-    @EnvironmentObject var sm: StateManager
+    @EnvironmentObject var sm: StateManager<iosState>
     
     @State var bikeOffset: CGFloat = 0
     @State var orientation: CGFloat = 0.0
@@ -57,7 +57,7 @@ struct Controls: View {
                 .frame(width: 36, height: 44)
                 
                 Divider().frame(width: 44)
-                Button { sm.action(.toLostLagoon) } label: { 
+                Button { sm.dispatch(.toLostLagoon) } label: {
                     Image(systemName: "location")
                 }              
                 .frame(width: 44, height: 44)
@@ -70,7 +70,7 @@ struct Controls: View {
                 .frame(width: 44, height: 44)
                 
                 Divider().frame(width: 44)
-                Button { sm.action(.updateStations) } label: { 
+                Button { sm.dispatchAsync(.updateStations) } label: {
 //                Button { sm.toggler.toggle() } label: { 
                         Image(systemName: "ellipsis.circle")
                 }
@@ -105,13 +105,13 @@ struct Controls: View {
 }
 
 struct MainView: View {
-    @EnvironmentObject var sm: StateManager
+    @EnvironmentObject var sm: StateManager<iosState>
     
     var body: some View {
         ZStack(alignment: .trailing) {
             VStack(alignment: .center) {
-                if let error = sm.state.activeError {
-                    ErrorView(error: error, clear: { sm.action(.clearError) })
+                if let error = sm.db.activeError {
+                    ErrorView(error: error, clear: { sm.dispatch(.clearError) })
                 }
                 MapView()
             }

@@ -4,30 +4,30 @@ import SwiftUI
 
 // https://medium.com/flawless-app-stories/mapkit-in-swiftui-c0cc2b07c28a
 struct MapView: UIViewRepresentable {
-    @EnvironmentObject var sm: StateManager
+    @EnvironmentObject var sm: StateManager<iosState>
     
     func makeCoordinator() -> MapViewCoordinator{
-        MapViewCoordinator(action: sm.action)
+        MapViewCoordinator(dispatch: sm.dispatch)
     }
     
     func makeUIView(context: Context) -> MKMapView{
-        sm.action(.loadBikeways)
-        sm.action(.updateStations)
+        sm.dispatch(.custom(.loadBikeways))
+        sm.dispatchAsync(.updateStations)
         let mapView = MKMapView(frame: .zero)
         
         mapView.register(AvailabilityAnnotationView.self, forAnnotationViewWithReuseIdentifier: AvailabilityAnnotationView.identifier)
         
         return mapView 
-        |> configureMinimalMap 
-        <> setRegion(sm.state.region.mkCoordinateRegion)
+        |> configureMinimalMap
+        <> setRegion(sm.db.region.mkCoordinateRegion)
         <> addCoordinator(context.coordinator)
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
         _ = view 
-        |> updateRegion(sm.state.region)
-        <> updateBikeways(view.overlays, sm.state.bikeways)
-        <> updateStations(view.annotations, sm.state.stations)
+        |> updateRegion(sm.db.region)
+        <> updateBikeways(view.overlays, sm.db.bikeways)
+        <> updateStations(view.annotations, sm.db.stations)
     }
 }
 

@@ -4,6 +4,7 @@ enum MBError: Error  {
     case statusNotOk(Int)
     case reponseNotHTTPURLResponse
     case decoderError
+    case resourceNotFound(String)
     case unknownError(Error)
 }
 
@@ -20,6 +21,8 @@ extension MBError {
         switch self {
         case .statusNotOk, .reponseNotHTTPURLResponse, .decoderError:
             return "Updating Stations Failed"
+        case .resourceNotFound(let resource):
+            return "Unable to load \(resource)"
         case .unknownError:
             return "Unknown Error"
         }
@@ -33,6 +36,8 @@ extension MBError {
             return "Could not decode API response"
         case .reponseNotHTTPURLResponse: 
             return "Response was not an HTTPURLResponse"
+        case .resourceNotFound(let resource):
+            return "Unable to load \(resource)"
         case .unknownError(let unknown): 
             return "Unknown Error \(unknown.localizedDescription)"
         }

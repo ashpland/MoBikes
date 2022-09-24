@@ -70,8 +70,6 @@ func constantly<A, B>(_ a: A) -> (B) -> A {
     { _ in a }
 } 
 
-func twin<A>(_ a: A) -> (A, A) { (a, a) }
-
 func asType<A>(_ type: A.Type) -> (Any) -> A? {
     return { $0 as? A }
 }
@@ -95,31 +93,17 @@ prefix func ^<Key: Hashable, Value>(_ key: Key) -> ([Key:Value]) -> Value? {
     get(key)
 }
 
+func assoc<Root, Value>(_ root: Root, _ kp: WritableKeyPath<Root, Value>, _ value: Value) -> Root {
+    var root = root
+    root[keyPath: kp] = value
+    return root
+}
+
 func assoc<Root, Value>(_ kp: WritableKeyPath<Root, Value>, _ value: Value) -> (Root) -> Root {
     return { root in
         var root = root
         root[keyPath: kp] = value
         return root
-    }
-}
-
-func assoc<Root, Value>(_ kp: WritableKeyPath<Root, Value>) -> (@escaping () throws -> Value) -> (Root) throws -> Root {
-    return { newValue in 
-        return { root in
-            var root = root
-            root[keyPath: kp] = try newValue()
-            return root
-        }
-    }
-}
-
-func assoc<Root, Value>(_ kp: WritableKeyPath<Root, Value>) -> (@escaping () async throws -> Value) -> (Root) async throws -> Root {
-    return { newValue in 
-        return { root in
-            var root = root
-            root[keyPath: kp] = try await newValue()
-            return root
-        }
     }
 }
 

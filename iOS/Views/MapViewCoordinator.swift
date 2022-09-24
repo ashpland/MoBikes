@@ -1,14 +1,14 @@
 import MapKit
 
 class MapViewCoordinator: NSObject, MKMapViewDelegate {
-    let action: (StateManager.Action) -> Void
+    let dispatch: (StateManager<iosState>.Event) -> Void
     
-    init(action: @escaping (StateManager.Action) -> Void) {
-        self.action = action
+    init(dispatch: @escaping (StateManager<iosState>.Event) -> Void) {
+        self.dispatch = dispatch
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        action(.updateRegion(mapView.region))
+        dispatch(.updateRegion(mapView.region))
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

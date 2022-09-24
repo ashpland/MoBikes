@@ -40,6 +40,7 @@ flip(String.components)(",")
 >>> map(flip(String.trimmingCharacters)(.whitespaces))
 
 // Tagged
+// https://github.com/pointfreeco/swift-tagged
 struct Tagged<Tag, RawValue> {
     let rawValue: RawValue
 }
