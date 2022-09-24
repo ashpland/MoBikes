@@ -20,5 +20,5 @@ struct iosState: StateManageable {
     }
     
     enum AsyncEvent {}
-    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> Self {}
+    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {}
 }

@@ -12,7 +12,7 @@ class StateManager<DB: StateManageable>: ObservableObject {
     
     func dispatch(_ event: Event) {
         do {
-            self.db = try Self.handleEvent(state: self.db, event: event)
+            self.db = try StateManager.handleEvent(state: self.db, event: event)
         } catch {
             setActiveError(error)
         }
@@ -21,9 +21,9 @@ class StateManager<DB: StateManageable>: ObservableObject {
     func dispatchAsync(_ event: AsyncEvent) {
         Task {
             do {
-                let db = try await Self.handleAsyncEvent(state: self.db, event: event)
+                let updateDB = try await StateManager.handleAsyncEvent(state: self.db, event: event)
                 await MainActor.run {
-                    self.db = db
+                    self.dispatch(.update(updateDB))
                 }
             } catch {
                 setActiveError(error)
@@ -39,6 +39,7 @@ class StateManager<DB: StateManageable>: ObservableObject {
 extension StateManager {
     enum Event {
         case custom(DB.Event)
+        case update((DB) -> DB)
         case clearError
         case throwSampleError
         case toLostLagoon
@@ -52,6 +53,8 @@ extension StateManager {
         switch event {
         case .custom(let customEvent):
             return try DB.handleEvent(state: state, event: customEvent)
+        case .update(let updateDB):
+            return updateDB(state)
         case .clearError:
             return assoc(state, \.activeError, nil)
         case .throwSampleError:
@@ -80,13 +83,13 @@ extension StateManager {
 }
 
 extension StateManager {
-    static func handleAsyncEvent(state: DB, event: AsyncEvent) async throws -> DB {
+    static func handleAsyncEvent(state: DB, event: AsyncEvent) async throws -> (DB) -> DB {
         switch event {
         case .custom(let customEvent):
             return try await DB.handleAsyncEvent(state: state, event: customEvent)
         case .updateStations:
             let stations = try await state.world.stationApi.getStations()
-            return assoc(state, \.stations, stations)
+            return { assoc($0, \.stations, stations) }
         }
     }
 }
@@ -95,7 +98,7 @@ protocol StateManageable {
     associatedtype Event
     static func handleEvent(state: Self, event: Event) throws -> Self
     associatedtype AsyncEvent
-    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws -> Self
+    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws -> (Self) -> Self
     
     var activeError: MBError? { get set }
     var currentLocation: Coordinate { get set }

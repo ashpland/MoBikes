@@ -10,5 +10,5 @@ struct watchState: StateManageable {
     static func handleEvent(state: Self, event: Event) throws -> Self {}
     
     enum AsyncEvent {}
-    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> Self {}
+    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {}
 }
