@@ -11,7 +11,8 @@ import SwiftUI
 struct MoBikesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(StateManager.shared)
         }
     }
 }
