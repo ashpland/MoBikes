@@ -1,10 +1,3 @@
-//
-//  MoBikesApp.swift
-//  watchOS WatchKit Extension
-//
-//  Created by Andrew on 2022-09-23.
-//
-
 import SwiftUI
 
 @main
