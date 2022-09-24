@@ -38,6 +38,13 @@ extension Coordinate {
                   longitude: coordinate.longitude)
     }
     
+    init?(_ locations: [CLLocation]) {
+        guard let coordinate = locations.first?.coordinate
+        else { return nil }
+        self.init(latitude: coordinate.latitude,
+                  longitude: coordinate.longitude)
+    }
+    
     static func parse(_ order: Order) -> (String) -> Coordinate? {
         return { 
             guard let parsedCoordinates = $0 

@@ -13,6 +13,8 @@
 		4909805528DE950200E2DF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909805428DE950200E2DF9E /* Assets.xcassets */; };
 		4909805828DE950200E2DF9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909805728DE950200E2DF9E /* Preview Assets.xcassets */; };
 		4909805C28DE950200E2DF9E /* watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4909804128DE950000E2DF9E /* watchOS.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		49126C6528DF8FC2000733E0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49126C6428DF8FC2000733E0 /* Location.swift */; };
+		49126C6628DF8FC2000733E0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49126C6428DF8FC2000733E0 /* Location.swift */; };
 		491CF7F728DE8AEF00CC9C69 /* Swjft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F228DE8AEF00CC9C69 /* Swjft.swift */; };
 		491CF7F928DE8AF000CC9C69 /* MBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F328DE8AEF00CC9C69 /* MBError.swift */; };
 		491CF7FB28DE8AF000CC9C69 /* Spatial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F428DE8AEF00CC9C69 /* Spatial.swift */; };
@@ -107,6 +109,7 @@
 		4909805428DE950200E2DF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4909805728DE950200E2DF9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4909805928DE950200E2DF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49126C6428DF8FC2000733E0 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		491CF7F228DE8AEF00CC9C69 /* Swjft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swjft.swift; sourceTree = "<group>"; };
 		491CF7F328DE8AEF00CC9C69 /* MBError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBError.swift; sourceTree = "<group>"; };
 		491CF7F428DE8AEF00CC9C69 /* Spatial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spatial.swift; sourceTree = "<group>"; };
@@ -204,6 +207,7 @@
 		4995427628DE8EC7002FCB93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49126C6428DF8FC2000733E0 /* Location.swift */,
 				491CF80128DE8AFD00CC9C69 /* Network.swift */,
 				49C2BB5E28DE9DDA009738AB /* State.swift */,
 				491CF80328DE8AFD00CC9C69 /* Stations.swift */,
@@ -440,6 +444,7 @@
 				49C2BB5A28DE986D009738AB /* MBError.swift in Sources */,
 				49B6467328DECC820048AAB0 /* watchState.swift in Sources */,
 				49AD3CB928DEE11600F8496A /* StationView.swift in Sources */,
+				49126C6628DF8FC2000733E0 /* Location.swift in Sources */,
 				49B6466E28DEBFC80048AAB0 /* HelperViews.swift in Sources */,
 				49C2BB5728DE986A009738AB /* Network.swift in Sources */,
 				49C2BB5528DE986A009738AB /* Stations.swift in Sources */,
@@ -468,6 +473,7 @@
 				49B0DFB828DE84B2006F856F /* iosMain.swift in Sources */,
 				491CF7FB28DE8AF000CC9C69 /* Spatial.swift in Sources */,
 				49B6467528DECD1A0048AAB0 /* ControlsView.swift in Sources */,
+				49126C6528DF8FC2000733E0 /* Location.swift in Sources */,
 				491CF80A28DE8AFD00CC9C69 /* Stations.swift in Sources */,
 				491CF80E28DE8AFD00CC9C69 /* World.swift in Sources */,
 				49C2BB5F28DE9DDA009738AB /* State.swift in Sources */,

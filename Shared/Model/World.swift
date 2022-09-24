@@ -1,11 +1,12 @@
 import Foundation
 
 struct World {
-    var stationApi = StationApi()
+    var stationApi: StationApi = .live
+    var locationClient: LocationClient = .live
 }
 
 extension World {
-    static let mock = World(stationApi: .mock)
+    static let mock = World(stationApi: .mock, locationClient: .mock)
 }
 
 struct StationApi {

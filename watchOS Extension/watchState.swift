@@ -1,5 +1,6 @@
 struct watchState: StateManageable {
     var activeError: MBError? = nil
+    var currentLocation: Coordinate = .cityHall
     var region: Region = .start
     var stations: [Station] = []
     var world: World = World()

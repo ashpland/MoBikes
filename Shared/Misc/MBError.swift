@@ -1,10 +1,11 @@
 import Foundation
 
 enum MBError: Error  {
-    case statusNotOk(Int)
-    case reponseNotHTTPURLResponse
     case decoderError
+    case locationError(LocationError)
+    case reponseNotHTTPURLResponse
     case resourceNotFound(String)
+    case statusNotOk(Int)
     case unknownError(Error)
 }
 
@@ -23,6 +24,8 @@ extension MBError {
             return "Updating Stations Failed"
         case .resourceNotFound(let resource):
             return "Unable to load \(resource)"
+        case .locationError(let error):
+            return error.userDescription
         case .unknownError:
             return "Unknown Error"
         }
@@ -38,6 +41,8 @@ extension MBError {
             return "Response was not an HTTPURLResponse"
         case .resourceNotFound(let resource):
             return "Unable to load \(resource)"
+        case .locationError(let error):
+            return error.debugDescription
         case .unknownError(let unknown): 
             return "Unknown Error \(unknown.localizedDescription)"
         }

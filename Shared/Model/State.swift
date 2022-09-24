@@ -1,3 +1,4 @@
+import CoreLocation
 import MapKit
 import SwiftUI
 
@@ -6,6 +7,7 @@ class StateManager<DB: StateManageable>: ObservableObject {
     
     init(_ db: DB) {
         self.db = db
+        db.world.locationClient.initialize({ [weak self] in self?.dispatch(.locationEvent($0)) })
     }
     
     func dispatch(_ event: Event) {
@@ -41,6 +43,7 @@ extension StateManager {
         case throwSampleError
         case toLostLagoon
         case updateRegion(MKCoordinateRegion)
+        case locationEvent(LocationClient.Event)
     }
 }
 
@@ -58,6 +61,13 @@ extension StateManager {
         case .updateRegion (let region):
             guard let region = Region(region) else { return state }
             return assoc(state, \.region, region)
+        case .locationEvent(let locationEvent):
+            switch locationEvent {
+            case .updateLocation(let location):
+                return assoc(state, \.currentLocation, location)
+            case .error(let error):
+                return assoc(state, \.activeError, .locationError(error))
+            }
         }
     }
 }
@@ -88,6 +98,7 @@ protocol StateManageable {
     static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws -> Self
     
     var activeError: MBError? { get set }
+    var currentLocation: Coordinate { get set }
     var region: Region { get set }
     var stations: [Station] { get set }
     var world: World { get set }
