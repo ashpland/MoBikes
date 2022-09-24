@@ -96,6 +96,15 @@ extension Coordinate {
                                longitude: longitude.value)
     }
     
+    var clLocation: CLLocation {
+        CLLocation(latitude: latitude.value,
+                   longitude: longitude.value)
+    }
+    
+    func distanceFrom(_ otherCoordinate: Coordinate) -> CLLocationDistance {
+        self.clLocation.distance(from: otherCoordinate.clLocation)
+    }
+    
     func region(spanning delta: CLLocationDegrees = Constants.startingLongitudeDeltaForMap) -> Region {
         Region(center: self, 
                span: Span(latitudeDelta: delta, 
@@ -134,6 +143,8 @@ extension Region {
     }
     
     static let start = Region(MKCoordinateRegion(center: .init(latitude: 49.288736748693054, longitude: -123.13784408424536), span: .init(latitudeDelta: 0.016335940297629747, longitudeDelta: 0.01166721364521095)))!
+    
+    static let cityHall = Region(center: .cityHall, span: Span(latitudeDelta: 0.008, longitudeDelta: 0.008))
 }
 
 // Coordinate sample values
@@ -148,25 +159,5 @@ extension Coordinate {
         let lng = -123.15...(-123.10)
         return Coordinate(latitude:  Double.random(in: lat),
                           longitude: Double.random(in: lng))!
-    }
-}
-
-// CLAuthorizationStatus Descriptions
-extension CLAuthorizationStatus {
-    var description: String {
-        switch self {
-        case .notDetermined:
-            return "Not Determined"
-        case .restricted:
-            return "Restricted"
-        case .denied:
-            return "Denied"
-        case .authorizedAlways:
-            return "Authorized Always"
-        case .authorizedWhenInUse:
-            return "Authorized When In Use"
-        @unknown default:
-            return "Unknown"
-        }
     }
 }

@@ -6,7 +6,7 @@ struct World {
 }
 
 extension World {
-    static let mock = World(stationApi: .mock, locationClient: .mock)
+    static let mock = World(stationApi: .mock, locationClient: .lostLagoon)
 }
 
 struct StationApi {

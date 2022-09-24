@@ -106,3 +106,11 @@ protocol StateManageable {
     var stations: [Station] { get set }
     var world: World { get set }
 }
+
+extension StateManageable {
+    var stationsByDistanceFromCurrentLocation: [Station] {
+        self.stations.sorted { lhs, rhs in
+            lhs.coordinate.distanceFrom(self.currentLocation) < rhs.coordinate.distanceFrom(self.currentLocation)
+        }
+    }
+}

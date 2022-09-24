@@ -21,7 +21,7 @@ struct MoBikesApp: App {
 
 struct MainView: View {
     @EnvironmentObject var sm: StateManager<watchState>
-   
+
     var body: some View {
         if (sm.db.stations.isEmpty) {
             Text("Loading Stations...")
@@ -34,7 +34,7 @@ struct MainView: View {
                         Label("Nearby Stations", systemImage: "mappin.and.ellipse")
                             .symbolRenderingMode(.hierarchical)
                     }
-                    ForEach(sm.db.stations) { station in
+                    ForEach(sm.db.stationsByDistanceFromCurrentLocation) { station in
                         StationCard(station: station)
                     }
                 }
@@ -46,12 +46,11 @@ struct MainView: View {
 }
 
 struct Main_Previews: PreviewProvider {
-    static let previewState = { watchState() |>
-        assoc(\.stations, Station.examples) }()
-    
     static var previews: some View {
         MainView()
-            .environmentObject(StateManager(previewState))
+            .environmentObject(StateManager(watchState() |>
+                                            assoc(\.stations, Station.examples)
+                                            >>> assoc(\.world.locationClient, .lostLagoon)))
             .accentColor(.purple)
     }
 }

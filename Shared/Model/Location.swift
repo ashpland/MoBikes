@@ -97,8 +97,12 @@ extension LocationClient {
 }
 
 extension LocationClient {
-    static var mock: Self {
+    static var lostLagoon: Self {
         return Self(initialize: { $0(.updateLocation(.lostLagoon)) })
+    }
+    
+    static var cityHall: Self {
+        return Self(initialize: { $0(.updateLocation(.cityHall)) })
     }
     
     static var authorized: Self {
