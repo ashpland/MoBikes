@@ -1,17 +1,17 @@
 import SwiftUI
 
-struct ErrorView: View {
-    let error: MBError
-    let clear: () -> Void
-    
+struct ErrorAlertView<DB: StateManageable>: View {
+    @EnvironmentObject var sm: StateManager<DB>
+    @State var displayError: Bool = false
+
     var body: some View {
-        VStack(alignment: .leading){
-            Text(error.userDescription)
-            Text(error.debugDescription)
-            Button("Clear Error") {
-                clear()
+        ZStack {}
+            .onReceive(sm.$db.map(\.activeError)) { self.displayError = $0 != nil }
+            .alert(sm.db.activeError?.userDescription ?? "",
+                   isPresented: $displayError) {
+                Button("Clear") { sm.dispatch(.clearError) }
+            } message: {
+                Text(sm.db.activeError?.debugDescription ?? "")
             }
-        }
-        .padding()
     }
 }

@@ -13,7 +13,7 @@ struct Controls: View {
                     .frame(width: 36, height: 44)
                 
                 Divider().frame(width: 44)
-                Button { sm.dispatch(.toLostLagoon) } label: {
+                Button { sm.dispatch(.platform(.zoomToCurrentLocation)) } label: {
                     Image(systemName: "location")
                 }
                 .frame(width: 44, height: 44)
@@ -121,6 +121,46 @@ struct Whimsy_Preview: PreviewProvider {
 
     static var previews: some View {
         Whimsy.Previewer()
+            .previewLayout(.sizeThatFits)
+    }
+}
+
+
+struct SimpleControls: View {
+    @EnvironmentObject var sm: StateManager<iosState>
+    private let width: CGFloat = 55
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Button { sm.dispatch(.platform(.zoomToCurrentLocation)) } label: {
+                Image(systemName: "location")
+            }
+            .frame(width: width, height: width)
+            
+            Divider().frame(width: width)
+            
+            Button { sm.dispatch(.platform(.updateUIBool(.init(kp: \.showLayersView, value: !sm.db.ui.showLayersView)))) } label: {
+                Image(systemName: "square.3.stack.3d")
+            }
+            .frame(width: width, height: width)
+            
+            Divider().frame(width: width)
+
+            Button { sm.dispatch(.throwSampleError) } label: {
+                Image(systemName: "ellipsis.circle")
+            }
+            .frame(width: width, height: width)
+        }
+        .font(.title)
+        .background(Color.secondaryBackground)
+        .cornerRadius(10)
+    }
+}
+
+struct SimpleControls_Preview: PreviewProvider {
+    static var previews: some View {
+        SimpleControls()
+            .environmentObject(StateManager(iosState()))
             .previewLayout(.sizeThatFits)
     }
 }

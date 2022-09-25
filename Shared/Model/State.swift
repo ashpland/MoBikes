@@ -1,5 +1,3 @@
-import CoreLocation
-import MapKit
 import SwiftUI
 
 class StateManager<DB: StateManageable>: ObservableObject {
@@ -38,12 +36,10 @@ class StateManager<DB: StateManageable>: ObservableObject {
 
 extension StateManager {
     enum Event {
-        case custom(DB.Event)
+        case platform(DB.Event)
         case update((DB) -> DB)
         case clearError
         case throwSampleError
-        case toLostLagoon
-        case updateRegion(MKCoordinateRegion)
         case locationEvent(LocationClient.Event)
     }
 }
@@ -51,7 +47,7 @@ extension StateManager {
 extension StateManager {
     static func handleEvent(state: DB, event: Event) throws -> DB {
         switch event {
-        case .custom(let customEvent):
+        case .platform(let customEvent):
             return try DB.handleEvent(state: state, event: customEvent)
         case .update(let updateDB):
             return updateDB(state)
@@ -59,11 +55,6 @@ extension StateManager {
             return assoc(state, \.activeError, nil)
         case .throwSampleError:
             return assoc(state, \.activeError, .decoderError)
-        case .toLostLagoon:
-            return assoc(state, \.region, Coordinate.lostLagoon.region())
-        case .updateRegion (let region):
-            guard let region = Region(region) else { return state }
-            return assoc(state, \.region, region)
         case .locationEvent(let locationEvent):
             switch locationEvent {
             case .updateLocation(let location):
@@ -79,7 +70,7 @@ extension StateManager {
 
 extension StateManager {
     enum AsyncEvent {
-        case custom(DB.AsyncEvent)
+        case platform(DB.AsyncEvent)
         case updateStations
     }
 }
@@ -87,8 +78,8 @@ extension StateManager {
 extension StateManager {
     static func handleAsyncEvent(state: DB, event: AsyncEvent) async throws -> (DB) -> DB {
         switch event {
-        case .custom(let customEvent):
-            return try await DB.handleAsyncEvent(state: state, event: customEvent)
+        case .platform(let platformEvent):
+            return try await DB.handleAsyncEvent(state: state, event: platformEvent)
         case .updateStations:
             let stations = try await state.world.stationApi.getStations()
             return { assoc($0, \.stations, stations) }

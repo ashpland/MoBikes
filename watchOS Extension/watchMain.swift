@@ -29,6 +29,7 @@ struct MainView: View {
             Text("Loading Stations...")
         } else {
             NavigationView {
+                ErrorAlertView<watchState>()
                 List {
                     NavigationLink {
                         StationsMap(sm.db.stations, sm.db.currentLocation)
@@ -47,14 +48,7 @@ struct MainView: View {
                     }
                 }
                 .navigationTitle("Mo'Bikes")
-                .alert(sm.db.activeError?.userDescription ?? "",
-                       isPresented: $displayError) {
-                    Button("Clear") { sm.dispatch(.clearError) }
-                } message: {
-                    Text(sm.db.activeError?.debugDescription ?? "")
-                }
             }
-            .onReceive(sm.$db.map(\.activeError)) { self.displayError = $0 != nil }
         }
     }
 }

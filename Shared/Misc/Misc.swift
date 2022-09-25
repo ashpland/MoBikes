@@ -73,3 +73,7 @@ extension String {
         .init(rawValue: self)
     }
 }
+
+func toggle(_ bool: Bool) -> Bool {
+    !bool
+}

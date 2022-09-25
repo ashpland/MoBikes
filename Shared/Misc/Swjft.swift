@@ -66,10 +66,6 @@ func <> <A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void) -> (A
 
 func identity<A>(_ value: A) -> A { value }
 
-func constantly<A, B>(_ a: A) -> (B) -> A {
-    { _ in a }
-} 
-
 func asType<A>(_ type: A.Type) -> (Any) -> A? {
     return { $0 as? A }
 }
@@ -105,6 +101,13 @@ func assoc<Root, Value>(_ kp: WritableKeyPath<Root, Value>, _ value: Value) -> (
         root[keyPath: kp] = value
         return root
     }
+}
+
+func update<Root, Value>(_ root: Root, _ kp: WritableKeyPath<Root, Value>, _ updatefn: (Value) -> Value) -> Root {
+    let value = root[keyPath: kp]
+    var root = root
+    root[keyPath: kp] = updatefn(value)
+    return root
 }
 
 func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {

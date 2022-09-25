@@ -2,11 +2,17 @@ import SwiftUI
 
 @main
 struct MoBikesApp: App {
+    let sm = StateManager(iosState())
+    
+    init() {
+        sm.dispatchAsync(.updateStations)
+        sm.dispatch(.platform(.loadBikeways))
+    }
     
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(StateManager(iosState()))
+                .environmentObject(sm)
                 .accentColor(.purple)
         }
     }
@@ -14,25 +20,29 @@ struct MoBikesApp: App {
 
 struct MainView: View {
     @EnvironmentObject var sm: StateManager<iosState>
-    
+
     var body: some View {
-        ZStack(alignment: .trailing) {
-            VStack(alignment: .center) {
-                if let error = sm.db.activeError {
-                    ErrorView(error: error, clear: { sm.dispatch(.clearError) })
-                }
-                MapView()
-            }
-            Controls()
+        ZStack {
+            ErrorAlertView<iosState>()
+
+            MapView().ignoresSafeArea()
+            
+            if sm.db.ui.showLayersView { LayersView() }
+    
+            SimpleControls()
                 .padding([.trailing], 10)
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
+        .animation(.default, value: sm.db.ui)
     }
 }
 
 struct Main_Preview: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(StateManager(iosState()))
-            .previewLayout(.fixed(width: 500, height: 500))
+            .environmentObject(StateManager(iosState() |> assoc(\.stations, Station.examples)
+                                            >>> assoc(\.world.locationClient, .cityHall)))
+            .accentColor(.purple)
+            .environment(\.colorScheme, .dark)
     }
 }

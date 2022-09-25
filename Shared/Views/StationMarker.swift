@@ -2,7 +2,6 @@ import SwiftUI
 
 struct StationMarker: View {
     let station: Station
-    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -11,11 +10,6 @@ struct StationMarker: View {
                 ZStack(alignment: .bottom) {
                     Color.black
                     Color.white.opacity(colorScheme == .dark ? 0.15 : 0.55)
-//                    if (colorScheme == .dark) {
-//                    } else {
-//                        Color.black
-//                        Color.white.opacity(0.55)
-//                    }
                     Color.accentColor.frame(height: geom.size.height * station.available.percent)
                 }
                 Text("\(station.available.bikes)")

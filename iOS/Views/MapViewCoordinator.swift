@@ -8,7 +8,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        dispatch(.updateRegion(mapView.region))
+        dispatch(.platform(.updateRegion(mapView.region)))
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -16,7 +16,8 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        mapView.dequeueReusableAnnotationView(withIdentifier: StationMarkerAnnotationView.identifier, for: annotation)
+        guard let annotation = annotation as? StationAnnotation else { return nil }
+        return mapView.dequeueReusableAnnotationView(withIdentifier: StationMarkerAnnotationView.identifier, for: annotation)
     }
 }
 

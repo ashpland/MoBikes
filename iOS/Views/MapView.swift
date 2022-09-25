@@ -11,9 +11,7 @@ struct MapView: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> MKMapView{
-        sm.dispatch(.custom(.loadBikeways))
-        sm.dispatchAsync(.updateStations)
-        let mapView = MKMapView(frame: .zero)        
+        let mapView = MKMapView(frame: .zero)
         mapView.register(StationMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: StationMarkerAnnotationView.identifier)
 
         return mapView 
@@ -25,8 +23,8 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ view: MKMapView, context: Context) {
         _ = view 
         |> updateRegion(sm.db.region)
-        <> updateBikeways(view.overlays, sm.db.bikeways)
-        <> updateStations(view.annotations, sm.db.stations)
+        <> updateBikeways(view.overlays, sm.db.bikeways, sm.db.ui.mapSettings.showBikeways)
+        <> updateStations(view.annotations, sm.db.stations, sm.db.ui.mapSettings.showStations)
     }
 }
 
@@ -37,6 +35,7 @@ assoc(\.mapType, .mutedStandard)
 <> assoc(\.showsScale, false)
 <> assoc(\.showsBuildings, false)
 <> assoc(\.isPitchEnabled, false)
+<> assoc(\.showsUserLocation, true)
 
 let setRegion = flip2ArgVoid(MKMapView.setRegion)(false)
 let addCoordinator = curry(assoc)(\MKMapView.delegate)
@@ -52,20 +51,34 @@ func updateRegion(_ newRegion: Region) -> (MKMapView) -> MKMapView {
     }
 }
 
-func updateBikeways(_ overlays: [MKOverlay], _ bikeways: [Bikeway]) -> (MKMapView) -> MKMapView {
-    overlays.count > 0 ? identity : addOverlaysAboveRoads(bikeways)
+func updateBikeways(_ overlays: [MKOverlay], _ bikeways: [Bikeway], _ showBikeways: Bool) -> (MKMapView) -> MKMapView {
+    switch (showBikeways, overlays.count) {
+    case (true, 0):
+        return addOverlaysAboveRoads(bikeways)
+    case (false, 1...):
+        return removeOverlays(bikeways)
+    default:
+        return identity
+    }
 }
 
-func updateStations(_ annotations: [MKAnnotation], _ stations: [Station]) -> (MKMapView) -> MKMapView {
+func updateStations(_ annotations: [MKAnnotation], _ stations: [Station], _ showStations: Bool) -> (MKMapView) -> MKMapView {
     let currentMarkers = annotations.compactMap { $0 as? StationAnnotation }
-    if currentMarkers.hashOfStationIds == stations.hashOfIds {
+    switch (showStations, currentMarkers.count) {
+    case (true, _):
+        if currentMarkers.hashOfStationIds == stations.hashOfIds {
+            return identity
+        } else {
+            let (markersToRemove, stationsToAdd) = getUnique(
+                currentMarkers, withID: ^\.station.id,
+                and: stations, withID: ^\.id)
+            return removeAnnotations(markersToRemove)
+            <> addAnnotations(stationsToAdd.asMarkers)
+        }
+    case (false, 1...):
+        return removeAnnotations(currentMarkers)
+    default:
         return identity
-    } else {
-        let (markersToRemove, stationsToAdd) = getUnique(
-            currentMarkers, withID: ^\.station.id, 
-            and: stations, withID: ^\.id)
-        return removeAnnotations(markersToRemove) 
-        <> addAnnotations(stationsToAdd.asMarkers)
     }
 }
 
@@ -74,3 +87,4 @@ func updateStations(_ annotations: [MKAnnotation], _ stations: [Station]) -> (MK
 let addAnnotations = flip(MKMapView.addAnnotations)
 let removeAnnotations = flip(MKMapView.removeAnnotations)
 let addOverlaysAboveRoads = flip2ArgVoid(MKMapView.addOverlays)(.aboveRoads)
+let removeOverlays = flip(MKMapView.removeOverlays)
