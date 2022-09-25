@@ -2,10 +2,11 @@ import SwiftUI
 
 struct StationCard: View {    
     let station: Station
+    let allStations: [Station]
     
     var body: some View {
-        Button {
-            
+        NavigationLink {
+            StationsMap(allStations, station.coordinate)
         } label : {
             HStack {
                 Text(station.name)
@@ -25,9 +26,8 @@ struct StationCardBackground: View {
         ZStack {
             Color.white.opacity(0.15)
             AvailabilityBar(available: available)
-                .opacity(0.4)
         }
-        .cornerRadius(12)
+        .cornerRadius(10)
     }
 }
 
@@ -53,7 +53,9 @@ struct AvailabilityBar: View {
 struct Station_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            ForEach(Station.examples, content: StationCard.init)
+            ForEach(Station.examples) {
+                StationCard(station: $0, allStations: Station.examples)
+            }
         }
         .accentColor(.purple)
     }

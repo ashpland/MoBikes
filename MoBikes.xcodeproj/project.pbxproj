@@ -29,6 +29,7 @@
 		491CF81928DE8B0700CC9C69 /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF81228DE8B0700CC9C69 /* HelperViews.swift */; };
 		491CF81D28DE8B0700CC9C69 /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF81428DE8B0700CC9C69 /* MapViewCoordinator.swift */; };
 		493BE3F428DE87ED00674009 /* bikeways.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 493BE3F328DE87ED00674009 /* bikeways.geojson */; };
+		4941BA3228DFEC3900EE60CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941BA3128DFEC3900EE60CE /* MapKit.framework */; };
 		4995427428DE8E5E002FCB93 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4995427328DE8E5E002FCB93 /* MapView.swift */; };
 		49AD3CB928DEE11600F8496A /* StationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AD3CB728DEE0E600F8496A /* StationCard.swift */; };
 		49B0DFB828DE84B2006F856F /* iosMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0DF9028DE84B1006F856F /* iosMain.swift */; };
@@ -126,6 +127,7 @@
 		491CF81428DE8B0700CC9C69 /* MapViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
 		491CF81F28DE8B3700CC9C69 /* MoBikes (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MoBikes (iOS).entitlements"; sourceTree = "<group>"; };
 		493BE3F328DE87ED00674009 /* bikeways.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bikeways.geojson; sourceTree = "<group>"; };
+		4941BA3128DFEC3900EE60CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		4995427328DE8E5E002FCB93 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		4995427A28DE8F5D002FCB93 /* MoBikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoBikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49AD3CB728DEE0E600F8496A /* StationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCard.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4941BA3228DFEC3900EE60CE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +199,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		4941BA3028DFEC3900EE60CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4941BA3128DFEC3900EE60CE /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4995427528DE8EAF002FCB93 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +250,7 @@
 				4909804D28DE950100E2DF9E /* watchOS Extension */,
 				4909804228DE950000E2DF9E /* watchOS App */,
 				49B0DF9828DE84B2006F856F /* Products */,
+				4941BA3028DFEC3900EE60CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -569,6 +581,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Mo'Bikes";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = watchOS_WatchKit_Extension.ComplicationController;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,6 +614,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Mo'Bikes";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = watchOS_WatchKit_Extension.ComplicationController;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -767,6 +783,7 @@
 				DEVELOPMENT_TEAM = T5E8L2XP69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -799,6 +816,7 @@
 				DEVELOPMENT_TEAM = T5E8L2XP69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

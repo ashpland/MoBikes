@@ -22,50 +22,39 @@ struct MoBikesApp: App {
 
 struct MainView: View {
     @EnvironmentObject var sm: StateManager<watchState>
-    @State var navigation: String? = nil
-    @State var activeError: MBError? = nil
+    @State var displayError: Bool = false
 
     var body: some View {
         if (sm.db.stations.isEmpty) {
             Text("Loading Stations...")
         } else {
             NavigationView {
-                ZStack {
-                    NavigationLink(destination: StationsMap(sm.db.stations, sm.db.currentLocation),
-                                   tag: "Map", selection: $navigation) { }
-                        .hidden()
-                    List {
-                        Button {
-                            sm.dispatch(.throwSampleError)
-                        } label: {
-                            Label("Throw Error", systemImage: "xmark.octagon")
-                                .symbolRenderingMode(.hierarchical)
+                List {
+                    NavigationLink {
+                        StationsMap(sm.db.stations, sm.db.currentLocation)
+                    } label: {
+                        HStack {
+                            Image(systemName: "bicycle.circle")
+                                .font(.title2)
+                                .foregroundStyle(.primary, .purple)
+                                .symbolRenderingMode(.palette)
+                                
+                            Text("All Stations")
                         }
-                        Button {
-                            sm.dispatch(.custom(.navigate(.map(sm.db.currentLocation))))
-                        } label: {
-                            Label("Nearby Stations", systemImage: "mappin.and.ellipse")
-                                .symbolRenderingMode(.hierarchical)
-                        }
-                        ForEach(sm.db.stationsByDistanceFromCurrentLocation) { station in
-                            StationCard(station: station)
-                        }
+                    }
+                    ForEach(sm.db.stationsByDistanceFromCurrentLocation) { station in
+                        StationCard(station: station, allStations: sm.db.stations)
                     }
                 }
                 .navigationTitle("Mo'Bikes")
-                .alert(item: $activeError) { error in
-                    Alert(title: Text(error.userDescription),
-                          message: Text(error.debugDescription),
-                          dismissButton: .cancel(Text("Clear"),
-                                                 action: { sm.dispatch(.clearError)}))
+                .alert(sm.db.activeError?.userDescription ?? "",
+                       isPresented: $displayError) {
+                    Button("Clear") { sm.dispatch(.clearError) }
+                } message: {
+                    Text(sm.db.activeError?.debugDescription ?? "")
                 }
             }
-            .onReceive(sm.$db.map(\.navigation.selection)) {
-                print("recieved selection \($0 ?? "nil")")
-                self.navigation = $0 }
-            .onReceive(sm.$db.map(\.activeError)) {
-                self.activeError = $0
-            }
+            .onReceive(sm.$db.map(\.activeError)) { self.displayError = $0 != nil }
         }
     }
 }

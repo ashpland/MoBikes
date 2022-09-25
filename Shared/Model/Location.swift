@@ -7,6 +7,7 @@ struct LocationClient {
     enum Event {
         case updateLocation(Coordinate)
         case error(LocationError)
+        case storeDelegate(Delegate)
     }
 }
 
@@ -36,57 +37,59 @@ enum LocationError: Error, Hashable {
             return error.localizedDescription
         }
     }
-    
 }
 
 extension LocationClient {
-    static var live: Self {
-        class Delegate: NSObject, CLLocationManagerDelegate {
-            let dispatch: Dispatch
-            
-            init(_ dispatch: @escaping Dispatch) {
-                self.dispatch = dispatch
-            }
+    class Delegate: NSObject, CLLocationManagerDelegate {
+        let dispatch: Dispatch
+        
+        init(_ dispatch: @escaping Dispatch) {
+            self.dispatch = dispatch
+        }
+        
+        func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+            print("locationManagerDidChangeAuthorization \(manager.authorizationStatus)")
+            switch manager.authorizationStatus {
+            case .notDetermined:
+                print("not determined")
+                manager.requestWhenInUseAuthorization()
+            case .authorizedAlways, .authorizedWhenInUse:
+                manager.startUpdatingLocation()
+            case .restricted:
+                dispatch(.error(.notAuthorized("Location Authorization Restricted")))
+            case .denied:
+                dispatch(.error(.notAuthorized("Location Authorization Denied")))
+            @unknown default:
+                dispatch(.error(.notAuthorized("Location Authorization Unknown")))
+            }            }
 
-            func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-                switch manager.authorizationStatus {
-                case .notDetermined:
-                    manager.requestWhenInUseAuthorization()
-                case .authorizedAlways, .authorizedWhenInUse:
-                    manager.startUpdatingLocation()
-                case .restricted:
-                    dispatch(.error(.notAuthorized("Location Authorization Restricted")))
-                case .denied:
-                    dispatch(.error(.notAuthorized("Location Authorization Denied")))
-                @unknown default:
-                    dispatch(.error(.notAuthorized("Location Authorization Unknown")))
-                }
-            }
-
-            func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-                if let coordinate = Coordinate(locations) {
-                    dispatch(.updateLocation(coordinate))
-                }
-            }
-            
-            func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-                if let error = error as? CLError {
-                    switch error.code {
-                    case .denied:
-                        dispatch(.error(.notAuthorized("Location Authorization Denied Error")))
-                    case .locationUnknown:
-                        dispatch(.error(.locationUnknown))
-                    default:
-                        dispatch(.error(.unknownError(error)))
-                    }
-                }
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let coordinate = Coordinate(locations) {
+                dispatch(.updateLocation(coordinate))
             }
         }
         
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            if let error = error as? CLError {
+                switch error.code {
+                case .denied:
+                    manager.stopUpdatingLocation()
+                    dispatch(.error(.notAuthorized("Location Authorization Denied Error")))
+                case .locationUnknown:
+                    break
+                default:
+                    dispatch(.error(.unknownError(error)))
+                }
+            }
+        }
+    }
+    
+    static var live: Self {
+        let locationManager = CLLocationManager()
 
         func initialize(_ dispatch: @escaping Dispatch) {
-            let locationManager = CLLocationManager()
             let delegate = Delegate(dispatch)
+            dispatch(.storeDelegate(delegate))
             locationManager.delegate = delegate
             locationManager.distanceFilter = 10
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters

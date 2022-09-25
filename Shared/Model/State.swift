@@ -70,6 +70,8 @@ extension StateManager {
                 return assoc(state, \.currentLocation, location)
             case .error(let error):
                 return assoc(state, \.activeError, .locationError(error))
+            case .storeDelegate(let delegate):
+                return assoc(state, \.world.locationClientDelegate, delegate)
             }
         }
     }

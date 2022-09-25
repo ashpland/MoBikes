@@ -3,6 +3,7 @@ import Foundation
 struct World {
     var stationApi: StationApi = .live
     var locationClient: LocationClient = .live
+    var locationClientDelegate: LocationClient.Delegate? = nil
 }
 
 extension World {

@@ -13,12 +13,13 @@ struct StationsMap: View {
     }
     
     var body: some View {
-        Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: stations) { station in
+        Map(coordinateRegion: $region, interactionModes: [.pan], showsUserLocation: true, annotationItems: stations) { station in
             MapAnnotation(coordinate: station.coordinate.clLocationCoordinate2D) {
                 StationMarker(station: station)
             }
         }
-        .ignoresSafeArea()
+        .accentColor(.purple)
+        .ignoresSafeArea(edges: [.bottom, .horizontal])
     }
 }
 
@@ -39,7 +40,6 @@ struct StationMarker: View {
                     Color.black
                     Color.white.opacity(0.15)
                     Color.accentColor.frame(height: geom.size.height * station.available.percent)
-                        .opacity(0.4)
                 }
                 Text("\(station.available.bikes)")
                     .font(.system(.body, design: .rounded))
