@@ -31,12 +31,6 @@ struct StationCardBackground: View {
     }
 }
 
-extension Station.Available {
-    var percent: CGFloat {
-        return Double(self.bikes) / Double(self.total)
-    }
-}
-
 struct AvailabilityBar: View {
     let available: Station.Available
     

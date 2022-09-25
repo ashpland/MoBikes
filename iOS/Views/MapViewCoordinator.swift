@@ -16,7 +16,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        mapView.dequeueReusableAnnotationView(withIdentifier: AvailabilityAnnotationView.identifier, for: annotation)
+        mapView.dequeueReusableAnnotationView(withIdentifier: StationMarkerAnnotationView.identifier, for: annotation)
     }
 }
 

@@ -17,7 +17,7 @@ final class AvailabilityAnnotationView: MKAnnotationView {
             arc.removeFromSuperlayer()
         }
         
-        if let stationMarker = annotation as? StationMarker {
+        if let stationMarker = annotation as? StationAnnotation {
             let percent = availabilityPercent(stationMarker.station)
             let arc = drawPercentArc(percent, color: tintColor.cgColor, 
                                      frame: self.frame, bounds: self.bounds)

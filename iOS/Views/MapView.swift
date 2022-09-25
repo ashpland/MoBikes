@@ -13,10 +13,9 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView{
         sm.dispatch(.custom(.loadBikeways))
         sm.dispatchAsync(.updateStations)
-        let mapView = MKMapView(frame: .zero)
-        
-        mapView.register(AvailabilityAnnotationView.self, forAnnotationViewWithReuseIdentifier: AvailabilityAnnotationView.identifier)
-        
+        let mapView = MKMapView(frame: .zero)        
+        mapView.register(StationMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: StationMarkerAnnotationView.identifier)
+
         return mapView 
         |> configureMinimalMap
         <> setRegion(sm.db.region.mkCoordinateRegion)
@@ -58,7 +57,7 @@ func updateBikeways(_ overlays: [MKOverlay], _ bikeways: [Bikeway]) -> (MKMapVie
 }
 
 func updateStations(_ annotations: [MKAnnotation], _ stations: [Station]) -> (MKMapView) -> MKMapView {
-    let currentMarkers = annotations.compactMap { $0 as? StationMarker }
+    let currentMarkers = annotations.compactMap { $0 as? StationAnnotation }
     if currentMarkers.hashOfStationIds == stations.hashOfIds {
         return identity
     } else {
@@ -75,20 +74,3 @@ func updateStations(_ annotations: [MKAnnotation], _ stations: [Station]) -> (MK
 let addAnnotations = flip(MKMapView.addAnnotations)
 let removeAnnotations = flip(MKMapView.removeAnnotations)
 let addOverlaysAboveRoads = flip2ArgVoid(MKMapView.addOverlays)(.aboveRoads)
-
-
-// Station Marker
-class StationMarker: NSObject, MKAnnotation {
-    let station: Station
-    let coordinate: CLLocationCoordinate2D
-    var title: String? { station.name }
-    var subtitle: String? {
-        "\(station.available.bikes) bikes | \(station.available.docks) docks"
-    }
-    
-    init(station: Station) {
-        self.station = station
-        self.coordinate = station.coordinate.clLocationCoordinate2D
-    }
-}
-

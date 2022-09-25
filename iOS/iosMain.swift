@@ -7,6 +7,7 @@ struct MoBikesApp: App {
         WindowGroup {
             MainView()
                 .environmentObject(StateManager(iosState()))
+                .accentColor(.purple)
         }
     }
 }

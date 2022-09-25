@@ -15,6 +15,10 @@
 		4909805C28DE950200E2DF9E /* Mo'Bikes.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4909804128DE950000E2DF9E /* Mo'Bikes.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		49126C6528DF8FC2000733E0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49126C6428DF8FC2000733E0 /* Location.swift */; };
 		49126C6628DF8FC2000733E0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49126C6428DF8FC2000733E0 /* Location.swift */; };
+		491655E928E0017B008FBB92 /* StationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491655E728E0017B008FBB92 /* StationMarker.swift */; };
+		491655EA28E001E7008FBB92 /* StationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491655E728E0017B008FBB92 /* StationMarker.swift */; };
+		491655EC28E002E3008FBB92 /* StationMarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491655EB28E002E3008FBB92 /* StationMarkerAnnotationView.swift */; };
+		491655EE28E0089B008FBB92 /* StationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491655ED28E0089B008FBB92 /* StationAnnotation.swift */; };
 		491CF7F728DE8AEF00CC9C69 /* Swjft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F228DE8AEF00CC9C69 /* Swjft.swift */; };
 		491CF7F928DE8AF000CC9C69 /* MBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F328DE8AEF00CC9C69 /* MBError.swift */; };
 		491CF7FB28DE8AF000CC9C69 /* Spatial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F428DE8AEF00CC9C69 /* Spatial.swift */; };
@@ -112,6 +116,9 @@
 		4909805728DE950200E2DF9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4909805928DE950200E2DF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49126C6428DF8FC2000733E0 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		491655E728E0017B008FBB92 /* StationMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationMarker.swift; sourceTree = "<group>"; };
+		491655EB28E002E3008FBB92 /* StationMarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationMarkerAnnotationView.swift; sourceTree = "<group>"; };
+		491655ED28E0089B008FBB92 /* StationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationAnnotation.swift; sourceTree = "<group>"; };
 		491CF7F228DE8AEF00CC9C69 /* Swjft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swjft.swift; sourceTree = "<group>"; };
 		491CF7F328DE8AEF00CC9C69 /* MBError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBError.swift; sourceTree = "<group>"; };
 		491CF7F428DE8AEF00CC9C69 /* Spatial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spatial.swift; sourceTree = "<group>"; };
@@ -214,6 +221,7 @@
 				49B6467428DECD1A0048AAB0 /* ControlsView.swift */,
 				4995427328DE8E5E002FCB93 /* MapView.swift */,
 				491CF81428DE8B0700CC9C69 /* MapViewCoordinator.swift */,
+				491655EB28E002E3008FBB92 /* StationMarkerAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				491CF81228DE8B0700CC9C69 /* HelperViews.swift */,
+				491655E728E0017B008FBB92 /* StationMarker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +300,7 @@
 				49B0DF9028DE84B1006F856F /* iosMain.swift */,
 				491CF80428DE8AFD00CC9C69 /* iosState.swift */,
 				491CF80228DE8AFD00CC9C69 /* Bikeways.swift */,
+				491655ED28E0089B008FBB92 /* StationAnnotation.swift */,
 				4995427528DE8EAF002FCB93 /* Views */,
 				493BE3F228DE87DD00674009 /* Resources */,
 			);
@@ -455,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				491655E928E0017B008FBB92 /* StationMarker.swift in Sources */,
 				49C2BB5C28DE986D009738AB /* Spatial.swift in Sources */,
 				49C2BB5A28DE986D009738AB /* MBError.swift in Sources */,
 				49B6467328DECC820048AAB0 /* watchState.swift in Sources */,
@@ -483,6 +494,7 @@
 				491CF80828DE8AFD00CC9C69 /* Bikeways.swift in Sources */,
 				491CF7F728DE8AEF00CC9C69 /* Swjft.swift in Sources */,
 				491CF7FF28DE8AF000CC9C69 /* Style.swift in Sources */,
+				491655EA28E001E7008FBB92 /* StationMarker.swift in Sources */,
 				491CF81528DE8B0700CC9C69 /* AvailabilityView.swift in Sources */,
 				491CF81928DE8B0700CC9C69 /* HelperViews.swift in Sources */,
 				491CF80C28DE8AFD00CC9C69 /* iosState.swift in Sources */,
@@ -491,10 +503,12 @@
 				49B6467528DECD1A0048AAB0 /* ControlsView.swift in Sources */,
 				49126C6528DF8FC2000733E0 /* Location.swift in Sources */,
 				491CF80A28DE8AFD00CC9C69 /* Stations.swift in Sources */,
+				491655EC28E002E3008FBB92 /* StationMarkerAnnotationView.swift in Sources */,
 				491CF80E28DE8AFD00CC9C69 /* World.swift in Sources */,
 				49C2BB5F28DE9DDA009738AB /* State.swift in Sources */,
 				491CF7FD28DE8AF000CC9C69 /* Misc.swift in Sources */,
 				491CF80628DE8AFD00CC9C69 /* Network.swift in Sources */,
+				491655EE28E0089B008FBB92 /* StationAnnotation.swift in Sources */,
 				491CF7F928DE8AF000CC9C69 /* MBError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
