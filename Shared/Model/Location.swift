@@ -10,7 +10,7 @@ struct LocationClient {
     }
 }
 
-enum LocationError: Error {
+enum LocationError: Error, Hashable {
     case notAuthorized(String)
     case locationUnknown
     case unknownError(CLError)

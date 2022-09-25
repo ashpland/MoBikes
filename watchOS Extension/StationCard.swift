@@ -5,7 +5,7 @@ struct StationCard: View {
     
     var body: some View {
         Button {
-
+            
         } label : {
             HStack {
                 Text(station.name)

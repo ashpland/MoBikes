@@ -32,7 +32,7 @@ extension Bikeway {
 extension Bikeway {
     static func loadFromFile() throws -> [Bikeway] {
         guard let url = Bundle.main.url(forResource: "bikeways", withExtension: "geojson") else {
-            throw MBError.resourceNotFound("bikeways")
+            throw MBError.resourceNotFound(name: "bikeways")
         }
         
         return try url |>

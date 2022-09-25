@@ -1,4 +1,4 @@
-import MapKit
+import Foundation
 
 struct Station: Identifiable, Equatable, Codable {
     typealias ID = Tagged<Station, String>
@@ -28,20 +28,6 @@ extension Station {
         self.available = .init(bikes: decoded.avl_bikes,
                                docks: decoded.free_slots)
         self.coordinate = coordinate
-    }
-}
-
-class StationMarker: NSObject, MKAnnotation {
-    let station: Station
-    let coordinate: CLLocationCoordinate2D
-    var title: String? { station.name }
-    var subtitle: String? {
-        "\(station.available.bikes) bikes | \(station.available.docks) docks"
-    }
-    
-    init(station: Station) {
-        self.station = station
-        self.coordinate = station.coordinate.clLocationCoordinate2D
     }
 }
 

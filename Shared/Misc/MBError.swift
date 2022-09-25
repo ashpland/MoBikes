@@ -1,12 +1,16 @@
 import Foundation
 
-enum MBError: Error  {
+enum MBError: Error, Identifiable, Hashable  {
     case decoderError
     case locationError(LocationError)
     case reponseNotHTTPURLResponse
-    case resourceNotFound(String)
-    case statusNotOk(Int)
-    case unknownError(Error)
+    case resourceNotFound(name: String)
+    case statusNotOk(status: Int)
+    case unknownError(description: String)
+    
+    var id: Self {
+        return self
+    }
 }
 
 extension MBError {
@@ -14,7 +18,7 @@ extension MBError {
         if let mbError = error as? MBError {
             return mbError
         } else {
-            return MBError.unknownError(error)
+            return MBError.unknownError(description: error.localizedDescription)
         }
     }
     
@@ -43,8 +47,8 @@ extension MBError {
             return "Unable to load \(resource)"
         case .locationError(let error):
             return error.debugDescription
-        case .unknownError(let unknown): 
-            return "Unknown Error \(unknown.localizedDescription)"
+        case .unknownError(let description):
+            return "Unknown Error \(description)"
         }
     }
 }

@@ -9,7 +9,7 @@ func checkStatus(_ args: (data: Data, response: HTTPURLResponse?)) throws -> Dat
     case .some(let response) where response.statusCode == 200:
         return args.data
     case .some(let response):
-        throw MBError.statusNotOk(response.statusCode)
+        throw MBError.statusNotOk(status: response.statusCode)
     case .none:
         throw MBError.reponseNotHTTPURLResponse
     }

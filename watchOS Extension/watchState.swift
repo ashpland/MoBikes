@@ -24,6 +24,13 @@ struct watchState: StateManageable {
 extension watchState {
     enum Navigation {
         case list
-        case map
+        case map(Coordinate)
+        
+        var selection: String? {
+            switch self {
+            case .list: return "List"
+            case .map: return "Map"
+            }
+        }
     }
 }

@@ -70,7 +70,25 @@ func updateStations(_ annotations: [MKAnnotation], _ stations: [Station]) -> (MK
     }
 }
 
+
 // Helpers
 let addAnnotations = flip(MKMapView.addAnnotations)
 let removeAnnotations = flip(MKMapView.removeAnnotations)
 let addOverlaysAboveRoads = flip2ArgVoid(MKMapView.addOverlays)(.aboveRoads)
+
+
+// Station Marker
+class StationMarker: NSObject, MKAnnotation {
+    let station: Station
+    let coordinate: CLLocationCoordinate2D
+    var title: String? { station.name }
+    var subtitle: String? {
+        "\(station.available.bikes) bikes | \(station.available.docks) docks"
+    }
+    
+    init(station: Station) {
+        self.station = station
+        self.coordinate = station.coordinate.clLocationCoordinate2D
+    }
+}
+
