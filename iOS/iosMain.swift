@@ -6,6 +6,7 @@ struct MoBikesApp: App {
     
     init() {
         sm.dispatchAsync(.updateStations)
+        sm.startTimer(.updateStations, seconds: StationApi.updateFrequency)
         sm.dispatch(.platform(.loadBikeways))
     }
     
@@ -20,7 +21,8 @@ struct MoBikesApp: App {
 
 struct MainView: View {
     @EnvironmentObject var sm: StateManager<iosState>
-
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some View {
         ZStack {
             ErrorAlertView<iosState>()
@@ -34,6 +36,17 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .animation(.default, value: sm.db.ui)
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active:
+                sm.dispatchAsync(.updateStations)
+                sm.startTimer(.updateStations, seconds: StationApi.updateFrequency)
+            case .background:
+                sm.stopTimer(.updateStations)
+            default:
+                break
+            }
+        }
     }
 }
 

@@ -38,9 +38,8 @@ extension Coordinate {
                   longitude: coordinate.longitude)
     }
     
-    init?(_ locations: [CLLocation]) {
-        guard let coordinate = locations.first?.coordinate
-        else { return nil }
+    init?(_ location: CLLocation?) {
+        guard let coordinate = location?.coordinate else { return nil }
         self.init(latitude: coordinate.latitude,
                   longitude: coordinate.longitude)
     }

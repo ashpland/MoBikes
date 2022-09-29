@@ -2,6 +2,7 @@ import SwiftUI
 
 class StateManager<DB: StateManageable>: ObservableObject {
     @Published private(set) var db: DB
+    private var timers: [AsyncEvent:Timer] = [:]
     
     init(_ db: DB) {
         self.db = db
@@ -26,6 +27,23 @@ class StateManager<DB: StateManageable>: ObservableObject {
             } catch {
                 setActiveError(error)
             }
+        }
+    }
+    
+    func startTimer(_ event: AsyncEvent, seconds: TimeInterval, repeats: Bool = true) {
+        self.stopTimer(event)
+        let timer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: repeats) { [weak self] _ in
+            if let self = self {
+                self.dispatchAsync(event)                
+            }
+        }
+        timers[event] = timer
+    }
+    
+    func stopTimer(_ event: AsyncEvent) {
+        if let timer = timers[event] {
+            timer.invalidate()
+            timers.removeValue(forKey: event)
         }
     }
     
@@ -69,7 +87,7 @@ extension StateManager {
 }
 
 extension StateManager {
-    enum AsyncEvent {
+    enum AsyncEvent: Hashable {
         case platform(DB.AsyncEvent)
         case updateStations
     }
@@ -90,12 +108,11 @@ extension StateManager {
 protocol StateManageable {
     associatedtype Event
     static func handleEvent(state: Self, event: Event) throws -> Self
-    associatedtype AsyncEvent
+    associatedtype AsyncEvent: Hashable
     static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws -> (Self) -> Self
     
     var activeError: MBError? { get set }
     var currentLocation: Coordinate { get set }
-    var region: Region { get set }
     var stations: [Station] { get set }
     var world: World { get set }
 }

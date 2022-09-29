@@ -7,6 +7,7 @@ struct MoBikesApp: App {
     
     init() {
         sm.dispatchAsync(.updateStations)
+        sm.startTimer(.updateStations, seconds: StationApi.updateFrequency)
     }
     
     var body: some Scene {
@@ -22,6 +23,7 @@ struct MoBikesApp: App {
 
 struct MainView: View {
     @EnvironmentObject var sm: StateManager<watchState>
+    @Environment(\.scenePhase) var scenePhase
     @State var displayError: Bool = false
 
     var body: some View {
@@ -48,6 +50,17 @@ struct MainView: View {
                     }
                 }
                 .navigationTitle("Mo'Bikes")
+            }
+            .onChange(of: scenePhase) { newPhase in
+                switch newPhase {
+                case .active:
+                    sm.dispatchAsync(.updateStations)
+                    sm.startTimer(.updateStations, seconds: StationApi.updateFrequency)
+                case .background:
+                    sm.stopTimer(.updateStations)
+                default:
+                    break
+                }
             }
         }
     }

@@ -64,7 +64,8 @@ extension LocationClient {
             }            }
 
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            if let coordinate = Coordinate(locations) {
+            if let location = locations.last,
+               let coordinate = Coordinate(location) {
                 dispatch(.updateLocation(coordinate))
             }
         }

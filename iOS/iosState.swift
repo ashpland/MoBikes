@@ -32,7 +32,7 @@ struct iosState: StateManageable {
         }
     }
     
-    enum AsyncEvent {}
+    enum AsyncEvent: Hashable {}
     static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {}
 }
 
