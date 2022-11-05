@@ -2,10 +2,9 @@ import MapKit
 import SwiftUI
 import UIKit
 
-final class StationMarkerAnnotationView: MKAnnotationView {
-    static let identifier = "\(StationMarkerAnnotationView.self)"
-    
-    private let hostingController = UIHostingController<StationMarker>(rootView: StationMarker(station: .blank))
+final class StationMarkerAnnotationView: MKAnnotationView, ReuseIdentifiable {    
+    private let hostingController: UIHostingController<StationMarker>
+    private let stationMarker: StationMarker
 
     override var annotation: MKAnnotation? {
         willSet { update(annotation: newValue) }

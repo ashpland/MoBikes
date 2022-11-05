@@ -11,11 +11,9 @@ struct MapView: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> MKMapView{
-        let mapView = MKMapView(frame: .zero)
-        mapView.register(StationMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: StationMarkerAnnotationView.identifier)
-
-        return mapView 
-        |> configureMinimalMap
+        MKMapView(frame: .zero)
+        |> registerAnnotationView(view: StationMarkerAnnotationView.self)
+        <> configureMinimalMap
         <> setRegion(sm.db.region.mkCoordinateRegion)
         <> addCoordinator(context.coordinator)
     }
@@ -88,3 +86,21 @@ let addAnnotations = flip(MKMapView.addAnnotations)
 let removeAnnotations = flip(MKMapView.removeAnnotations)
 let addOverlaysAboveRoads = flip2ArgVoid(MKMapView.addOverlays)(.aboveRoads)
 let removeOverlays = flip(MKMapView.removeOverlays)
+
+
+// ReuseIdentifiable
+func registerAnnotationView(view: ReuseIdentifiable.Type) -> (MKMapView) -> MKMapView {
+    return { mapView in
+        mapView.register(view, forAnnotationViewWithReuseIdentifier: view.identifier)
+        return mapView
+    }
+}
+
+protocol ReuseIdentifiable: MKAnnotationView {
+    static var identifier: String { get }
+}
+extension ReuseIdentifiable {
+    static var identifier: String {
+        "\(Self.self)"
+    }
+}
