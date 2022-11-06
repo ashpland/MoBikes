@@ -160,3 +160,34 @@ extension Coordinate {
                           longitude: Double.random(in: lng))!
     }
 }
+
+// Hashable Conformance
+extension CLLocationCoordinate2D: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+    }
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+
+extension MKCoordinateSpan: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(latitudeDelta)
+        hasher.combine(longitudeDelta)
+    }
+    public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
+        lhs.latitudeDelta == rhs.latitudeDelta && lhs.longitudeDelta == rhs.longitudeDelta
+    }
+}
+
+extension MKCoordinateRegion: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(center)
+        hasher.combine(span)
+    }
+    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
+        lhs.center == rhs.center && lhs.span == rhs.span
+    }
+}

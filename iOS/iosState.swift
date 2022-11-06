@@ -13,7 +13,6 @@ struct iosState: StateManageable {
     enum Event {
         case loadBikeways
         case zoomToCurrentLocation
-        case updateRegion(MKCoordinateRegion)
         case updateUIBool(UI.Update<Bool>)
     }
     
@@ -24,16 +23,21 @@ struct iosState: StateManageable {
             return assoc(state, \.bikeways, bikeways)
         case .zoomToCurrentLocation:
             return assoc(state, \.region, state.currentLocation.region())
-        case .updateRegion (let region):
-            guard let region = Region(region) else { return state }
-            return assoc(state, \.region, region)
         case .updateUIBool(let uiUpdate):
             return update(state, \.ui, UI.handleUpdate(uiUpdate))
         }
     }
     
-    enum AsyncEvent: Hashable { case placeholder }
-    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {{ $0 }}
+    enum AsyncEvent: Hashable {
+        case updateRegion(MKCoordinateRegion)
+    }
+    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {
+        switch event {
+        case .updateRegion(let region):
+            guard let region = Region(region) else { return identity }
+            return { assoc($0, \.region, region) }
+        }
+    }
 }
 
 extension iosState {

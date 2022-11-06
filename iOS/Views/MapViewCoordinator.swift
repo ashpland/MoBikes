@@ -1,9 +1,9 @@
 import MapKit
 
 class MapViewCoordinator: NSObject, MKMapViewDelegate {
-    let dispatch: (StateManager<iosState>.Event) -> Void
+    let dispatch: (StateManager<iosState>.AsyncEvent) -> Void
     
-    init(dispatch: @escaping (StateManager<iosState>.Event) -> Void) {
+    init(dispatch: @escaping (StateManager<iosState>.AsyncEvent) -> Void) {
         self.dispatch = dispatch
     }
     

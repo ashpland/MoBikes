@@ -7,7 +7,7 @@ struct MapView: UIViewRepresentable {
     @EnvironmentObject var sm: StateManager<iosState>
     
     func makeCoordinator() -> MapViewCoordinator{
-        MapViewCoordinator(dispatch: sm.dispatch)
+        MapViewCoordinator(dispatch: sm.dispatchAsync)
     }
     
     func makeUIView(context: Context) -> MKMapView{
