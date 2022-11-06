@@ -8,5 +8,5 @@ struct watchState: StateManageable {
     static func handleEvent(state: Self, event: Event) throws -> Self { state }
     
     enum AsyncEvent: Hashable { case placeholder }
-    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {{ $0 }}
+    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self { identity }
 }
