@@ -42,28 +42,6 @@ func >>> <A, B, C>(f: @escaping (A) async throws -> B, g: @escaping (B) async th
     }
 }
 
-precedencegroup SingleTypeComposition {
-    associativity: left
-    higherThan: ForwardApplication, ForwardComposition
-}
-
-infix operator <>: SingleTypeComposition
-
-func <> <A>(
-    f: @escaping (A) -> A,
-    g: @escaping (A) -> A)
--> ((A) -> A) {
-    
-    return f >>> g
-}
-
-func <> <A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void) -> (A) -> Void {
-    return { a in
-        f(a)
-        g(a)
-    }
-}
-
 func identity<A>(_ value: A) -> A { value }
 
 func asType<A>(_ type: A.Type) -> (Any) -> A? {
@@ -108,6 +86,15 @@ func update<Root, Value>(_ root: Root, _ kp: WritableKeyPath<Root, Value>, _ upd
     var root = root
     root[keyPath: kp] = updatefn(value)
     return root
+}
+
+func update<Root, Value>(_ kp: WritableKeyPath<Root, Value>, _ updatefn: @escaping (Value) -> Value) -> (Root) -> Root {
+    return { root in
+        let value = root[keyPath: kp]
+        var root = root
+        root[keyPath: kp] = updatefn(value)
+        return root
+    }
 }
 
 func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {

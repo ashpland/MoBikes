@@ -12,38 +12,46 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView{
         MKMapView(frame: .zero)
-        |> registerAnnotationView(view: StationMarkerAnnotationView.self)
-        <> configureMinimalMap
-        <> setRegion(sm.db.region.mkCoordinateRegion)
-        <> addCoordinator(context.coordinator)
+        |>  registerAnnotationView(view: StationMarkerAnnotationView.self)
+        >>> configureMinimalMap
+        >>> setRegion(sm.db.region.mkCoordinateRegion)
+        >>> addCoordinator(context.coordinator)
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
-        _ = view 
-        |> updateRegion(sm.db.region)
-        <> updateBikeways(view.overlays, sm.db.bikeways, sm.db.ui.mapSettings.showBikeways)
-        <> updateStations(view.annotations, sm.db.stations, sm.db.ui.mapSettings.showStations)
+        let shouldFreezeMap = sm.db.ui.freezeMap
+        if shouldFreezeMap {
+            sm.dispatchAsync(.platform(.updateUIBool(.init(kp: \.freezeMap, value: false))))
+        }
+        _ = view
+        |>  updateRegion(sm.db.region, shouldFreezeMap)
+        >>> updateBikeways(view.overlays, sm.db.bikeways, sm.db.ui.mapSettings.showBikeways)
+        >>> updateStations(view.annotations, sm.db.stations, sm.db.ui.mapSettings.showStations)
     }
 }
 
 // Make View
 let configureMinimalMap: (MKMapView) -> MKMapView = 
 assoc(\.mapType, .mutedStandard)
-<> assoc(\.pointOfInterestFilter, .excludingAll)
-<> assoc(\.showsScale, false)
-<> assoc(\.showsBuildings, false)
-<> assoc(\.isPitchEnabled, false)
-<> assoc(\.showsUserLocation, true)
+>>> assoc(\.pointOfInterestFilter, .excludingAll)
+>>> assoc(\.showsScale, false)
+>>> assoc(\.showsBuildings, false)
+>>> assoc(\.isPitchEnabled, false)
+>>> assoc(\.showsUserLocation, true)
 
 let setRegion = flip2ArgVoid(MKMapView.setRegion)(false)
 let addCoordinator = curry(assoc)(\MKMapView.delegate)
 
 // Update View
-func updateRegion(_ newRegion: Region) -> (MKMapView) -> MKMapView {
+func updateRegion(_ newRegion: Region, _ shouldFreezeMap: Bool) -> (MKMapView) -> MKMapView {
     return { mapView in
-        if let currentRegion = Region(mapView.region),
-           newRegion != currentRegion {
-            mapView.setRegion(newRegion.mkCoordinateRegion, animated: true)
+        if let coordinator = mapView.delegate as? MapViewCoordinator,
+           let currentRegion = Region(mapView.region) {
+            let shouldNewRegionBeSet = (shouldFreezeMap || coordinator.isChanging == false) && (newRegion != currentRegion)
+            
+            if shouldNewRegionBeSet {
+                mapView.setRegion(newRegion.mkCoordinateRegion, animated: true)
+            }
         }
         return mapView
     }
@@ -71,7 +79,7 @@ func updateStations(_ annotations: [MKAnnotation], _ stations: [Station], _ show
                 currentMarkers, withID: ^\.station.id,
                 and: stations, withID: ^\.id)
             return removeAnnotations(markersToRemove)
-            <> addAnnotations(stationsToAdd.asMarkers)
+            >>> addAnnotations(stationsToAdd.asMarkers)
         }
     case (false, 1...):
         return removeAnnotations(currentMarkers)

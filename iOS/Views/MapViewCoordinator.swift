@@ -2,12 +2,18 @@ import MapKit
 
 class MapViewCoordinator: NSObject, MKMapViewDelegate {
     let dispatch: (StateManager<iosState>.AsyncEvent) -> Void
+    var isChanging: Bool = false
     
     init(dispatch: @escaping (StateManager<iosState>.AsyncEvent) -> Void) {
         self.dispatch = dispatch
     }
     
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        self.isChanging = true
+    }
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        self.isChanging = false
         dispatch(.platform(.updateRegion(mapView.region)))
     }
     
