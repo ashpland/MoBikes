@@ -4,9 +4,9 @@ struct watchState: StateManageable {
     var stations: [Station] = []
     var world: World = World()
         
-    enum Event { }
-    static func handleEvent(state: Self, event: Event) throws -> Self { }
+    enum Event { case placeholder }
+    static func handleEvent(state: Self, event: Event) throws -> Self { state }
     
-    enum AsyncEvent: Hashable {}
-    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {}
+    enum AsyncEvent: Hashable { case placeholder }
+    static func handleAsyncEvent(state: Self, event: AsyncEvent) async throws-> (Self) -> Self {{ $0 }}
 }

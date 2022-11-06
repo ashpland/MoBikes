@@ -3,8 +3,7 @@ import SwiftUI
 import UIKit
 
 final class StationMarkerAnnotationView: MKAnnotationView, ReuseIdentifiable {    
-    private let hostingController: UIHostingController<StationMarker>
-    private let stationMarker: StationMarker
+    private let hostingController = UIHostingController<StationMarker>(rootView: StationMarker(station: .blank))
 
     override var annotation: MKAnnotation? {
         willSet { update(annotation: newValue) }

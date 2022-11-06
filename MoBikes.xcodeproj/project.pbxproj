@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4909804428DE950100E2DF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909804328DE950100E2DF9E /* Assets.xcassets */; };
-		4909804A28DE950100E2DF9E /* watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4909804928DE950100E2DF9E /* watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4909805328DE950100E2DF9E /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909805228DE950100E2DF9E /* ComplicationController.swift */; };
 		4909805528DE950200E2DF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909805428DE950200E2DF9E /* Assets.xcassets */; };
 		4909805828DE950200E2DF9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4909805728DE950200E2DF9E /* Preview Assets.xcassets */; };
@@ -34,7 +33,8 @@
 		491CF81928DE8B0700CC9C69 /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF81228DE8B0700CC9C69 /* HelperViews.swift */; };
 		491CF81D28DE8B0700CC9C69 /* MapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF81428DE8B0700CC9C69 /* MapViewCoordinator.swift */; };
 		493BE3F428DE87ED00674009 /* bikeways.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 493BE3F328DE87ED00674009 /* bikeways.geojson */; };
-		4941BA3228DFEC3900EE60CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941BA3128DFEC3900EE60CE /* MapKit.framework */; };
+		494EA82C2917424E00A7410F /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C2BB5E28DE9DDA009738AB /* State.swift */; };
+		494EA82E2917444F00A7410F /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C2BB5E28DE9DDA009738AB /* State.swift */; };
 		4995427428DE8E5E002FCB93 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4995427328DE8E5E002FCB93 /* MapView.swift */; };
 		49AD3CB928DEE11600F8496A /* StationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AD3CB728DEE0E600F8496A /* StationCard.swift */; };
 		49B0DFB828DE84B2006F856F /* iosMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B0DF9028DE84B1006F856F /* iosMain.swift */; };
@@ -51,20 +51,11 @@
 		49C2BB5B28DE986D009738AB /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F528DE8AEF00CC9C69 /* Misc.swift */; };
 		49C2BB5C28DE986D009738AB /* Spatial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F428DE8AEF00CC9C69 /* Spatial.swift */; };
 		49C2BB5D28DE986D009738AB /* Swjft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491CF7F228DE8AEF00CC9C69 /* Swjft.swift */; };
-		49C2BB5F28DE9DDA009738AB /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C2BB5E28DE9DDA009738AB /* State.swift */; };
-		49C2BB6028DE9DDA009738AB /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C2BB5E28DE9DDA009738AB /* State.swift */; };
 		49CBF32928DFBE5A00DA41CD /* StationsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CBF32828DFBE5A00DA41CD /* StationsMap.swift */; };
 		49D55C8428E049FA00C31345 /* iosMisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D55C8328E049FA00C31345 /* iosMisc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4909804B28DE950100E2DF9E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49B0DF8B28DE84B1006F856F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4909804828DE950100E2DF9E;
-			remoteInfo = "watchOS WatchKit Extension";
-		};
 		4909805A28DE950200E2DF9E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49B0DF8B28DE84B1006F856F /* Project object */;
@@ -86,33 +77,11 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4909806028DE950200E2DF9E /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				4909804A28DE950100E2DF9E /* watchOS WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		499542B628DE8F5F002FCB93 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4909804128DE950000E2DF9E /* Mo'Bikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mo'Bikes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4909804328DE950100E2DF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4909804928DE950100E2DF9E /* watchOS WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "watchOS WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4909805228DE950100E2DF9E /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		4909805428DE950200E2DF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4909805728DE950200E2DF9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -137,9 +106,7 @@
 		491CF81428DE8B0700CC9C69 /* MapViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCoordinator.swift; sourceTree = "<group>"; };
 		491CF81F28DE8B3700CC9C69 /* MoBikes (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MoBikes (iOS).entitlements"; sourceTree = "<group>"; };
 		493BE3F328DE87ED00674009 /* bikeways.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bikeways.geojson; sourceTree = "<group>"; };
-		4941BA3128DFEC3900EE60CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		4995427328DE8E5E002FCB93 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		4995427A28DE8F5D002FCB93 /* MoBikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoBikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49AD3CB728DEE0E600F8496A /* StationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCard.swift; sourceTree = "<group>"; };
 		49B0DF9028DE84B1006F856F /* iosMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosMain.swift; sourceTree = "<group>"; };
 		49B0DF9228DE84B2006F856F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,7 +124,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4941BA3228DFEC3900EE60CE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,14 +176,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		4941BA3028DFEC3900EE60CE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4941BA3128DFEC3900EE60CE /* MapKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4995427528DE8EAF002FCB93 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,7 +221,6 @@
 				4909804D28DE950100E2DF9E /* watchOS Extension */,
 				4909804228DE950000E2DF9E /* watchOS App */,
 				49B0DF9828DE84B2006F856F /* Products */,
-				4941BA3028DFEC3900EE60CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -282,9 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				49B0DF9728DE84B2006F856F /* Mo'Bikes.app */,
-				4995427A28DE8F5D002FCB93 /* MoBikes.app */,
 				4909804128DE950000E2DF9E /* Mo'Bikes.app */,
-				4909804928DE950100E2DF9E /* watchOS WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,50 +276,17 @@
 			buildConfigurationList = 4909806428DE950200E2DF9E /* Build configuration list for PBXNativeTarget "watchOS" */;
 			buildPhases = (
 				4909803F28DE950000E2DF9E /* Resources */,
-				4909806028DE950200E2DF9E /* Embed App Extensions */,
+				4909804528DE950100E2DF9E /* Sources */,
+				4909804628DE950100E2DF9E /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4909804C28DE950100E2DF9E /* PBXTargetDependency */,
 			);
 			name = watchOS;
 			productName = watchOS;
 			productReference = 4909804128DE950000E2DF9E /* Mo'Bikes.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		4909804828DE950100E2DF9E /* watchOS WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4909806328DE950200E2DF9E /* Build configuration list for PBXNativeTarget "watchOS WatchKit Extension" */;
-			buildPhases = (
-				4909804528DE950100E2DF9E /* Sources */,
-				4909804628DE950100E2DF9E /* Frameworks */,
-				4909804728DE950100E2DF9E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "watchOS WatchKit Extension";
-			productName = "watchOS WatchKit Extension";
-			productReference = 4909804928DE950100E2DF9E /* watchOS WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
-		};
-		4995427928DE8F5D002FCB93 /* MoBikes */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 499542B728DE8F5F002FCB93 /* Build configuration list for PBXNativeTarget "MoBikes" */;
-			buildPhases = (
-				4995427828DE8F5D002FCB93 /* Resources */,
-				499542B628DE8F5F002FCB93 /* Embed Watch Content */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MoBikes;
-			productName = MoBikes;
-			productReference = 4995427A28DE8F5D002FCB93 /* MoBikes.app */;
-			productType = "com.apple.product-type.application.watchapp2-container";
+			productType = "com.apple.product-type.application";
 		};
 		49B0DF9628DE84B2006F856F /* iOS */ = {
 			isa = PBXNativeTarget;
@@ -393,15 +315,9 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					4909804028DE950000E2DF9E = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
-					4909804828DE950100E2DF9E = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
-					4995427928DE8F5D002FCB93 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
 					49B0DF9628DE84B2006F856F = {
@@ -422,10 +338,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4995427928DE8F5D002FCB93 /* MoBikes */,
 				49B0DF9628DE84B2006F856F /* iOS */,
 				4909804028DE950000E2DF9E /* watchOS */,
-				4909804828DE950100E2DF9E /* watchOS WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -435,23 +349,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4909804428DE950100E2DF9E /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4909804728DE950100E2DF9E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 				4909805828DE950200E2DF9E /* Preview Assets.xcassets in Resources */,
 				4909805528DE950200E2DF9E /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4995427828DE8F5D002FCB93 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				4909804428DE950100E2DF9E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,9 +384,9 @@
 				49B6467128DECBFA0048AAB0 /* watchMain.swift in Sources */,
 				49C2BB5628DE986A009738AB /* World.swift in Sources */,
 				49C2BB5D28DE986D009738AB /* Swjft.swift in Sources */,
+				494EA82C2917424E00A7410F /* State.swift in Sources */,
 				49C2BB5B28DE986D009738AB /* Misc.swift in Sources */,
 				49C2BB5928DE986D009738AB /* Style.swift in Sources */,
-				49C2BB6028DE9DDA009738AB /* State.swift in Sources */,
 				49CBF32928DFBE5A00DA41CD /* StationsMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +404,7 @@
 				491655EA28E001E7008FBB92 /* StationMarker.swift in Sources */,
 				491CF81528DE8B0700CC9C69 /* AvailabilityView.swift in Sources */,
 				491CF81928DE8B0700CC9C69 /* HelperViews.swift in Sources */,
+				494EA82E2917444F00A7410F /* State.swift in Sources */,
 				491CF80C28DE8AFD00CC9C69 /* iosState.swift in Sources */,
 				49B0DFB828DE84B2006F856F /* iosMain.swift in Sources */,
 				491CF7FB28DE8AF000CC9C69 /* Spatial.swift in Sources */,
@@ -512,7 +413,6 @@
 				491CF80A28DE8AFD00CC9C69 /* Stations.swift in Sources */,
 				491655EC28E002E3008FBB92 /* StationMarkerAnnotationView.swift in Sources */,
 				491CF80E28DE8AFD00CC9C69 /* World.swift in Sources */,
-				49C2BB5F28DE9DDA009738AB /* State.swift in Sources */,
 				491CF7FD28DE8AF000CC9C69 /* Misc.swift in Sources */,
 				491CF80628DE8AFD00CC9C69 /* Network.swift in Sources */,
 				491655EE28E0089B008FBB92 /* StationAnnotation.swift in Sources */,
@@ -524,11 +424,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4909804C28DE950100E2DF9E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4909804828DE950100E2DF9E /* watchOS WatchKit Extension */;
-			targetProxy = 4909804B28DE950100E2DF9E /* PBXContainerItemProxy */;
-		};
 		4909805B28DE950200E2DF9E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -541,16 +436,23 @@
 		4909805E28DE950200E2DF9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T5E8L2XP69;
 				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = watchOS_WatchKit_Extension;
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = land.ashp.MoBikes;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes.watchkitapp;
 				PRODUCT_NAME = "Mo'Bikes";
@@ -559,23 +461,30 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
 		4909805F28DE950200E2DF9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T5E8L2XP69;
 				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = watchOS_WatchKit_Extension;
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = land.ashp.MoBikes;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes.watchkitapp;
 				PRODUCT_NAME = "Mo'Bikes";
@@ -585,103 +494,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Release;
-		};
-		4909806128DE950200E2DF9E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = T5E8L2XP69;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "watchOS Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Mo'Bikes";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = watchOS_WatchKit_Extension.ComplicationController;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Debug;
-		};
-		4909806228DE950200E2DF9E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = T5E8L2XP69;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "watchOS Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Mo'Bikes";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = watchOS_WatchKit_Extension.ComplicationController;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Mo'Bikes uses your location to find the nearest stations.";
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Release;
-		};
-		499542B828DE8F5F002FCB93 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T5E8L2XP69;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		499542B928DE8F5F002FCB93 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T5E8L2XP69;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = land.ashp.MoBikes;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -718,6 +531,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -739,6 +553,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -776,6 +591,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -790,6 +606,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_ENABLE_BATCH_MODE = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -811,7 +628,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -845,7 +662,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -866,29 +683,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4909806328DE950200E2DF9E /* Build configuration list for PBXNativeTarget "watchOS WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4909806128DE950200E2DF9E /* Debug */,
-				4909806228DE950200E2DF9E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4909806428DE950200E2DF9E /* Build configuration list for PBXNativeTarget "watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4909805E28DE950200E2DF9E /* Debug */,
 				4909805F28DE950200E2DF9E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		499542B728DE8F5F002FCB93 /* Build configuration list for PBXNativeTarget "MoBikes" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				499542B828DE8F5F002FCB93 /* Debug */,
-				499542B928DE8F5F002FCB93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
