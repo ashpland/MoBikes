@@ -35,8 +35,8 @@ extension Bikeway {
             throw MBError.resourceNotFound(name: "bikeways")
         }
         
-        return try url |>
-        getDataFromContentsOfUrl
+        return try url
+        |>> getDataFromContentsOfUrl
         >>> MKGeoJSONDecoder().decode
         >>> compactMap(makeSegment)
         >>> groupBy(\.category)

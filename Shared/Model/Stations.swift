@@ -26,7 +26,7 @@ extension Station.Available {
 extension Station {
     init?(decoded: DecodableStation) {
         guard decoded.operative,
-              let coordinate = decoded.coordinates |> Coordinate.parse(.latitudeFirst)
+              let coordinate = decoded.coordinates |>> Coordinate.parse(.latitudeFirst)
         else { return nil }
         
         self.id = decoded.name.tagged()
@@ -98,7 +98,7 @@ struct StationApi {
 private func getStationsLive() async throws -> [Station] {
     let apiURL = URL(string: "https://vancouver-ca.smoove.pro/api-public/stations")!
     return try await apiURL
-    |> dataRequestForURL
+    |>> dataRequestForURL
     >>> second(asType(HTTPURLResponse.self))
     >>> checkStatus
     >>> decode(DecodableStation.Group.self)

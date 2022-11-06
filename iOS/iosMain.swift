@@ -53,7 +53,8 @@ struct MainView: View {
 struct Main_Preview: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(StateManager(iosState() |> assoc(\.stations, Station.examples)
+            .environmentObject(StateManager(iosState()
+                                            |>> assoc(\.stations, Station.examples)
                                             >>> assoc(\.world.locationClient, .cityHall)))
             .accentColor(.purple)
             .environment(\.colorScheme, .dark)

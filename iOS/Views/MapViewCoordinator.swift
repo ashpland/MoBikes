@@ -30,7 +30,7 @@ class MapViewCoordinator: NSObject, MKMapViewDelegate {
 func makeRenderer(_ overlay: MKOverlay) -> MKOverlayRenderer {
     let bikeway = overlay as? Bikeway
     let renderer = MKMultiPolylineRenderer(overlay: overlay)
-    |> assoc(\.strokeColor, .systemGreen)
+    |>> assoc(\.strokeColor, .systemGreen)
     >>> assoc(\.lineWidth, 3)
     >>> assoc(\.alpha, 0.7)
     >>> assoc(\.lineCap, .butt)
@@ -38,7 +38,7 @@ func makeRenderer(_ overlay: MKOverlay) -> MKOverlayRenderer {
     switch bikeway?.category {
     case .shared, .painted:
         return renderer
-        |> assoc(\.lineDashPattern, [3, 3])
+        |>> assoc(\.lineDashPattern, [3, 3])
         >>> assoc(\.lineCap, .butt)
     default:
         return renderer

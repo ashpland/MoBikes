@@ -47,12 +47,12 @@ extension Coordinate {
     static func parse(_ order: Order) -> (String) -> Coordinate? {
         return { 
             guard let parsedCoordinates = $0 
-            |> separateAndTrimWhitespace
+            |>> separateAndTrimWhitespace
             >>> compactMap(CLLocationDegrees.init)
             >>> firstTwo
             >>> flatMap(order.sort)
             else { return nil }
-            return parsedCoordinates |> Coordinate.init
+            return parsedCoordinates |>> Coordinate.init
         }
     }
 }

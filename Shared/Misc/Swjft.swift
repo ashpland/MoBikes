@@ -3,17 +3,17 @@ precedencegroup ForwardApplication {
     higherThan: AssignmentPrecedence, ComparisonPrecedence
 }
 
-infix operator |>: ForwardApplication
+infix operator |>>: ForwardApplication
 
-func |> <A, B>(a: A, f: (A) -> B) -> B {
+func |>> <A, B>(a: A, f: (A) -> B) -> B {
     return f(a)
 }
 
-func |> <A, B>(a: A, f: (A) throws -> B) throws -> B {
+func |>> <A, B>(a: A, f: (A) throws -> B) throws -> B {
     return try f(a)
 }
 
-func |> <A, B>(a: A, f: (A) async throws -> B) async throws -> B {
+func |>> <A, B>(a: A, f: (A) async throws -> B) async throws -> B {
     return try await f(a)
 }
 

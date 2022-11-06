@@ -12,7 +12,7 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView{
         MKMapView(frame: .zero)
-        |>  registerAnnotationView(view: StationMarkerAnnotationView.self)
+        |>> registerAnnotationView(view: StationMarkerAnnotationView.self)
         >>> configureMinimalMap
         >>> setRegion(sm.db.region.mkCoordinateRegion)
         >>> addCoordinator(context.coordinator)
@@ -24,7 +24,7 @@ struct MapView: UIViewRepresentable {
             sm.dispatchAsync(.platform(.updateUIBool(.init(kp: \.freezeMap, value: false))))
         }
         _ = view
-        |>  updateRegion(sm.db.region, shouldFreezeMap)
+        |>> updateRegion(sm.db.region, shouldFreezeMap)
         >>> updateBikeways(view.overlays, sm.db.bikeways, sm.db.ui.mapSettings.showBikeways)
         >>> updateStations(view.annotations, sm.db.stations, sm.db.ui.mapSettings.showStations)
     }

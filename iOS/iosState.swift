@@ -23,7 +23,7 @@ struct iosState: StateManageable {
             return assoc(state, \.bikeways, bikeways)
         case .zoomToCurrentLocation:
             return state
-            |>  assoc(\.region, state.currentLocation.region())
+            |>> assoc(\.region, state.currentLocation.region())
             >>> assoc(\.ui.freezeMap, true)
         case .updateUIBool(let uiUpdate):
             return update(state, \.ui, UI.handleUpdate(uiUpdate))
